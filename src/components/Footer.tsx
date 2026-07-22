@@ -1,6 +1,5 @@
 import { Link } from 'react-router'
 import { Mail, Phone, MapPin } from 'lucide-react'
-import Logo from '@/components/Logo'
 
 export default function Footer() {
   return (
@@ -8,11 +7,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <Logo className="h-9 w-9" />
-              <span className="text-lg font-bold tracking-tight text-white">
-                Westbridge<span className="text-blue-400"> Global</span>
-              </span>
+            <div className="flex items-center">
+              <img src="/images/logo-full-white.png" alt="Westbridge Global" className="h-12 w-auto" />
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               Highly trained, western-standard office professionals from the Philippines — for at
