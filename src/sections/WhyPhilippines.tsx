@@ -15,7 +15,7 @@ const features = [
   {
     icon: Clock3,
     title: 'Your hours, covered',
-    text: 'A well-established night-shift culture built on serving western markets means your team works your business day — UK, US or Australian time.',
+    text: 'A well-established night-shift culture built on serving western markets means your team works your business day — UK, US, Canadian or Australian time.',
   },
   {
     icon: GraduationCap,

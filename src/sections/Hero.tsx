@@ -32,7 +32,7 @@ export default function Hero() {
 
           <h1 className="text-4xl font-extrabold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-6xl">
             Your next great hire costs{' '}
-            <span className="relative whitespace-nowrap text-blue-300">
+            <span className="relative whitespace-nowrap text-[#93C5FD] drop-shadow-[0_1px_2px_rgba(2,6,23,0.8)]">
               half as much
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 220 12" fill="none" aria-hidden="true">
                 <path d="M3 9c60-6 154-6 214-2" stroke="#34D399" strokeWidth="5" strokeLinecap="round" />
@@ -47,10 +47,10 @@ export default function Hero() {
             and spoken English, your business hours, part-time or full-time.
           </p>
 
-          <ul className="mt-6 space-y-2.5 text-[15px] text-slate-100">
+          <ul className="mt-6 space-y-2.5 text-[15px] font-medium text-white">
             {[
               'Pre-vetted, degree-educated Filipino professionals',
-              'Working your UK, US or Australian business hours',
+              'Working your UK, US, Canadian or Australian business hours',
               'One simple monthly invoice — we handle HR, payroll & equipment',
             ].map((item) => (
               <li key={item} className="flex items-start gap-2.5">

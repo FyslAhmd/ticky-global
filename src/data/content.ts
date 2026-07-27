@@ -301,7 +301,7 @@ export const steps: Step[] = [
 
 export const stats = [
   { value: '50%+', label: 'Minimum cost saving vs a native western hire' },
-  { value: '120+', label: 'Businesses supported across UK, US & AU' },
+  { value: '120+', label: 'Businesses supported across UK, US, Canada & AU' },
   { value: '400+', label: 'Filipino professionals placed and managed' },
   { value: '14 days', label: 'Average time from brief to start date' },
 ]
