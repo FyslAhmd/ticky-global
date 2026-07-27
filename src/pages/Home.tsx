@@ -5,7 +5,6 @@ import RolesPreview from '@/sections/RolesPreview'
 import WhyPhilippines from '@/sections/WhyPhilippines'
 import ProcessPreview from '@/sections/ProcessPreview'
 import LeadersCarousel from '@/sections/LeadersCarousel'
-import FaqSection from '@/sections/FaqSection'
 import CtaSection from '@/sections/CtaSection'
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <WhyPhilippines />
       <ProcessPreview />
       <LeadersCarousel />
-      <FaqSection />
       <CtaSection />
     </>
   )

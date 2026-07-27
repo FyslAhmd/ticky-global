@@ -5,7 +5,15 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Quote, ArrowRight, ArrowLeft, PiggyBank, Users, Building2, TrendingDown, Star } from 'lucide-react'
 import Stars from '@/components/Stars'
-import { reviews } from '@/data/reviews'
+import { reviews as fallbackReviews, type Review } from '@/data/reviews'
+import { trpc } from '@/providers/trpc'
+
+function useReviews(): Review[] {
+  const query = trpc.public.reviews.useQuery(undefined, { retry: 1 })
+  return query.data?.length
+    ? query.data.map((r) => ({ ...r, id: r.slug, photo: r.photo ?? '' }))
+    : fallbackReviews
+}
 
 const aggregates = [
   { icon: Star, value: '5.0', label: 'Average client rating' },
@@ -14,6 +22,7 @@ const aggregates = [
 ]
 
 export default function Reviews() {
+  const reviews = useReviews()
   return (
     <>
       <section className="bg-gradient-to-b from-blue-50 to-white py-16 lg:py-24">

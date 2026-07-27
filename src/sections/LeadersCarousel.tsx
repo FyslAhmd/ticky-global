@@ -14,10 +14,15 @@ import {
 } from '@/components/ui/carousel'
 import { Quote, ArrowRight } from 'lucide-react'
 import Stars from '@/components/Stars'
-import { reviews } from '@/data/reviews'
+import { reviews as fallbackReviews, type Review } from '@/data/reviews'
+import { trpc } from '@/providers/trpc'
 
 export default function LeadersCarousel() {
   const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }))
+  const query = trpc.public.reviews.useQuery(undefined, { retry: 1 })
+  const reviews: Review[] = query.data?.length
+    ? query.data.map((r) => ({ ...r, id: r.slug, photo: r.photo ?? '' }))
+    : fallbackReviews
 
   return (
     <section className="bg-slate-50 py-20 lg:py-28">

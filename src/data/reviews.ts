@@ -1,3 +1,4 @@
+/** Subset of the DB review row used by the public site (API rows get id = slug). */
 export interface Review {
   id: string
   name: string

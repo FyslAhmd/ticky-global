@@ -12,8 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CheckCircle2, Mail, Phone, CalendarCheck, Clock3, ShieldCheck } from 'lucide-react'
+import { CheckCircle2, Mail, Phone, CalendarCheck, Clock3, ShieldCheck, CircleAlert } from 'lucide-react'
 import { roles } from '@/data/content'
+import { trpc } from '@/providers/trpc'
 
 const expectations = [
   {
@@ -35,10 +36,25 @@ const expectations = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const submit = trpc.public.submitEnquiry.useMutation({
+    onSuccess: () => setSubmitted(true),
+    onError: (e) => setError(e.message || 'Something went wrong — please try again.'),
+  })
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    setError(null)
+    const data = new FormData(e.currentTarget)
+    submit.mutate({
+      name: String(data.get('name') ?? ''),
+      company: String(data.get('company') ?? ''),
+      email: String(data.get('email') ?? ''),
+      phone: String(data.get('phone') ?? '') || undefined,
+      roleInterest: String(data.get('roleInterest') ?? '') || undefined,
+      hours: (String(data.get('hours') ?? '') || undefined) as 'full' | 'part' | 'unsure' | undefined,
+      message: String(data.get('message') ?? '') || undefined,
+    })
   }
 
   return (
@@ -120,11 +136,11 @@ export default function Contact() {
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="name">Full name *</Label>
-                        <Input id="name" required placeholder="Jane Smith" className="h-11" />
+                        <Input id="name" name="name" required placeholder="Jane Smith" className="h-11" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="company">Company *</Label>
-                        <Input id="company" required placeholder="Acme Ltd" className="h-11" />
+                        <Input id="company" name="company" required placeholder="Acme Ltd" className="h-11" />
                       </div>
                     </div>
                     <div className="grid gap-5 sm:grid-cols-2">
@@ -132,6 +148,7 @@ export default function Contact() {
                         <Label htmlFor="email">Work email *</Label>
                         <Input
                           id="email"
+                          name="email"
                           type="email"
                           required
                           placeholder="jane@acme.com"
@@ -140,29 +157,29 @@ export default function Contact() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="phone">Phone</Label>
-                        <Input id="phone" type="tel" placeholder="+44 ..." className="h-11" />
+                        <Input id="phone" name="phone" type="tel" placeholder="+44 ..." className="h-11" />
                       </div>
                     </div>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label>Role you're interested in</Label>
-                        <Select>
+                        <Select name="roleInterest">
                           <SelectTrigger className="h-11">
                             <SelectValue placeholder="Select a role" />
                           </SelectTrigger>
                           <SelectContent>
                             {roles.map((r) => (
-                              <SelectItem key={r.id} value={r.id}>
+                              <SelectItem key={r.id} value={r.title}>
                                 {r.title}
                               </SelectItem>
                             ))}
-                            <SelectItem value="other">Something else</SelectItem>
+                            <SelectItem value="Something else">Something else</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                       <div className="space-y-2">
                         <Label>Hours</Label>
-                        <Select>
+                        <Select name="hours">
                           <SelectTrigger className="h-11">
                             <SelectValue placeholder="Select hours" />
                           </SelectTrigger>
@@ -178,16 +195,24 @@ export default function Contact() {
                       <Label htmlFor="message">Tell us about what you need</Label>
                       <Textarea
                         id="message"
+                        name="message"
                         rows={4}
                         placeholder="e.g. We need a telesales caller to book demos for our SaaS product, working UK hours..."
                       />
                     </div>
+                    {error && (
+                      <p className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+                        <CircleAlert className="h-4 w-4 shrink-0" />
+                        {error}
+                      </p>
+                    )}
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={submit.isPending}
                       className="w-full rounded-full bg-blue-700 text-base font-semibold hover:bg-blue-800"
                     >
-                      Request My Discovery Call
+                      {submit.isPending ? 'Sending...' : 'Request My Discovery Call'}
                     </Button>
                     <p className="text-center text-xs text-slate-400">
                       By submitting, you agree to be contacted about your enquiry. We never share

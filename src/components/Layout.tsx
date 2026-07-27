@@ -2,9 +2,11 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { usePageTracking } from '@/lib/analytics'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
+  usePageTracking()
 
   useEffect(() => {
     if (hash) {
