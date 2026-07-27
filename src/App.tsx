@@ -5,6 +5,8 @@ import Roles from '@/pages/Roles'
 import HowItWorks from '@/pages/HowItWorks'
 import Reviews from '@/pages/Reviews'
 import Contact from '@/pages/Contact'
+import Login from "./pages/Login"
+import NotFound from "./pages/NotFound"
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
       </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
