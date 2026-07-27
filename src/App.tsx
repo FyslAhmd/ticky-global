@@ -6,6 +6,7 @@ import Roles from '@/pages/Roles'
 import HowItWorks from '@/pages/HowItWorks'
 import Reviews from '@/pages/Reviews'
 import Contact from '@/pages/Contact'
+import ClientPortal from '@/pages/ClientPortal'
 import DynamicPage from '@/pages/DynamicPage'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/client-portal" element={<ClientPortal />} />
         <Route path="/p/:slug" element={<DynamicPage />} />
       </Route>
 
