@@ -22,6 +22,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               <li><Link to="/roles" className="hover:text-white">Roles & Pricing</Link></li>
               <li><Link to="/how-it-works" className="hover:text-white">How It Works</Link></li>
+              <li><Link to="/reviews" className="hover:text-white">Client Reviews</Link></li>
               <li><Link to="/contact" className="hover:text-white">Book a Discovery Call</Link></li>
             </ul>
           </div>
