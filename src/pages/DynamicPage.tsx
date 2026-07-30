@@ -47,7 +47,7 @@ export default function DynamicPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <p className="text-sm font-bold uppercase tracking-widest text-blue-700">
-              Westbridge Global
+              Ticky Global
             </p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
               {p.title}

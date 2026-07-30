@@ -16,7 +16,7 @@ const planned = [
   {
     icon: Users,
     title: 'Your team, in one place',
-    text: 'See your Westbridge team members, their roles, schedules and leave — without a single email.',
+    text: 'See your Ticky team members, their roles, schedules and leave — without a single email.',
   },
   {
     icon: FileText,
@@ -62,10 +62,10 @@ export default function ClientPortal() {
             Client Portal
           </p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            Coming soon for Westbridge clients
+            Coming soon for Ticky clients
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-            We're building a dedicated portal where every Westbridge client can manage their
+            We're building a dedicated portal where every Ticky client can manage their
             offshore team, invoices and reporting in one place. Here's a preview of what's on the
             way.
           </p>
@@ -128,7 +128,7 @@ export default function ClientPortal() {
         </motion.div>
 
         <p className="mt-8 text-center text-sm text-slate-400">
-          Westbridge staff? Use the{' '}
+          Ticky staff? Use the{' '}
           <Link to="/admin" className="font-semibold text-blue-700 hover:underline">
             Admin / Office portal
           </Link>{' '}

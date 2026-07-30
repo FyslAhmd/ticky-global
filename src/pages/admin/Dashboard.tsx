@@ -69,7 +69,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <AdminHeader title="Dashboard" description="What's happening across the Westbridge Global site.">
+      <AdminHeader title="Dashboard" description="What's happening across the Ticky Global site.">
         <div className="flex gap-2">
           <Button asChild variant="outline" className="rounded-full">
             <Link to="/admin/reviews/new">

@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center">
-              <img src="/images/logo-full-white.png" alt="Westbridge Global" className="h-12 w-auto" />
+              <img src="/images/logo-full-white.png" alt="Ticky Global" className="h-12 w-auto" />
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               Highly trained, western-standard office professionals from the Philippines — for at
@@ -31,7 +31,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Get in touch</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-blue-400" /> hello@westbridgeglobal.com
+                <Mail className="h-4 w-4 text-blue-400" /> hello@tickyglobal.com
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-blue-400" /> +44 (0)20 7946 0820
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-slate-800 pt-6 text-sm text-slate-500">
-          <p>© {new Date().getFullYear()} Westbridge Global Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Ticky Global Ltd. All rights reserved.</p>
         </div>
       </div>
     </footer>

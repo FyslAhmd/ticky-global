@@ -43,7 +43,7 @@ export default function LeadersCarousel() {
             </h2>
             <p className="mt-4 text-lg text-slate-600">
               From London to Austin to Sydney — hear from the founders and directors whose teams,
-              and margins, were transformed by Westbridge.
+              and margins, were transformed by Ticky.
             </p>
           </div>
           <Button asChild variant="outline" className="rounded-full font-semibold">

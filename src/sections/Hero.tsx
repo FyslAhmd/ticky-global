@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Banner image — full width on desktop, tighter crop with shifted focus on mobile */}
       <img
         src="/images/hero-banner.jpg"
-        alt="Westbridge Global team of Filipino professionals in a modern Manila office"
+        alt="Ticky Global team of Filipino professionals in a modern Manila office"
         className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-[center_30%]"
       />
       {/* Legibility overlays: strong dark gradient from the left (where the copy sits) + overall tint */}
@@ -42,7 +42,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-200">
-            Westbridge Global recruits highly trained, western-standard office professionals from
+            Ticky Global recruits highly trained, western-standard office professionals from
             the Philippines — sales, telesales, administration, marketing and more. Clear written
             and spoken English, your business hours, part-time or full-time.
           </p>

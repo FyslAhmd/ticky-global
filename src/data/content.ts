@@ -13,9 +13,9 @@ export interface Role {
   description: string
   responsibilities: string[]
   tools: string[]
-  // Fully-loaded monthly cost of a native western hire vs Westbridge monthly fee
+  // Fully-loaded monthly cost of a native western hire vs Ticky monthly fee
   native: Record<Region, number>
-  westbridge: Record<Region, number>
+  ticky: Record<Region, number>
   popular?: boolean
 }
 
@@ -34,7 +34,7 @@ export const roles: Role[] = [
     ],
     tools: ['HubSpot', 'Salesforce', 'Aircall', 'Outreach', 'Apollo'],
     native: { uk: 3200, us: 4500, au: 6000 },
-    westbridge: { uk: 1095, us: 1395, au: 2095 },
+    ticky: { uk: 1095, us: 1395, au: 2095 },
     popular: true,
   },
   {
@@ -51,7 +51,7 @@ export const roles: Role[] = [
     ],
     tools: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zoom', 'Gong'],
     native: { uk: 4200, us: 5800, au: 7800 },
-    westbridge: { uk: 1495, us: 1895, au: 2795 },
+    ticky: { uk: 1495, us: 1895, au: 2795 },
   },
   {
     id: 'admin',
@@ -67,7 +67,7 @@ export const roles: Role[] = [
     ],
     tools: ['Microsoft 365', 'Google Workspace', 'Slack', 'Asana', 'Notion'],
     native: { uk: 2800, us: 3900, au: 5300 },
-    westbridge: { uk: 945, us: 1195, au: 1795 },
+    ticky: { uk: 945, us: 1195, au: 1795 },
     popular: true,
   },
   {
@@ -84,7 +84,7 @@ export const roles: Role[] = [
     ],
     tools: ['Mailchimp', 'HubSpot', 'Canva', 'WordPress', 'GA4'],
     native: { uk: 3400, us: 4700, au: 6400 },
-    westbridge: { uk: 1195, us: 1495, au: 2295 },
+    ticky: { uk: 1195, us: 1495, au: 2295 },
     popular: true,
   },
   {
@@ -101,7 +101,7 @@ export const roles: Role[] = [
     ],
     tools: ['Zendesk', 'Intercom', 'Freshdesk', 'Shopify', 'Gorgias'],
     native: { uk: 2600, us: 3600, au: 4900 },
-    westbridge: { uk: 895, us: 1145, au: 1695 },
+    ticky: { uk: 895, us: 1145, au: 1695 },
   },
   {
     id: 'bookkeeper',
@@ -117,7 +117,7 @@ export const roles: Role[] = [
     ],
     tools: ['Xero', 'QuickBooks', 'MYOB', 'Dext', 'Excel'],
     native: { uk: 3100, us: 4300, au: 5800 },
-    westbridge: { uk: 1045, us: 1345, au: 1995 },
+    ticky: { uk: 1045, us: 1345, au: 1995 },
   },
   {
     id: 'ea',
@@ -133,7 +133,7 @@ export const roles: Role[] = [
     ],
     tools: ['Google Workspace', 'Microsoft 365', 'Calendly', 'Slack', 'Zoom'],
     native: { uk: 3500, us: 4900, au: 6600 },
-    westbridge: { uk: 1245, us: 1595, au: 2395 },
+    ticky: { uk: 1245, us: 1595, au: 2395 },
   },
   {
     id: 'social',
@@ -149,7 +149,7 @@ export const roles: Role[] = [
     ],
     tools: ['Canva', 'Hootsuite', 'Buffer', 'CapCut', 'Meta Suite'],
     native: { uk: 3200, us: 4400, au: 6000 },
-    westbridge: { uk: 1145, us: 1445, au: 2195 },
+    ticky: { uk: 1145, us: 1445, au: 2195 },
   },
 ]
 
@@ -165,7 +165,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      'Our Westbridge SDR books more qualified meetings than the two UK hires she replaced — at less than half the cost of one. The quality of English honestly surprised me.',
+      'Our Ticky SDR books more qualified meetings than the two UK hires she replaced — at less than half the cost of one. The quality of English honestly surprised me.',
     name: 'James Whitfield',
     role: 'Managing Director',
     company: 'B2B SaaS, London',
@@ -201,7 +201,7 @@ export const faqs: Faq[] = [
   {
     question: 'How good is their English, really?',
     answer:
-      'English is an official language of the Philippines and the primary language of business and higher education. Every Westbridge candidate passes a rigorous written and spoken English assessment, a neutral-accent screening and a live interview before they ever reach your shortlist. Most clients tell us they cannot tell the difference on a call.',
+      'English is an official language of the Philippines and the primary language of business and higher education. Every Ticky candidate passes a rigorous written and spoken English assessment, a neutral-accent screening and a live interview before they ever reach your shortlist. Most clients tell us they cannot tell the difference on a call.',
   },
   {
     question: 'Will they work my business hours?',
@@ -236,7 +236,7 @@ export const faqs: Faq[] = [
   {
     question: 'Who employs the staff and handles payroll?',
     answer:
-      'We do. Westbridge Global employs your team members directly in the Philippines and handles payroll, benefits, HR, equipment and office facilities. You receive one simple monthly invoice in your own currency.',
+      'We do. Ticky Global employs your team members directly in the Philippines and handles payroll, benefits, HR, equipment and office facilities. You receive one simple monthly invoice in your own currency.',
   },
 ]
 

@@ -59,7 +59,7 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 z-40 flex w-64 flex-col bg-slate-950 text-slate-300">
         <div className="flex h-16 items-center border-b border-slate-800 px-5">
-          <img src="/images/logo-full-white.png" alt="Westbridge Global" className="h-9 w-auto" />
+          <img src="/images/logo-full-white.png" alt="Ticky Global" className="h-9 w-auto" />
           <span className="ml-2 rounded-md bg-blue-600/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-blue-400">
             Admin
           </span>

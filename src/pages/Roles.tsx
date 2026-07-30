@@ -84,7 +84,7 @@ export default function Roles() {
             {roles.map((role, i) => {
               const Icon = iconMap[role.id] ?? Briefcase
               const savingPct = Math.round(
-                ((role.native[region] - role.westbridge[region]) / role.native[region]) * 100,
+                ((role.native[region] - role.ticky[region]) / role.native[region]) * 100,
               )
               return (
                 <motion.div
@@ -152,12 +152,12 @@ export default function Roles() {
                           </p>
                           <p className="mt-1 text-2xl font-extrabold text-slate-900">
                             {sym}
-                            {role.westbridge[region].toLocaleString()}
+                            {role.ticky[region].toLocaleString()}
                             <span className="text-sm font-medium text-slate-500"> / month FT</span>
                           </p>
                           <p className="text-xs text-slate-500">
                             or {sym}
-                            {Math.round(role.westbridge[region] / 2).toLocaleString()}/mo part-time
+                            {Math.round(role.ticky[region] / 2).toLocaleString()}/mo part-time
                           </p>
                         </div>
                         <Button
@@ -179,7 +179,7 @@ export default function Roles() {
 
           <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-slate-400">
             Native hire figures are indicative fully-loaded costs (salary, employer taxes, benefits,
-            equipment and recruitment overheads) for comparable roles. Final Westbridge pricing is
+            equipment and recruitment overheads) for comparable roles. Final Ticky pricing is
             confirmed on your discovery call based on seniority and requirements.
           </p>
         </div>

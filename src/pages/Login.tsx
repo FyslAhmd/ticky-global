@@ -24,12 +24,12 @@ export default function Login() {
         <CardHeader className="items-center text-center">
           <img
             src="/images/logo-full-white.png"
-            alt="Westbridge Global"
+            alt="Ticky Global"
             className="mb-2 h-12 w-auto"
           />
           <CardTitle className="text-xl">Team sign-in</CardTitle>
           <p className="text-sm text-slate-400">
-            Access the Westbridge Global admin dashboard — enquiries, reviews, pages and analytics.
+            Access the Ticky Global admin dashboard — enquiries, reviews, pages and analytics.
           </p>
         </CardHeader>
         <CardContent>
@@ -43,7 +43,7 @@ export default function Login() {
             Sign in with Kimi
           </Button>
           <p className="mt-4 text-center text-xs text-slate-500">
-            Authorised Westbridge Global staff only.
+            Authorised Ticky Global staff only.
           </p>
         </CardContent>
       </Card>

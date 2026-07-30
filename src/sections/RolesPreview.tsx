@@ -40,7 +40,7 @@ export default function RolesPreview() {
               One partner for every office function
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              From your first telesales caller to a full back-office team — every Westbridge
+              From your first telesales caller to a full back-office team — every Ticky
               professional is pre-vetted, skills-tested and trained to western business standards.
             </p>
           </div>

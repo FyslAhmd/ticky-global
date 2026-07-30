@@ -120,7 +120,7 @@ export default function HowItWorks() {
               We stay involved, so you don't have to worry
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Westbridge is not a recruitment agency that disappears after placement. We employ,
+              Ticky is not a recruitment agency that disappears after placement. We employ,
               house, equip and support your team for as long as you work with us.
             </p>
           </div>

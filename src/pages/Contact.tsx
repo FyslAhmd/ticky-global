@@ -71,7 +71,7 @@ export default function Contact() {
               Book a discovery call
             </p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-              Let's find your first Westbridge hire
+              Let's find your first Ticky hire
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
               Tell us a little about what you need and we will be in touch within one business day
@@ -95,7 +95,7 @@ export default function Contact() {
 
             <div className="mt-10 space-y-3 border-t border-slate-200 pt-8 text-sm text-slate-600">
               <p className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-blue-700" /> hello@westbridgeglobal.com
+                <Mail className="h-4 w-4 text-blue-700" /> hello@tickyglobal.com
               </p>
               <p className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-blue-700" /> +44 (0)20 7946 0820
@@ -120,7 +120,7 @@ export default function Contact() {
                       Request received
                     </h2>
                     <p className="mt-3 max-w-sm text-slate-600">
-                      Thank you — a member of the Westbridge team will contact you within one
+                      Thank you — a member of the Ticky team will contact you within one
                       business day to arrange your discovery call.
                     </p>
                     <Button

@@ -257,7 +257,7 @@ export default function ReviewEditor() {
               />
             </div>
             <div className="space-y-2">
-              <Label>Westbridge team hired *</Label>
+              <Label>Ticky team hired *</Label>
               {form.hires.map((h, i) => (
                 <div key={i} className="flex gap-2">
                   <Input

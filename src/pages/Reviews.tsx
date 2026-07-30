@@ -36,7 +36,7 @@ export default function Reviews() {
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
               Founders and directors across the UK, US, Canada and Australia on what happened when they
-              moved their office functions to a Westbridge team in the Philippines.
+              moved their office functions to a Ticky team in the Philippines.
             </p>
           </div>
 
@@ -121,7 +121,7 @@ export default function Reviews() {
 
                     <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-5">
                       <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        Westbridge team:
+                        Ticky team:
                       </span>
                       {review.hires.map((hire) => (
                         <Badge

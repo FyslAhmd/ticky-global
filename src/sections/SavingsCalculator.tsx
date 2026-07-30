@@ -25,7 +25,7 @@ export default function SavingsCalculator() {
     const role = roles.find((r) => r.id === roleId)!
     const factor = hours === 'full' ? 1 : 0.5
     const native = Math.round(role.native[region] * factor)
-    const wb = Math.round(role.westbridge[region] * factor)
+    const wb = Math.round(role.ticky[region] * factor)
     const monthly = native - wb
     const pct = Math.round((monthly / native) * 100)
     return { role, native, wb, monthly, annual: monthly * 12, pct }
@@ -45,7 +45,7 @@ export default function SavingsCalculator() {
             See exactly what you would save
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            Compare the fully-loaded cost of a native western hire with a Westbridge professional.
+            Compare the fully-loaded cost of a native western hire with a Ticky professional.
             No hidden extras — our fee includes salary, HR, equipment and management.
           </p>
         </div>
@@ -122,7 +122,7 @@ export default function SavingsCalculator() {
 
                 <p className="text-xs leading-relaxed text-slate-400">
                   Native hire cost includes salary, employer taxes, pension/benefits, equipment and
-                  typical recruitment overheads. Westbridge fee is fully loaded.
+                  typical recruitment overheads. Ticky fee is fully loaded.
                 </p>
               </CardContent>
 
@@ -145,7 +145,7 @@ export default function SavingsCalculator() {
                     </span>
                   </div>
                   <div className="flex items-baseline justify-between border-b border-white/15 pb-4">
-                    <span className="text-sm text-blue-100">Westbridge / month</span>
+                    <span className="text-sm text-blue-100">Ticky / month</span>
                     <span className="text-2xl font-extrabold">{fmt(result.wb)}</span>
                   </div>
                   <div className="flex items-baseline justify-between">

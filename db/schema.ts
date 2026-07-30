@@ -28,7 +28,7 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
 // ---------------------------------------------------------------------------
-// Westbridge Global CMS tables
+// Ticky Global CMS tables
 // ---------------------------------------------------------------------------
 
 /** Enquiries submitted through the public contact / discovery-call form */
