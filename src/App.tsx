@@ -2,7 +2,11 @@ import { Routes, Route } from 'react-router'
 import Layout from '@/components/Layout'
 import AdminLayout from '@/components/AdminLayout'
 import Home from '@/pages/Home'
-import Roles from '@/pages/Roles'
+import Pricing from '@/pages/Pricing'
+import Sectors from '@/pages/Sectors'
+import SectorDetail from '@/pages/SectorDetail'
+import RolesHub from '@/pages/RolesHub'
+import RoleDetail from '@/pages/RoleDetail'
 import HowItWorks from '@/pages/HowItWorks'
 import Reviews from '@/pages/Reviews'
 import Contact from '@/pages/Contact'
@@ -24,7 +28,12 @@ export default function App() {
       {/* Public marketing site */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/roles" element={<Roles />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/pricing/:region" element={<Pricing />} />
+        <Route path="/sectors" element={<Sectors />} />
+        <Route path="/sectors/:slug" element={<SectorDetail />} />
+        <Route path="/roles" element={<RolesHub />} />
+        <Route path="/roles/:slug" element={<RoleDetail />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />

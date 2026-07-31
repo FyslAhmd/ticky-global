@@ -50,7 +50,7 @@ export default function Hero() {
           <ul className="mt-6 space-y-2.5 text-[15px] font-medium text-white">
             {[
               'Pre-vetted, degree-educated Filipino professionals',
-              'Working your UK, US, Canadian or Australian business hours',
+              'Working your UK, US, Canadian, Australian or NZ business hours',
               'One simple monthly invoice — we handle HR, payroll & equipment',
             ].map((item) => (
               <li key={item} className="flex items-start gap-2.5">

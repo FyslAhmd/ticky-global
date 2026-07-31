@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -23,8 +22,9 @@ import {
   CheckCircle2,
   Wrench,
   ArrowRight,
+  Info,
 } from 'lucide-react'
-import { roles, regions, type Region } from '@/data/content'
+import { roles, regions, regionKeys, type Region } from '@/data/content'
 
 const iconMap: Record<string, React.ElementType> = {
   telesales: Phone,
@@ -37,9 +37,22 @@ const iconMap: Record<string, React.ElementType> = {
   social: Share2,
 }
 
-export default function Roles() {
-  const [region, setRegion] = useState<Region>('uk')
-  const sym = regions[region].symbol
+const seoIntro: Record<Region, string> = {
+  uk: 'Hiring in the UK? Compare fully-loaded UK employment costs — salary, employer National Insurance, pension and office overheads — against one simple monthly Ticky fee in pounds sterling.',
+  us: 'Hiring in the United States? Compare fully-loaded US employment costs — salary, payroll taxes, benefits and overheads — against one simple monthly Ticky fee in US dollars.',
+  ca: 'Hiring in Canada? Compare fully-loaded Canadian employment costs — salary, CPP/EI contributions, benefits and overheads — against one simple monthly Ticky fee in Canadian dollars.',
+  au: 'Hiring in Australia? Compare fully-loaded Australian employment costs — salary, superannuation, leave loading and overheads — against one simple monthly Ticky fee in Australian dollars.',
+  nz: 'Hiring in New Zealand? Compare fully-loaded NZ employment costs — salary, KiwiSaver, ACC levies and overheads — against one simple monthly Ticky fee in New Zealand dollars.',
+}
+
+export default function Pricing() {
+  const { region: regionParam } = useParams<{ region: string }>()
+  const navigate = useNavigate()
+  const region: Region = regionKeys.includes(regionParam as Region)
+    ? (regionParam as Region)
+    : 'uk'
+  const r = regions[region]
+  const sym = r.symbol
 
   return (
     <>
@@ -47,28 +60,32 @@ export default function Roles() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <div className="max-w-2xl">
-              <p className="text-sm font-bold uppercase tracking-widest text-blue-700">
-                Roles & pricing
-              </p>
+              <p className="text-sm font-bold uppercase tracking-widest text-blue-700">Pricing</p>
               <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-                Every role your office needs, at half the cost
+                Offshore staffing pricing for {r.label === 'United States' ? 'the United States' : r.label}
               </h1>
-              <p className="mt-4 text-lg leading-relaxed text-slate-600">
-                All prices are fully loaded monthly fees — salary, benefits, HR, equipment, secure
-                office facilities and a dedicated account manager included. Part-time is simply
-                50% of the full-time fee.
+              <p className="mt-4 text-lg leading-relaxed text-slate-600">{seoIntro[region]}</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-500">
+                Every price below is a fully loaded monthly fee — salary, benefits, HR, equipment,
+                secure office facilities and a dedicated account manager included. Part-time (20
+                hours per week) is simply 50% of the full-time fee. Most clients save 60% or more
+                against an equivalent native hire.
               </p>
             </div>
-            <div className="w-full max-w-[240px]">
-              <p className="mb-2 text-sm font-semibold text-slate-700">Show pricing for</p>
-              <Select value={region} onValueChange={(v) => setRegion(v as Region)}>
-                <SelectTrigger className="h-11 bg-white">
+            <div className="w-full max-w-[260px]">
+              <p className="mb-2 text-sm font-semibold text-slate-700">Your country</p>
+              <Select value={region} onValueChange={(v) => navigate(`/pricing/${v}`)}>
+                <SelectTrigger className="h-12 border-2 border-blue-600 bg-blue-50 text-base font-semibold text-blue-800">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.entries(regions).map(([key, r]) => (
+                  {regionKeys.map((key) => (
                     <SelectItem key={key} value={key}>
-                      {r.label}
+                      <span className="flex items-center gap-2">
+                        <span>{regions[key].flag}</span>
+                        <span>{regions[key].label}</span>
+                        <span className="text-slate-400">({regions[key].currency})</span>
+                      </span>
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -120,10 +137,10 @@ export default function Roles() {
                       </p>
 
                       <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                        {role.responsibilities.map((r) => (
-                          <li key={r} className="flex items-start gap-2 text-sm text-slate-600">
+                        {role.responsibilities.map((resp) => (
+                          <li key={resp} className="flex items-start gap-2 text-sm text-slate-600">
                             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                            {r}
+                            {resp}
                           </li>
                         ))}
                       </ul>
@@ -144,7 +161,7 @@ export default function Roles() {
                       <div className="mt-6 flex flex-wrap items-end justify-between gap-4 rounded-xl bg-slate-50 p-5">
                         <div>
                           <p className="text-xs font-medium text-slate-500">
-                            Native {regions[region].name} hire:{' '}
+                            Native {r.name} hire:{' '}
                             <span className="line-through">
                               {sym}
                               {role.native[region].toLocaleString()}/mo
@@ -160,15 +177,24 @@ export default function Roles() {
                             {Math.round(role.ticky[region] / 2).toLocaleString()}/mo part-time
                           </p>
                         </div>
-                        <Button
-                          asChild
-                          className="rounded-full bg-blue-700 font-semibold hover:bg-blue-800"
-                        >
-                          <Link to="/contact">
-                            Hire this role
-                            <ArrowRight className="ml-1.5 h-4 w-4" />
-                          </Link>
-                        </Button>
+                        <div className="flex flex-col items-stretch gap-2">
+                          <Button
+                            asChild
+                            className="rounded-full bg-blue-700 font-semibold hover:bg-blue-800"
+                          >
+                            <Link to="/contact">
+                              Hire this role
+                              <ArrowRight className="ml-1.5 h-4 w-4" />
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            variant="ghost"
+                            className="rounded-full text-blue-700 hover:bg-blue-50 hover:text-blue-800"
+                          >
+                            <Link to={`/roles/${role.id}`}>Role details & case study</Link>
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -177,11 +203,15 @@ export default function Roles() {
             })}
           </div>
 
-          <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-slate-400">
-            Native hire figures are indicative fully-loaded costs (salary, employer taxes, benefits,
-            equipment and recruitment overheads) for comparable roles. Final Ticky pricing is
-            confirmed on your discovery call based on seniority and requirements.
-          </p>
+          <div className="mx-auto mt-10 flex max-w-2xl items-start gap-2.5 text-sm text-slate-400">
+            <Info className="mt-0.5 h-4 w-4 shrink-0" />
+            <p className="text-center">
+              Native hire figures are indicative fully-loaded costs (salary, employer taxes,
+              benefits, equipment and recruitment overheads) for comparable roles in {r.label}.
+              Final Ticky pricing is confirmed on your discovery call based on seniority and
+              requirements.
+            </p>
+          </div>
         </div>
       </section>
     </>

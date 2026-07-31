@@ -60,6 +60,31 @@ export default function SavingsCalculator() {
             <div className="grid md:grid-cols-[1fr_1.1fr]">
               {/* Controls */}
               <CardContent className="space-y-6 p-7 sm:p-9">
+                <div className="space-y-2 rounded-2xl bg-blue-50 p-4 ring-1 ring-blue-100">
+                  <Label htmlFor="region" className="text-sm font-bold text-blue-800">
+                    Your location
+                  </Label>
+                  <Select value={region} onValueChange={(v) => setRegion(v as Region)}>
+                    <SelectTrigger
+                      id="region"
+                      className="h-12 border-2 border-blue-600 bg-white text-base font-semibold text-blue-800"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.entries(regions).map(([key, r]) => (
+                        <SelectItem key={key} value={key}>
+                          <span className="flex items-center gap-2">
+                            <span>{r.flag}</span>
+                            <span>{r.label}</span>
+                            <span className="text-slate-400">({r.symbol} {r.currency})</span>
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="role" className="text-sm font-semibold text-slate-700">
                     Role
@@ -72,24 +97,6 @@ export default function SavingsCalculator() {
                       {roles.map((r) => (
                         <SelectItem key={r.id} value={r.id}>
                           {r.title}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="region" className="text-sm font-semibold text-slate-700">
-                    Your location
-                  </Label>
-                  <Select value={region} onValueChange={(v) => setRegion(v as Region)}>
-                    <SelectTrigger id="region" className="h-11">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Object.entries(regions).map(([key, r]) => (
-                        <SelectItem key={key} value={key}>
-                          {r.label}
                         </SelectItem>
                       ))}
                     </SelectContent>

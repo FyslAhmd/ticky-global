@@ -35,7 +35,7 @@ export default function Reviews() {
               Real businesses. Real savings.
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              Founders and directors across the UK, US, Canada and Australia on what happened when they
+              Founders and directors across the UK, US, Canada, Australia and New Zealand on what happened when they
               moved their office functions to a Ticky team in the Philippines.
             </p>
           </div>

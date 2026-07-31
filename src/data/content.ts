@@ -1,10 +1,17 @@
-export type Region = 'uk' | 'us' | 'au'
+export type Region = 'uk' | 'us' | 'ca' | 'au' | 'nz'
 
-export const regions: Record<Region, { label: string; symbol: string; name: string }> = {
-  uk: { label: 'United Kingdom', symbol: '£', name: 'UK' },
-  us: { label: 'United States', symbol: '$', name: 'US' },
-  au: { label: 'Australia', symbol: 'A$', name: 'AU' },
+export const regions: Record<
+  Region,
+  { label: string; symbol: string; name: string; flag: string; currency: string }
+> = {
+  uk: { label: 'United Kingdom', symbol: '£', name: 'UK', flag: '🇬🇧', currency: 'GBP' },
+  us: { label: 'United States', symbol: '$', name: 'US', flag: '🇺🇸', currency: 'USD' },
+  ca: { label: 'Canada', symbol: 'C$', name: 'Canada', flag: '🇨🇦', currency: 'CAD' },
+  au: { label: 'Australia', symbol: 'A$', name: 'AU', flag: '🇦🇺', currency: 'AUD' },
+  nz: { label: 'New Zealand', symbol: 'NZ$', name: 'NZ', flag: '🇳🇿', currency: 'NZD' },
 }
+
+export const regionKeys = Object.keys(regions) as Region[]
 
 export interface Role {
   id: string
@@ -33,8 +40,8 @@ export const roles: Role[] = [
       'Follow-up sequences and call logging',
     ],
     tools: ['HubSpot', 'Salesforce', 'Aircall', 'Outreach', 'Apollo'],
-    native: { uk: 3200, us: 4500, au: 6000 },
-    ticky: { uk: 1095, us: 1395, au: 2095 },
+    native: { uk: 3200, us: 4500, ca: 5800, au: 6000, nz: 6900 },
+    ticky: { uk: 1260, us: 1605, ca: 2200, au: 2410, nz: 2645 },
     popular: true,
   },
   {
@@ -50,8 +57,8 @@ export const roles: Role[] = [
       'Sales reporting and forecasting',
     ],
     tools: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zoom', 'Gong'],
-    native: { uk: 4200, us: 5800, au: 7800 },
-    ticky: { uk: 1495, us: 1895, au: 2795 },
+    native: { uk: 4200, us: 5800, ca: 7500, au: 7800, nz: 8900 },
+    ticky: { uk: 1720, us: 2180, ca: 2985, au: 3215, nz: 3595 },
   },
   {
     id: 'admin',
@@ -66,8 +73,8 @@ export const roles: Role[] = [
       'Supplier, travel and meeting coordination',
     ],
     tools: ['Microsoft 365', 'Google Workspace', 'Slack', 'Asana', 'Notion'],
-    native: { uk: 2800, us: 3900, au: 5300 },
-    ticky: { uk: 945, us: 1195, au: 1795 },
+    native: { uk: 2800, us: 3900, ca: 5100, au: 5300, nz: 6000 },
+    ticky: { uk: 1085, us: 1375, ca: 1885, au: 2065, nz: 2270 },
     popular: true,
   },
   {
@@ -83,8 +90,8 @@ export const roles: Role[] = [
       'Landing page and CMS updates',
     ],
     tools: ['Mailchimp', 'HubSpot', 'Canva', 'WordPress', 'GA4'],
-    native: { uk: 3400, us: 4700, au: 6400 },
-    ticky: { uk: 1195, us: 1495, au: 2295 },
+    native: { uk: 3400, us: 4700, ca: 6100, au: 6400, nz: 7200 },
+    ticky: { uk: 1375, us: 1720, ca: 2355, au: 2640, nz: 2840 },
     popular: true,
   },
   {
@@ -100,8 +107,8 @@ export const roles: Role[] = [
       'Knowledge base maintenance',
     ],
     tools: ['Zendesk', 'Intercom', 'Freshdesk', 'Shopify', 'Gorgias'],
-    native: { uk: 2600, us: 3600, au: 4900 },
-    ticky: { uk: 895, us: 1145, au: 1695 },
+    native: { uk: 2600, us: 3600, ca: 4700, au: 4900, nz: 5500 },
+    ticky: { uk: 1030, us: 1315, ca: 1800, au: 1950, nz: 2170 },
   },
   {
     id: 'bookkeeper',
@@ -116,8 +123,8 @@ export const roles: Role[] = [
       'Month-end support and reporting',
     ],
     tools: ['Xero', 'QuickBooks', 'MYOB', 'Dext', 'Excel'],
-    native: { uk: 3100, us: 4300, au: 5800 },
-    ticky: { uk: 1045, us: 1345, au: 1995 },
+    native: { uk: 3100, us: 4300, ca: 5500, au: 5800, nz: 6600 },
+    ticky: { uk: 1200, us: 1545, ca: 2115, au: 2295, nz: 2550 },
   },
   {
     id: 'ea',
@@ -132,8 +139,8 @@ export const roles: Role[] = [
       'Personal and business task support',
     ],
     tools: ['Google Workspace', 'Microsoft 365', 'Calendly', 'Slack', 'Zoom'],
-    native: { uk: 3500, us: 4900, au: 6600 },
-    ticky: { uk: 1245, us: 1595, au: 2395 },
+    native: { uk: 3500, us: 4900, ca: 6400, au: 6600, nz: 7600 },
+    ticky: { uk: 1430, us: 1835, ca: 2515, au: 2755, nz: 3030 },
   },
   {
     id: 'social',
@@ -148,8 +155,8 @@ export const roles: Role[] = [
       'Performance tracking and reporting',
     ],
     tools: ['Canva', 'Hootsuite', 'Buffer', 'CapCut', 'Meta Suite'],
-    native: { uk: 3200, us: 4400, au: 6000 },
-    ticky: { uk: 1145, us: 1445, au: 2195 },
+    native: { uk: 3200, us: 4400, ca: 5800, au: 6000, nz: 6900 },
+    ticky: { uk: 1315, us: 1660, ca: 2275, au: 2525, nz: 2740 },
   },
 ]
 
@@ -206,7 +213,7 @@ export const faqs: Faq[] = [
   {
     question: 'Will they work my business hours?',
     answer:
-      'Yes. Our teams work your hours — whether that is UK, US East or West Coast, or Australian business time. The Philippines has a long-established night-shift culture built around serving western markets, so overlapping your working day is the norm, not the exception.',
+      'Yes. Our teams work your hours — whether that is UK, US East or West Coast, Canadian, Australian or New Zealand business time. The Philippines has a long-established night-shift culture built around serving western markets, so overlapping your working day is the norm, not the exception.',
   },
   {
     question: 'What does "at least 50% saving" actually include?',
@@ -301,7 +308,7 @@ export const steps: Step[] = [
 
 export const stats = [
   { value: '50%+', label: 'Minimum cost saving vs a native western hire' },
-  { value: '120+', label: 'Businesses supported across UK, US, Canada & AU' },
+  { value: '120+', label: 'Businesses supported across the UK, US, Canada, Australia & NZ' },
   { value: '400+', label: 'Filipino professionals placed and managed' },
   { value: '14 days', label: 'Average time from brief to start date' },
 ]

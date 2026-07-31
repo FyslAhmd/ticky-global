@@ -46,7 +46,7 @@ export default function RolesPreview() {
           </div>
           <Button asChild variant="outline" className="rounded-full font-semibold">
             <Link to="/roles">
-              View all roles & pricing
+              View all roles
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

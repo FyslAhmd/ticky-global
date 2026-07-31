@@ -20,7 +20,9 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Company</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              <li><Link to="/roles" className="hover:text-white">Roles & Pricing</Link></li>
+              <li><Link to="/roles" className="hover:text-white">Our Roles</Link></li>
+              <li><Link to="/sectors" className="hover:text-white">Sectors</Link></li>
+              <li><Link to="/pricing" className="hover:text-white">Pricing</Link></li>
               <li><Link to="/how-it-works" className="hover:text-white">How It Works</Link></li>
               <li><Link to="/reviews" className="hover:text-white">Client Reviews</Link></li>
               <li><Link to="/contact" className="hover:text-white">Book a Discovery Call</Link></li>
