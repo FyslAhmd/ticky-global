@@ -32,7 +32,7 @@ export const reviews: Review[] = [
     story: [
       'We were sceptical. We had tried a freelance VA before and it ended in missed calls and garbled emails, so the bar for Ticky was high. Our discovery call changed the tone completely — within five days we had three candidate videos, and each one spoke clearer, more confident English than some of the people we had interviewed locally.',
       'We hired Angela as our SDR on a full-time basis, working 9am to 5:30pm UK time. Her first two weeks were spent in our HubSpot instance learning our ICP, and by week three she was on the phones. She now books 12–15 qualified demos a month — more than the two UK-based SDRs we had previously employed combined.',
-      'The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,260, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.',
+      'The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,385, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.',
     ],
     photo: '/images/review-james.jpg',
   },

@@ -41,7 +41,7 @@ export const roles: Role[] = [
     ],
     tools: ['HubSpot', 'Salesforce', 'Aircall', 'Outreach', 'Apollo'],
     native: { uk: 3200, us: 4500, ca: 5800, au: 6000, nz: 6900 },
-    ticky: { uk: 1260, us: 1605, ca: 2200, au: 2410, nz: 2645 },
+    ticky: { uk: 1385, us: 1765, ca: 2420, au: 2650, nz: 2910 },
     popular: true,
   },
   {
@@ -74,7 +74,7 @@ export const roles: Role[] = [
     ],
     tools: ['Microsoft 365', 'Google Workspace', 'Slack', 'Asana', 'Notion'],
     native: { uk: 2800, us: 3900, ca: 5100, au: 5300, nz: 6000 },
-    ticky: { uk: 1085, us: 1375, ca: 1885, au: 2065, nz: 2270 },
+    ticky: { uk: 1195, us: 1515, ca: 2075, au: 2270, nz: 2495 },
     popular: true,
   },
   {
@@ -108,7 +108,7 @@ export const roles: Role[] = [
     ],
     tools: ['Zendesk', 'Intercom', 'Freshdesk', 'Shopify', 'Gorgias'],
     native: { uk: 2600, us: 3600, ca: 4700, au: 4900, nz: 5500 },
-    ticky: { uk: 1030, us: 1315, ca: 1800, au: 1950, nz: 2170 },
+    ticky: { uk: 1135, us: 1445, ca: 1980, au: 2145, nz: 2385 },
   },
   {
     id: 'bookkeeper',

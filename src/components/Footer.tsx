@@ -36,10 +36,21 @@ export default function Footer() {
                 <Mail className="h-4 w-4 text-blue-400" /> hello@tickyglobal.com
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-blue-400" /> +44 (0)20 7946 0820
+                <Phone className="h-4 w-4 text-blue-400" /> UK: 0808 175 3413
               </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-blue-400" /> London · Manila
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                <span>
+                  <span className="font-semibold text-slate-200">UK Office</span> — Chetwynd
+                  Grove, Bangor Road, Cross Lanes, Wrexham, United Kingdom
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                <span>
+                  <span className="font-semibold text-slate-200">US Office</span> — 8 The
+                  Green, Suite A, Dover, Delaware 19901, United States
+                </span>
               </li>
             </ul>
           </div>

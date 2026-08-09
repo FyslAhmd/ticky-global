@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CheckCircle2, Mail, Phone, CalendarCheck, Clock3, ShieldCheck, CircleAlert } from 'lucide-react'
+import { CheckCircle2, Mail, Phone, MapPin, CalendarCheck, Clock3, ShieldCheck, CircleAlert } from 'lucide-react'
 import { roles } from '@/data/content'
 import { trpc } from '@/providers/trpc'
 
@@ -93,13 +93,33 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="mt-10 space-y-3 border-t border-slate-200 pt-8 text-sm text-slate-600">
+            <div className="mt-10 border-t border-slate-200 pt-8 text-sm text-slate-600">
               <p className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-blue-700" /> hello@tickyglobal.com
               </p>
-              <p className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-blue-700" /> +44 (0)20 7946 0820
-              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <p className="flex items-center gap-2 font-bold text-slate-900">
+                    <span className="text-base">🇬🇧</span> UK Office
+                  </p>
+                  <p className="mt-2 flex items-start gap-2 leading-relaxed">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" />
+                    Chetwynd Grove, Bangor Road, Cross Lanes, Wrexham, United Kingdom
+                  </p>
+                  <p className="mt-2 flex items-center gap-2 font-semibold text-slate-900">
+                    <Phone className="h-4 w-4 shrink-0 text-blue-700" /> 0808 175 3413
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <p className="flex items-center gap-2 font-bold text-slate-900">
+                    <span className="text-base">🇺🇸</span> US Office
+                  </p>
+                  <p className="mt-2 flex items-start gap-2 leading-relaxed">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" />8 The Green,
+                    Suite A, Dover, Delaware 19901, United States
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
 
