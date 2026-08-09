@@ -1,66 +1,55 @@
-# 🚀 Ticky Global - VPS Deployment Guide
+# 🚀 Ticky Global - cPanel/AlmaLinux Deployment Guide
 
-Welcome! This guide will walk you through deploying your Ticky Global application on your AlmaLinux VPS manually from scratch. Since you have `root` access and are deploying this without cPanel, we will be using the industry-standard stack for a production Node.js application: **Node.js, MySQL, PM2, and Nginx**.
+Welcome! Since you are used to deploying manually on Ubuntu, AlmaLinux 10 with cPanel will feel a bit different. cPanel tightly controls the web server (Apache) and the database (MariaDB). 
 
----
-
-## 🛑 Step 0: Point Your Domain (Do this right away)
-Before proceeding with Nginx and SSL setup later on, you need to point your domain to your VPS. 
-1. Log in to your domain registrar (e.g., GoDaddy, Namecheap).
-2. Go to your DNS Settings.
-3. Add an **A Record**:
-   * **Host/Name:** `@`
-   * **Value/IP:** `92.205.187.233`
-4. Add another **A Record** (for www):
-   * **Host/Name:** `www`
-   * **Value/IP:** `92.205.187.233`
-
-*DNS propagation can take a little time, so doing this first ensures it's ready when we need it in Step 7.*
+Instead of fighting cPanel by installing Nginx or PM2, we are going to use **Phusion Passenger**. This is cPanel's native way of running Node.js apps. It integrates directly with Apache, meaning we don't need a reverse proxy, and it manages the background processes automatically (so no PM2 required!).
 
 ---
 
-## 🛠️ Step 1: Install System Dependencies
-First, log in to your server via SSH as the `tickyglobal` user. Since your user has `sudo` privileges, you can run commands as `root`. We need to install Node.js (v20), Git, Nginx, and MySQL.
+## 🛑 Step 0: Point Your Domain
+If you haven't already, point your domain to the server so cPanel can issue an SSL certificate.
+1. Go to your domain registrar (e.g., GoDaddy, Namecheap).
+2. Add an **A Record** for `@` pointing to `92.205.187.233`.
+3. Add an **A Record** for `www` pointing to `92.205.187.233`.
 
-Run these commands one by one:
+---
 
+## 💾 Step 1: Create a Swap File (Memory Protection)
+Your VPS only has 2GB of RAM. cPanel alone uses a large chunk of this. To prevent your Node application from crashing when it builds or receives traffic, we will add 2GB of "virtual memory" (Swap) on your hard drive.
+
+Run these commands in your SSH terminal:
 ```bash
-# Update the system packages
-sudo dnf update -y
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
 
-# Enable Node.js v20 module and install Node.js and Git
-sudo dnf module enable nodejs:20 -y
-sudo dnf install -y nodejs git nginx mysql-server
-
-# Install PM2 globally (PM2 keeps your app running forever in the background)
-sudo npm install -g pm2
+# Make the swap permanent so it survives a reboot:
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
 ---
 
-## 🗄️ Step 2: Setup Local MySQL Database
-Your app requires a database. Let's start the MySQL server and create a database.
+## 🛠️ Step 2: Install Node.js & Passenger
+Instead of using `apt` (Ubuntu), AlmaLinux uses `dnf`. We need to install the official cPanel packages for Node.js 22 and Passenger.
 
-**1. Start & Enable MySQL:**
+Run this command:
 ```bash
-sudo systemctl start mysqld
-sudo systemctl enable mysqld
+sudo dnf install -y ea-nodejs22 ea-apache24-mod-passenger ea-apache24-mod_env
 ```
+*(This installs Node.js and tells Apache how to run Node apps).*
 
-**2. Secure your MySQL Installation (Optional but Recommended):**
-```bash
-sudo mysql_secure_installation
-```
-*(Just follow the on-screen prompts to set a root password and remove test databases. Press `Y` for yes on most of them).*
+---
 
-**3. Create the Database and User:**
-Log into MySQL:
+## 🗄️ Step 3: Setup the Database (Using Existing MariaDB)
+Since cPanel already installed MariaDB, we just need to log in and create your database.
+
+**1. Log into the database:**
 ```bash
 sudo mysql
 ```
 
-Once inside the MySQL prompt (`mysql>`), run the following SQL commands one by one. **Important: Change `YourStrongPassword` to a secure password you want to use.**
-
+**2. Run these SQL commands:** *(Change `YourStrongPassword` to a secure password!)*
 ```sql
 CREATE DATABASE tickyglobal;
 CREATE USER 'tickyuser'@'localhost' IDENTIFIED BY 'YourStrongPassword';
@@ -71,148 +60,82 @@ EXIT;
 
 ---
 
-## 📥 Step 3: Clone Your Codebase
-Now, we will pull your code from your new GitHub repository into a directory on your server. A good place to put web applications is `/var/www/`.
+## 📥 Step 4: Clone & Build Your Codebase
+In cPanel, your main website is served from the `public_html` directory. We will clone your code into a safe folder outside of that, and then link it later.
 
+**1. Clone the repository:**
 ```bash
-# Create the www directory if it doesn't exist, and take ownership of it
-sudo mkdir -p /var/www
-sudo chown -R tickyglobal:tickyglobal /var/www
-
-# Navigate to the folder
-cd /var/www
-
-# Clone the repository (It will ask for your GitHub credentials or SSH key password)
+cd /home/tickyglobal
 git clone git@github.com:FyslAhmd/ticky-global.git
-
-# Go into the project folder
 cd ticky-global
 ```
 
----
-
-## ⚙️ Step 4: Configure Environment Variables
-Your app needs to know how to connect to the database and your AWS S3 bucket.
-
-1. Create your `.env` file by copying the example:
+**2. Configure Environment Variables:**
 ```bash
 cp .env.example .env
-```
-
-2. Open the file in the `nano` text editor:
-```bash
 nano .env
 ```
-
-3. Set your environment variables. Make sure your `DATABASE_URL` matches the user and password you created in Step 2. Also, add your AWS S3 credentials if your application utilizes them for file storage.
+Update the database URL to match what you created in Step 3. (To save and exit nano: `Ctrl + O` -> `Enter` -> `Ctrl + X`).
 ```env
-# Database Connection (Format: mysql://USER:PASSWORD@localhost:3306/DATABASE)
 DATABASE_URL=mysql://tickyuser:YourStrongPassword@localhost:3306/tickyglobal
-
-# Set to production mode
 NODE_ENV=production
-PORT=3000
-
-# AWS S3 Variables (Replace with your actual AWS keys)
-AWS_ACCESS_KEY_ID=your_aws_access_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key
-AWS_REGION=your_aws_region
-AWS_S3_BUCKET=your_bucket_name
 ```
-*(To save and exit nano: Press `Ctrl + O`, then `Enter`, then `Ctrl + X`).*
 
----
-
-## 🏗️ Step 5: Install & Build the Application
-Now, we will install the Node.js packages, push the database structure to MySQL, and build the final production files.
-
+**3. Install & Build:**
 ```bash
-# 1. Install all dependencies
+# We must use the specific Node version we installed via cPanel
+export PATH=/opt/cpanel/ea-nodejs22/bin:$PATH
+
+# Install packages
 npm install
 
-# 2. Push the database schema to your local MySQL database
+# Push the database schema
 npm run db:push
 
-# 3. Build the frontend and backend for production
+# Build the application
 npm run build
 ```
 
 ---
 
-## 🚀 Step 6: Start the Application with PM2
-We want the app to run in the background and automatically restart if it crashes or if the VPS reboots.
+## 🚀 Step 5: Connect the App to Apache (Passenger)
+This is where the magic happens. We just need to drop a `.htaccess` file into your public web folder. Apache will read it and automatically boot up your Node.js application!
 
+**1. Open your public HTML folder's `.htaccess` file:**
 ```bash
-# Start the app using PM2
-pm2 start dist/boot.js --name "ticky-global"
-
-# Save the PM2 process list so it remembers the app
-pm2 save
-
-# Generate a startup script (Run this and follow the instructions it outputs)
-pm2 startup
+nano /home/tickyglobal/public_html/.htaccess
 ```
-*Note: The `pm2 startup` command will print a command at the bottom of the screen that looks like `sudo env PATH=$PATH...`. You must copy and paste that command and press enter to ensure the app starts when the server reboots.*
+
+**2. Paste this exact configuration inside:**
+```apache
+PassengerEnabled On
+PassengerAppType node
+PassengerAppRoot /home/tickyglobal/ticky-global
+PassengerStartupFile dist/boot.js
+```
+*(Save and exit nano: `Ctrl + O` -> `Enter` -> `Ctrl + X`).*
+
+That's it! Passenger will automatically intercept traffic to `tickyglobal.com` and run your `dist/boot.js` app. It will also restart the app automatically if the server reboots.
 
 ---
 
-## 🌐 Step 7: Configure Nginx (Reverse Proxy)
-Right now, your app is running on port `3000` (e.g., `http://92.205.187.233:3000`). We need to use Nginx to route normal web traffic (port 80) from `tickyglobal.com` directly to your app.
+## 🔒 Step 6: Secure with SSL (AutoSSL)
+cPanel has a built-in feature called AutoSSL that automatically generates free Let's Encrypt certificates. You don't need to manually install Certbot like on Ubuntu.
 
-**1. Create a new Nginx configuration file:**
+Force cPanel to check your domain and install the SSL certificate by running:
 ```bash
-sudo nano /etc/nginx/conf.d/tickyglobal.com.conf
+sudo /usr/local/cpanel/bin/autossl_check --user=tickyglobal
 ```
-
-**2. Paste the following configuration:**
-```nginx
-server {
-    listen 80;
-    server_name tickyglobal.com www.tickyglobal.com;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
-*(Save and exit nano: `Ctrl + O` -> `Enter` -> `Ctrl + X`)*
-
-**3. Test and restart Nginx:**
-```bash
-sudo nginx -t
-sudo systemctl enable nginx
-sudo systemctl restart nginx
-```
-
-If your domain (Step 0) has propagated successfully, you should now be able to go to `http://tickyglobal.com` and see your app!
+*(Note: Your domain must be pointed to the server for this to work. It may take a few minutes to complete).*
 
 ---
 
-## 🔒 Step 8: Install SSL Certificate (HTTPS)
-Finally, let's secure the website with a free SSL certificate from Let's Encrypt.
+### 🎉 You're Done!
+Your application is now successfully running within the native cPanel ecosystem. It’s secure, memory-protected with swap, and managed automatically by Passenger.
 
+**To restart your app in the future (after pulling new code):**
+Passenger restarts your app whenever it sees a file called `restart.txt` inside a `tmp` folder.
 ```bash
-# Install EPEL repository and Certbot
-sudo dnf install epel-release -y
-sudo dnf install certbot python3-certbot-nginx -y
-
-# Run Certbot to install the SSL certificate
-sudo certbot --nginx -d tickyglobal.com -d www.tickyglobal.com
+mkdir -p /home/tickyglobal/ticky-global/tmp
+touch /home/tickyglobal/ticky-global/tmp/restart.txt
 ```
-
-Certbot will ask for your email address and whether you agree to the Terms of Service. It will then automatically configure Nginx to use HTTPS and set up automatic renewals.
-
----
-
-### 🎉 Congratulations!
-Your website is now deployed, running in the background securely, served by Nginx, and secured with SSL! 
-
-**Useful Commands for the Future:**
-* To view live logs of your app: `pm2 logs ticky-global`
-* To restart your app after code changes: `pm2 restart ticky-global`
-* To update your app later: `git pull`, then `npm run build`, then `pm2 restart ticky-global`
