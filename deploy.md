@@ -1,55 +1,65 @@
-# 🚀 Ticky Global - cPanel/AlmaLinux Deployment Guide
+# 🚀 Ticky Global - Advanced cPanel/AlmaLinux Deployment Guide
 
-Welcome! Since you are used to deploying manually on Ubuntu, AlmaLinux 10 with cPanel will feel a bit different. cPanel tightly controls the web server (Apache) and the database (MariaDB). 
-
-Instead of fighting cPanel by installing Nginx or PM2, we are going to use **Phusion Passenger**. This is cPanel's native way of running Node.js apps. It integrates directly with Apache, meaning we don't need a reverse proxy, and it manages the background processes automatically (so no PM2 required!).
+Welcome! This guide has been rigorously refined for your specific environment (AlmaLinux 10 + cPanel with 2GB RAM). We will deploy everything purely via the SSH terminal using cPanel's native APIs (`UAPI`) to ensure we don't break any cPanel configurations.
 
 ---
 
 ## 🛑 Step 0: Point Your Domain
-If you haven't already, point your domain to the server so cPanel can issue an SSL certificate.
-1. Go to your domain registrar (e.g., GoDaddy, Namecheap).
-2. Add an **A Record** for `@` pointing to `92.205.187.233`.
-3. Add an **A Record** for `www` pointing to `92.205.187.233`.
+If you haven't already, ensure your DNS is resolving to your VPS so cPanel can issue an SSL certificate later.
+1. Add an **A Record** for `@` pointing to `92.205.187.233`.
+2. Add an **A Record** for `www` pointing to `92.205.187.233`.
 
 ---
 
-## 💾 Step 1: Create a Swap File (Memory Protection)
-Your VPS only has 2GB of RAM. cPanel alone uses a large chunk of this. To prevent your Node application from crashing when it builds or receives traffic, we will add 2GB of "virtual memory" (Swap) on your hard drive.
+## 💾 Step 1: Create a Swap File (Memory Pressure Protection)
+Your VPS has 2GB of RAM, and cPanel is already consuming a large portion of it. While Swap is not a replacement for physical RAM, it acts as a critical safety net to prevent the server from completely crashing during heavy operations (like running `npm install`).
 
-Run these commands in your SSH terminal:
 ```bash
 sudo fallocate -l 2G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
 
-# Make the swap permanent so it survives a reboot:
+# Make the swap permanent:
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
 ---
 
 ## 🛠️ Step 2: Install Node.js & Passenger
-Instead of using `apt` (Ubuntu), AlmaLinux uses `dnf`. We need to install the official cPanel packages for Node.js 22 and Passenger.
+We need to install the official cPanel EasyApache packages for Node.js 22 and Passenger.
 
-Run this command:
 ```bash
 sudo dnf install -y ea-nodejs22 ea-apache24-mod-passenger ea-apache24-mod_env
 ```
-*(This installs Node.js and tells Apache how to run Node apps).*
 
 ---
 
-## 🗄️ Step 3: Setup the Database (Using Existing MariaDB)
-Since cPanel already installed MariaDB, we just need to log in and create your database.
+## 🗄️ Step 3: Secure & Setup the Database
+cPanel already installed MariaDB, but it might be listening publicly. We want it restricted to localhost.
 
-**1. Log into the database:**
+**1. Secure MariaDB:**
+Open the configuration file:
+```bash
+sudo nano /etc/my.cnf.d/mariadb-server.cnf
+```
+Under the `[mysqld]` section, add this line:
+```ini
+bind-address = 127.0.0.1
+```
+*(Save and exit: `Ctrl + O` -> `Enter` -> `Ctrl + X`).*
+
+Restart MariaDB to apply the security fix:
+```bash
+sudo systemctl restart mariadb
+```
+
+**2. Create the Database:**
+Log into MySQL:
 ```bash
 sudo mysql
 ```
-
-**2. Run these SQL commands:** *(Change `YourStrongPassword` to a secure password!)*
+Run these commands *(Change `YourStrongPassword`!)*:
 ```sql
 CREATE DATABASE tickyglobal;
 CREATE USER 'tickyuser'@'localhost' IDENTIFIED BY 'YourStrongPassword';
@@ -60,9 +70,24 @@ EXIT;
 
 ---
 
-## 📥 Step 4: Clone & Build Your Codebase
-In cPanel, your main website is served from the `public_html` directory. We will clone your code into a safe folder outside of that, and then link it later.
+## 🔑 Step 4: GitHub SSH Authentication
+Since your repository is private, the server needs permission to clone it. We will use a Deploy Key.
 
+**1. Generate an SSH key:**
+```bash
+ssh-keygen -t ed25519 -C "vps-deploy-key"
+```
+*(Press Enter for all prompts to use the default path and no passphrase).*
+
+**2. View and copy the public key:**
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+**3. Add to GitHub:** Go to your `ticky-global` repository on GitHub -> **Settings** -> **Deploy keys** -> **Add deploy key**. Paste the key you just copied.
+
+---
+
+## 📥 Step 5: Clone & Configure
 **1. Clone the repository:**
 ```bash
 cd /home/tickyglobal
@@ -75,67 +100,62 @@ cd ticky-global
 cp .env.example .env
 nano .env
 ```
-Update the database URL to match what you created in Step 3. (To save and exit nano: `Ctrl + O` -> `Enter` -> `Ctrl + X`).
+Update your `.env` variables carefully. Make sure the database URL is exactly what you created in Step 3. (Add your AWS S3 credentials here as well).
 ```env
 DATABASE_URL=mysql://tickyuser:YourStrongPassword@localhost:3306/tickyglobal
 NODE_ENV=production
 ```
 
-**3. Install & Build:**
+---
+
+## 🏗️ Step 6: Build & Symlink Entry Point
+We will build the application using the cPanel Node.js version.
+
 ```bash
-# We must use the specific Node version we installed via cPanel
+# Export the correct Node path
 export PATH=/opt/cpanel/ea-nodejs22/bin:$PATH
 
-# Install packages
+# Install dependencies
 npm install
 
-# Push the database schema
+# Push database schema
 npm run db:push
 
-# Build the application
+# Build the app (this outputs to the dist/ folder)
 npm run build
 ```
 
----
-
-## 🚀 Step 5: Connect the App to Apache (Passenger)
-This is where the magic happens. We just need to drop a `.htaccess` file into your public web folder. Apache will read it and automatically boot up your Node.js application!
-
-**1. Open your public HTML folder's `.htaccess` file:**
+**Crucial Passenger Step:**
+By default, cPanel Passenger looks for an `app.js` file to start the application. Since our app is built into `dist/boot.js`, the absolute cleanest way to configure this without hacking Apache configs is to create a symlink:
 ```bash
-nano /home/tickyglobal/public_html/.htaccess
+ln -s dist/boot.js app.js
 ```
-
-**2. Paste this exact configuration inside:**
-```apache
-PassengerEnabled On
-PassengerAppType node
-PassengerAppRoot /home/tickyglobal/ticky-global
-PassengerStartupFile dist/boot.js
-```
-*(Save and exit nano: `Ctrl + O` -> `Enter` -> `Ctrl + X`).*
-
-That's it! Passenger will automatically intercept traffic to `tickyglobal.com` and run your `dist/boot.js` app. It will also restart the app automatically if the server reboots.
 
 ---
 
-## 🔒 Step 6: Secure with SSL (AutoSSL)
-cPanel has a built-in feature called AutoSSL that automatically generates free Let's Encrypt certificates. You don't need to manually install Certbot like on Ubuntu.
+## 🚀 Step 7: Register App via cPanel UAPI
+Instead of manually writing `.htaccess` rules (which can cause conflicts), we will use cPanel's official API to register the application. This ensures cPanel natively routes traffic from your domain to your Node.js app!
 
-Force cPanel to check your domain and install the SSL certificate by running:
+Run this command:
+```bash
+uapi --user=tickyglobal PassengerApps register_application name="tickyglobal" path="ticky-global" domain="tickyglobal.com" deployment_mode="production"
+```
+
+---
+
+## 🔒 Step 8: Secure with SSL (AutoSSL)
+Force cPanel to issue a Let's Encrypt SSL certificate for your domain:
 ```bash
 sudo /usr/local/cpanel/bin/autossl_check --user=tickyglobal
 ```
-*(Note: Your domain must be pointed to the server for this to work. It may take a few minutes to complete).*
+*(This may take a few minutes. Make sure your domain is fully pointed to the server's IP).*
 
 ---
 
 ### 🎉 You're Done!
-Your application is now successfully running within the native cPanel ecosystem. It’s secure, memory-protected with swap, and managed automatically by Passenger.
+Your application is now securely running, integrated deeply and safely into the cPanel ecosystem!
 
-**To restart your app in the future (after pulling new code):**
-Passenger restarts your app whenever it sees a file called `restart.txt` inside a `tmp` folder.
-```bash
-mkdir -p /home/tickyglobal/ticky-global/tmp
-touch /home/tickyglobal/ticky-global/tmp/restart.txt
-```
+**To update your app in the future:**
+1. Pull the new code: `git pull`
+2. Rebuild: `npm run build`
+3. Tell Passenger to restart: `touch tmp/restart.txt`
