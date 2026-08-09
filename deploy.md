@@ -1,4 +1,4 @@
-# 🚀 Ticky Global - Advanced cPanel/AlmaLinux Deployment Guide
+# 🚀 Ticky Global - Final cPanel/AlmaLinux Deployment Guide
 
 Welcome! This guide has been rigorously refined for your specific environment (AlmaLinux 10 + cPanel with 2GB RAM). We will deploy everything purely via the SSH terminal using cPanel's native APIs (`UAPI`) to ensure we don't break any cPanel configurations.
 
@@ -23,6 +23,7 @@ sudo swapon /swapfile
 # Make the swap permanent:
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
+Verify the swap is active by running `free -h`. You should see approximately `2.0Gi` of Swap.
 
 ---
 
@@ -32,23 +33,26 @@ We need to install the official cPanel EasyApache packages for Node.js 22 and Pa
 ```bash
 sudo dnf install -y ea-nodejs22 ea-apache24-mod-passenger ea-apache24-mod_env
 ```
+Verify installation: `/opt/cpanel/ea-nodejs22/bin/node -v`
 
 ---
 
 ## 🗄️ Step 3: Secure & Setup the Database
 cPanel already installed MariaDB, but it might be listening publicly. We want it restricted to localhost.
 
-**1. Secure MariaDB:**
-Open the configuration file:
+**1. Locate the correct config file:**
+Run this to see where `bind-address` might already be defined:
+```bash
+sudo grep -R "bind-address" /etc/my.cnf /etc/my.cnf.d/ 2>/dev/null
+```
+If it's missing, open the main config file:
 ```bash
 sudo nano /etc/my.cnf.d/mariadb-server.cnf
 ```
-Under the `[mysqld]` section, add this line:
+Add this under `[mysqld]`:
 ```ini
 bind-address = 127.0.0.1
 ```
-*(Save and exit: `Ctrl + O` -> `Enter` -> `Ctrl + X`).*
-
 Restart MariaDB to apply the security fix:
 ```bash
 sudo systemctl restart mariadb
@@ -77,13 +81,19 @@ Since your repository is private, the server needs permission to clone it. We wi
 ```bash
 ssh-keygen -t ed25519 -C "vps-deploy-key"
 ```
-*(Press Enter for all prompts to use the default path and no passphrase).*
+*(Press Enter for all prompts to use the default path).*
 
 **2. View and copy the public key:**
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 **3. Add to GitHub:** Go to your `ticky-global` repository on GitHub -> **Settings** -> **Deploy keys** -> **Add deploy key**. Paste the key you just copied.
+
+**4. Test the connection:**
+```bash
+ssh -T git@github.com
+```
+*(You should see a successful authentication message).*
 
 ---
 
@@ -108,7 +118,7 @@ NODE_ENV=production
 
 ---
 
-## 🏗️ Step 6: Build & Symlink Entry Point
+## 🏗️ Step 6: Build & Create Entry Point
 We will build the application using the cPanel Node.js version.
 
 ```bash
@@ -126,19 +136,25 @@ npm run build
 ```
 
 **Crucial Passenger Step:**
-By default, cPanel Passenger looks for an `app.js` file to start the application. Since our app is built into `dist/boot.js`, the absolute cleanest way to configure this without hacking Apache configs is to create a symlink:
+By default, cPanel Passenger looks for an `app.js` file to start the application. Since our app is built into `dist/boot.js` (and is an ES module), we will create a literal `app.js` file that simply imports our built code. This is the cleanest, most explicit way to satisfy cPanel without messy symlinks or hacking Apache configs:
 ```bash
-ln -s dist/boot.js app.js
+echo "import './dist/boot.js';" > app.js
 ```
 
 ---
 
 ## 🚀 Step 7: Register App via cPanel UAPI
-Instead of manually writing `.htaccess` rules (which can cause conflicts), we will use cPanel's official API to register the application. This ensures cPanel natively routes traffic from your domain to your Node.js app!
+Instead of manually writing `.htaccess` rules (which can cause conflicts), we will use cPanel's official API to register the application. Notice that the `path` is relative to your home directory.
 
 Run this command:
 ```bash
-uapi --user=tickyglobal PassengerApps register_application name="tickyglobal" path="ticky-global" domain="tickyglobal.com" deployment_mode="production"
+uapi --output=jsonpretty \
+  --user=tickyglobal \
+  PassengerApps \
+  register_application \
+  name='tickyglobal' \
+  path='/ticky-global' \
+  domain='tickyglobal.com'
 ```
 
 ---
@@ -158,4 +174,4 @@ Your application is now securely running, integrated deeply and safely into the 
 **To update your app in the future:**
 1. Pull the new code: `git pull`
 2. Rebuild: `npm run build`
-3. Tell Passenger to restart: `touch tmp/restart.txt`
+3. Tell Passenger to restart: `mkdir -p tmp && touch tmp/restart.txt`
