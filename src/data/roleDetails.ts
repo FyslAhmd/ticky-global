@@ -85,7 +85,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   admin: {
     slug: 'admin',
     heroIntro:
-      'The office administrator is the backbone of every offshore programme: inbox, diary, data entry, documents and coordination — handled reliably, in perfect written English, from around £1,195 per month fully loaded.',
+      'The office administrator is the backbone of every offshore programme: inbox, diary, data entry, documents and coordination — handled reliably, in perfect written English, from around £1,085 per month fully loaded.',
     calibre: {
       intro:
         'Filipino administrators are career professionals, not stopgaps. Many come from executive-support and back-office roles serving multinational companies, and treat organisation as a craft.',
@@ -149,7 +149,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   'customer-service': {
     slug: 'customer-service',
     heroIntro:
-      'Customer service is the role the Philippines is world-famous for. A Ticky representative answers your phone, email and live chat with warmth and flawless English — from around £1,135 per month, fully loaded.',
+      'Customer service is the role the Philippines is world-famous for. A Ticky representative answers your phone, email and live chat with warmth and flawless English — from around £1,030 per month, fully loaded.',
     calibre: {
       intro:
         'The Philippines is the world’s contact-centre capital, serving the biggest western brands for decades. Ticky hires from the top of that talent pool and adds a management layer on top.',

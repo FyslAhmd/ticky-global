@@ -56,7 +56,7 @@ export const sectors: Sector[] = [
       { roleId: 'marketing', note: 'Job adverts, LinkedIn campaigns and talent-pool nurturing' },
     ],
     savingsNote:
-      'A native resourcer or recruitment administrator typically costs £2,800–£3,200 (US$3,900–4,500) per month fully loaded. The same role through Ticky starts from around £1,195 / US$1,515 — a saving of roughly 60% per seat, every month.',
+      'A native resourcer or recruitment administrator typically costs £2,800–£3,200 (US$3,900–4,500) per month fully loaded. The same role through Ticky starts from around £1,085 / US$1,375 — a saving of roughly 60% per seat, every month.',
     caseStudy: {
       business: 'A 12-consultant boutique agency in Manchester',
       challenge:
@@ -240,7 +240,7 @@ export const sectors: Sector[] = [
       { roleId: 'marketing', note: 'Newsletters, LinkedIn and campaign execution' },
     ],
     savingsNote:
-      'A native executive assistant or legal administrator costs £2,800–£3,500 (A$5,300–6,600) per month fully loaded. Ticky equivalents start from around £1,195–£1,430 / A$2,270–2,755 — typically a 60% saving per seat.',
+      'A native executive assistant or legal administrator costs £2,800–£3,500 (A$5,300–6,600) per month fully loaded. Ticky equivalents start from around £1,085–£1,430 / A$2,065–2,755 — typically a 60% saving per seat.',
     caseStudy: {
       business: 'A professional services firm in Sydney',
       challenge:
@@ -332,7 +332,7 @@ export const sectors: Sector[] = [
       { roleId: 'marketing', note: 'Email nurture, SEO upkeep and analytics' },
     ],
     savingsNote:
-      'A native SDR costs roughly £3,200 (US$4,500 / C$5,800) per month fully loaded. A Ticky SDR starts from around £1,385 / US$1,765 — meaning two offshore SDRs cost less than one local hire, with management included.',
+      'A native SDR costs roughly £3,200 (US$4,500 / C$5,800) per month fully loaded. A Ticky SDR starts from around £1,260 / US$1,605 — meaning two offshore SDRs cost less than one local hire, with management included.',
     caseStudy: {
       business: 'A B2B SaaS scale-up in London',
       challenge:
