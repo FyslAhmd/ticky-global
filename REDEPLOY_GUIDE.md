@@ -28,6 +28,10 @@ If you added new packages, you need to install them. Then, re-compile the fronte
 
 Because cPanel uses specific paths for its Node versions, use the exact absolute path for npm:
 ```bash
+
+# 0. reset permission to ticky app
+sudo chown -R tickyapp:tickyapp /home/tickyapp/ticky-global
+
 # 1. Install any new packages
 sudo -u tickyapp /opt/cpanel/ea-nodejs22/bin/npm install
 

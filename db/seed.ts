@@ -173,22 +173,34 @@ async function seed() {
   const db = getDb();
   console.log("Seeding database...");
 
-  const [{ reviewCount }] = await db
-    .select({ reviewCount: sql<number>`count(*)` })
-    .from(reviews);
-
-  if (Number(reviewCount) === 0) {
-    await db.insert(reviews).values(
-      seedReviews.map((r) => ({
+  for (const r of seedReviews) {
+    await db.insert(reviews)
+      .values({
         ...r,
         hires: JSON.stringify(r.hires),
         story: JSON.stringify(r.story),
-      })),
-    );
-    console.log(`Inserted ${seedReviews.length} reviews`);
-  } else {
-    console.log("Reviews already seeded, skipping");
+      })
+      .onDuplicateKeyUpdate({
+        set: {
+          name: r.name,
+          role: r.role,
+          company: r.company,
+          location: r.location,
+          industry: r.industry,
+          hires: JSON.stringify(r.hires),
+          saving: r.saving,
+          rating: r.rating,
+          headline: r.headline,
+          quote: r.quote,
+          story: JSON.stringify(r.story),
+          photo: r.photo,
+          status: r.status,
+          sortOrder: r.sortOrder,
+          updatedAt: new Date(),
+        },
+      });
   }
+  console.log(`Upserted ${seedReviews.length} reviews`);
 
   const [{ enquiryCount }] = await db
     .select({ enquiryCount: sql<number>`count(*)` })
@@ -201,18 +213,26 @@ async function seed() {
     console.log("Enquiries already exist, skipping");
   }
 
-  const [{ pageCount }] = await db.select({ pageCount: sql<number>`count(*)` }).from(pages);
-  if (Number(pageCount) === 0) {
-    await db.insert(pages).values({
-      slug: "why-outsource-to-the-philippines",
-      title: "Why Outsource to the Philippines? A Straight-Talking Guide for SMEs",
-      excerpt:
-        "The real economics, the cultural fit, and the mistakes to avoid when building your first offshore team.",
-      content: `## The short version\n\nThe Philippines combines western-standard English, a service-oriented culture and labour costs roughly 50–70% below the UK, US and Australia. It is why over 1.3 million Filipinos work in the outsourcing industry.\n\n## What makes it work\n\n- **English as an official language** — business, law and higher education all run in English.\n- **Cultural alignment** — decades of close ties with western markets mean your customers notice no difference.\n- **Time-zone flexibility** — a mature night-shift culture covers UK, US and AU business hours.\n\n## The mistakes to avoid\n\n1. Hiring freelancers with no management layer.\n2. Treating offshore staff as tasks rather than team members.\n3. Skipping structured onboarding.\n\nTicky exists to solve all three — we employ, equip, train and manage your team so you get the output without the overhead.`,
-      status: "published" as const,
+  const pageData = {
+    slug: "why-outsource-to-the-philippines",
+    title: "Why Outsource to the Philippines? A Straight-Talking Guide for SMEs",
+    excerpt: "The real economics, the cultural fit, and the mistakes to avoid when building your first offshore team.",
+    content: `## The short version\n\nThe Philippines combines western-standard English, a service-oriented culture and labour costs roughly 50–70% below the UK, US and Australia. It is why over 1.3 million Filipinos work in the outsourcing industry.\n\n## What makes it work\n\n- **English as an official language** — business, law and higher education all run in English.\n- **Cultural alignment** — decades of close ties with western markets mean your customers notice no difference.\n- **Time-zone flexibility** — a mature night-shift culture covers UK, US and AU business hours.\n\n## The mistakes to avoid\n\n1. Hiring freelancers with no management layer.\n2. Treating offshore staff as tasks rather than team members.\n3. Skipping structured onboarding.\n\nTicky exists to solve all three — we employ, equip, train and manage your team so you get the output without the overhead.`,
+    status: "published" as const,
+  };
+
+  await db.insert(pages)
+    .values(pageData)
+    .onDuplicateKeyUpdate({
+      set: {
+        title: pageData.title,
+        excerpt: pageData.excerpt,
+        content: pageData.content,
+        status: pageData.status,
+        updatedAt: new Date(),
+      },
     });
-    console.log("Inserted 1 sample page");
-  }
+  console.log("Upserted 1 sample page");
 
   // a little analytics history so the dashboard chart isn't empty
   const [{ eventCount }] = await db
