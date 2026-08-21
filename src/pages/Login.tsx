@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 function getOAuthUrl() {
   const kimiAuthUrl = import.meta.env.VITE_KIMI_AUTH_URL;
   const appID = import.meta.env.VITE_APP_ID;
-  const redirectUri = `${window.location.origin}/api/oauth/callback`;
+  
+  // Strip 'www.' to ensure it matches the non-www URL registered in Kimi Developer settings
+  const baseOrigin = window.location.origin.replace('https://www.', 'https://');
+  const redirectUri = `${baseOrigin}/api/oauth/callback`;
+  
   const state = btoa(redirectUri);
 
   const url = new URL(`${kimiAuthUrl}/api/oauth/authorize`);
