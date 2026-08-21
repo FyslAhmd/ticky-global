@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/select'
 import { ArrowRight, PiggyBank } from 'lucide-react'
 import { roles, regions, type Region } from '@/data/content'
+import { trackCalculatorUsed, trackCtaClick } from '@/lib/tracking'
 
 type Hours = 'full' | 'part'
 
@@ -33,6 +34,26 @@ export default function SavingsCalculator() {
 
   const sym = regions[region].symbol
   const fmt = (n: number) => `${sym}${n.toLocaleString()}`
+
+  // Fire a calculator_used conversion event (debounced) when the visitor changes inputs
+  const calcTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => {
+    if (calcTimer.current) clearTimeout(calcTimer.current)
+    calcTimer.current = setTimeout(() => {
+      trackCalculatorUsed({
+        roleId: result.role.id,
+        roleTitle: result.role.title,
+        region,
+        hours,
+        annualSaving: result.annual,
+        currency: regions[region].currency,
+      })
+    }, 1500)
+    return () => {
+      if (calcTimer.current) clearTimeout(calcTimer.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roleId, region, hours])
 
   return (
     <section id="savings" className="bg-slate-50 py-20 lg:py-28">
@@ -129,7 +150,8 @@ export default function SavingsCalculator() {
 
                 <p className="text-xs leading-relaxed text-slate-400">
                   Native hire cost includes salary, employer taxes, pension/benefits, equipment and
-                  typical recruitment overheads. Ticky fee is fully loaded.
+                  typical recruitment overheads. Ticky fees are fully loaded "starting from"
+                  figures, confirmed on your discovery call.
                 </p>
               </CardContent>
 
@@ -153,7 +175,12 @@ export default function SavingsCalculator() {
                   </div>
                   <div className="flex items-baseline justify-between border-b border-white/15 pb-4">
                     <span className="text-sm text-blue-100">Ticky / month</span>
-                    <span className="text-2xl font-extrabold">{fmt(result.wb)}</span>
+                    <span className="text-2xl font-extrabold">
+                      <span className="mr-1.5 align-middle text-xs font-semibold uppercase tracking-wide text-blue-200">
+                        From
+                      </span>
+                      {fmt(result.wb)}
+                    </span>
                   </div>
                   <div className="flex items-baseline justify-between">
                     <span className="text-sm font-medium text-emerald-300">You save / year</span>
@@ -171,7 +198,12 @@ export default function SavingsCalculator() {
                   asChild
                   className="mt-6 w-full rounded-full bg-white font-semibold text-blue-800 hover:bg-blue-50"
                 >
-                  <Link to="/contact">
+                  <Link
+                    to="/contact"
+                    onClick={() =>
+                      trackCtaClick({ label: 'Lock in this saving', path: window.location.pathname })
+                    }
+                  >
                     Lock in this saving
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>

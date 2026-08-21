@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, CalendarCheck } from 'lucide-react'
+import { trackCtaClick } from '@/lib/tracking'
 
 export default function CtaSection() {
   return (
@@ -36,7 +37,15 @@ export default function CtaSection() {
                 size="lg"
                 className="rounded-full bg-white px-8 text-base font-semibold text-blue-800 hover:bg-blue-50"
               >
-                <Link to="/contact">
+                <Link
+                  to="/contact"
+                  onClick={() =>
+                    trackCtaClick({
+                      label: 'Book Your Free Discovery Call',
+                      path: window.location.pathname,
+                    })
+                  }
+                >
                   Book Your Free Discovery Call
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

@@ -1,8 +1,6 @@
--- Ticky Global database export
--- Exported 2026-08-02T13:22:56.921Z
--- Database: 19f85079-8f42-8a80-8000-09f98afd4ca9
+-- Ticky Global — full database export
+-- Exported 2026-08-12T16:55:53.750Z
 
-SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS `analytics_events`;
@@ -16,452 +14,524 @@ CREATE TABLE `analytics_events` (
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=74030001;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=102030001;
 
-INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES
-(1,'pageview','/','google.com','seed',NULL,'2026-06-27 11:54:19'),
-(2,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-28 00:08:06'),
-(3,'pageview','/reviews','google.com','seed',NULL,'2026-06-27 16:51:40'),
-(4,'pageview','/reviews',NULL,'seed',NULL,'2026-06-27 12:36:56'),
-(5,'pageview','/contact',NULL,'seed',NULL,'2026-06-27 17:54:23'),
-(6,'pageview','/',NULL,'seed',NULL,'2026-06-27 18:37:49'),
-(7,'pageview','/contact','google.com','seed',NULL,'2026-06-27 21:32:02'),
-(8,'pageview','/roles',NULL,'seed',NULL,'2026-06-28 06:06:48'),
-(9,'pageview','/',NULL,'seed',NULL,'2026-06-27 18:36:15'),
-(10,'pageview','/reviews','google.com','seed',NULL,'2026-06-28 02:39:47'),
-(11,'pageview','/reviews','google.com','seed',NULL,'2026-06-28 19:12:35'),
-(12,'pageview','/reviews','google.com','seed',NULL,'2026-06-28 23:21:47'),
-(13,'pageview','/roles',NULL,'seed',NULL,'2026-06-28 18:36:02'),
-(14,'pageview','/','google.com','seed',NULL,'2026-06-29 08:53:49'),
-(15,'pageview','/','google.com','seed',NULL,'2026-06-29 08:53:58'),
-(16,'pageview','/','google.com','seed',NULL,'2026-06-29 00:01:16'),
-(17,'pageview','/','google.com','seed',NULL,'2026-06-28 18:49:29'),
-(18,'pageview','/','google.com','seed',NULL,'2026-06-29 08:13:46'),
-(19,'pageview','/','google.com','seed',NULL,'2026-06-29 15:48:34'),
-(20,'pageview','/contact','google.com','seed',NULL,'2026-06-30 02:30:21'),
-(21,'pageview','/how-it-works',NULL,'seed',NULL,'2026-06-30 07:45:10'),
-(22,'pageview','/reviews',NULL,'seed',NULL,'2026-06-29 13:42:02'),
-(23,'pageview','/roles',NULL,'seed',NULL,'2026-06-30 01:16:55'),
-(24,'pageview','/reviews','google.com','seed',NULL,'2026-06-29 19:43:51'),
-(25,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-30 02:16:03'),
-(26,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-29 21:57:47'),
-(27,'pageview','/','google.com','seed',NULL,'2026-06-30 04:17:49'),
-(28,'pageview','/',NULL,'seed',NULL,'2026-06-29 22:27:48'),
-(29,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-30 14:20:15'),
-(30,'pageview','/contact',NULL,'seed',NULL,'2026-06-30 20:30:59'),
-(31,'pageview','/reviews',NULL,'seed',NULL,'2026-07-01 06:22:02'),
-(32,'pageview','/',NULL,'seed',NULL,'2026-06-30 12:48:45'),
-(33,'pageview','/roles',NULL,'seed',NULL,'2026-07-02 01:29:50'),
-(34,'pageview','/roles','google.com','seed',NULL,'2026-07-01 15:08:41'),
-(35,'pageview','/reviews','google.com','seed',NULL,'2026-07-01 20:29:39'),
-(36,'pageview','/reviews',NULL,'seed',NULL,'2026-07-02 03:27:37'),
-(37,'pageview','/reviews',NULL,'seed',NULL,'2026-07-01 16:57:45'),
-(38,'pageview','/','google.com','seed',NULL,'2026-07-01 16:27:48'),
-(39,'pageview','/','google.com','seed',NULL,'2026-07-02 05:33:49'),
-(40,'pageview','/',NULL,'seed',NULL,'2026-07-01 22:57:06'),
-(41,'pageview','/contact','google.com','seed',NULL,'2026-07-02 23:38:38'),
-(42,'pageview','/','google.com','seed',NULL,'2026-07-03 05:19:21'),
-(43,'pageview','/contact','google.com','seed',NULL,'2026-07-02 11:24:38'),
-(44,'pageview','/','google.com','seed',NULL,'2026-07-03 05:17:31'),
-(45,'pageview','/',NULL,'seed',NULL,'2026-07-03 08:34:10'),
-(46,'pageview','/','google.com','seed',NULL,'2026-07-02 18:23:53'),
-(47,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-02 18:43:23'),
-(48,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-03 04:44:44'),
-(49,'pageview','/reviews','google.com','seed',NULL,'2026-07-04 01:34:57'),
-(50,'pageview','/contact','google.com','seed',NULL,'2026-07-03 13:44:06'),
-(51,'pageview','/roles','google.com','seed',NULL,'2026-07-03 17:56:30'),
-(52,'pageview','/contact','google.com','seed',NULL,'2026-07-03 23:32:16'),
-(53,'pageview','/','google.com','seed',NULL,'2026-07-04 02:36:03'),
-(54,'pageview','/reviews','google.com','seed',NULL,'2026-07-04 02:49:13'),
-(55,'pageview','/roles','google.com','seed',NULL,'2026-07-04 00:00:55'),
-(56,'pageview','/','google.com','seed',NULL,'2026-07-03 21:43:07'),
-(57,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-03 23:13:16'),
-(58,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-03 21:47:35'),
-(59,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-03 15:24:09'),
-(60,'pageview','/contact','google.com','seed',NULL,'2026-07-04 00:55:42'),
-(61,'pageview','/','google.com','seed',NULL,'2026-07-04 01:12:11'),
-(62,'pageview','/',NULL,'seed',NULL,'2026-07-03 15:48:27'),
-(63,'pageview','/contact',NULL,'seed',NULL,'2026-07-03 21:56:57'),
-(64,'pageview','/',NULL,'seed',NULL,'2026-07-03 21:31:45'),
-(65,'pageview','/','google.com','seed',NULL,'2026-07-04 21:49:04'),
-(66,'pageview','/contact','google.com','seed',NULL,'2026-07-05 02:49:17'),
-(67,'pageview','/','google.com','seed',NULL,'2026-07-04 12:05:06'),
-(68,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-04 13:44:30'),
-(69,'pageview','/','google.com','seed',NULL,'2026-07-04 12:19:47'),
-(70,'pageview','/',NULL,'seed',NULL,'2026-07-04 23:20:30'),
-(71,'pageview','/',NULL,'seed',NULL,'2026-07-04 21:01:00'),
-(72,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-05 00:49:55'),
-(73,'pageview','/contact','google.com','seed',NULL,'2026-07-05 08:38:24'),
-(74,'pageview','/','google.com','seed',NULL,'2026-07-05 02:10:04'),
-(75,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-04 15:01:25'),
-(76,'pageview','/',NULL,'seed',NULL,'2026-07-06 04:15:31'),
-(77,'pageview','/contact',NULL,'seed',NULL,'2026-07-06 08:25:12'),
-(78,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-06 00:27:40'),
-(79,'pageview','/reviews','google.com','seed',NULL,'2026-07-06 03:16:04'),
-(80,'pageview','/',NULL,'seed',NULL,'2026-07-07 00:17:09'),
-(81,'pageview','/','google.com','seed',NULL,'2026-07-07 00:51:13'),
-(82,'pageview','/','google.com','seed',NULL,'2026-07-07 02:18:14'),
-(83,'pageview','/',NULL,'seed',NULL,'2026-07-07 02:31:42'),
-(84,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-06 16:25:10'),
-(85,'pageview','/',NULL,'seed',NULL,'2026-07-06 21:35:34'),
-(86,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-06 12:22:58'),
-(87,'pageview','/','google.com','seed',NULL,'2026-07-08 08:48:05'),
-(88,'pageview','/','google.com','seed',NULL,'2026-07-07 17:14:28'),
-(89,'pageview','/contact','google.com','seed',NULL,'2026-07-07 19:03:28'),
-(90,'pageview','/reviews',NULL,'seed',NULL,'2026-07-08 09:20:05'),
-(91,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-08 00:03:38'),
-(92,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 08:26:04'),
-(93,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-09 00:24:39'),
-(94,'pageview','/','google.com','seed',NULL,'2026-07-09 00:22:22'),
-(95,'pageview','/contact',NULL,'seed',NULL,'2026-07-08 19:23:36'),
-(96,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 03:35:39'),
-(97,'pageview','/roles','google.com','seed',NULL,'2026-07-09 06:07:15'),
-(98,'pageview','/contact','google.com','seed',NULL,'2026-07-08 16:59:24'),
-(99,'pageview','/',NULL,'seed',NULL,'2026-07-09 00:05:27'),
-(100,'pageview','/contact',NULL,'seed',NULL,'2026-07-08 13:00:01'),
-(101,'pageview','/reviews','google.com','seed',NULL,'2026-07-09 00:56:03'),
-(102,'pageview','/contact',NULL,'seed',NULL,'2026-07-09 06:22:32'),
-(103,'pageview','/',NULL,'seed',NULL,'2026-07-09 05:59:43'),
-(104,'pageview','/reviews',NULL,'seed',NULL,'2026-07-08 18:14:49'),
-(105,'pageview','/roles','google.com','seed',NULL,'2026-07-08 23:42:00'),
-(106,'pageview','/contact',NULL,'seed',NULL,'2026-07-08 14:11:48'),
-(107,'pageview','/',NULL,'seed',NULL,'2026-07-09 06:49:07'),
-(108,'pageview','/contact',NULL,'seed',NULL,'2026-07-10 00:29:34'),
-(109,'pageview','/',NULL,'seed',NULL,'2026-07-10 04:32:04'),
-(110,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-09 22:41:46'),
-(111,'pageview','/','google.com','seed',NULL,'2026-07-10 02:50:33'),
-(112,'pageview','/roles','google.com','seed',NULL,'2026-07-10 01:05:19'),
-(113,'pageview','/roles',NULL,'seed',NULL,'2026-07-10 03:23:37'),
-(114,'pageview','/','google.com','seed',NULL,'2026-07-09 13:32:45'),
-(115,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 21:39:04'),
-(116,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 13:41:34'),
-(117,'pageview','/roles','google.com','seed',NULL,'2026-07-09 14:54:15'),
-(118,'pageview','/',NULL,'seed',NULL,'2026-07-10 06:25:33'),
-(119,'pageview','/',NULL,'seed',NULL,'2026-07-09 20:01:27'),
-(120,'pageview','/roles',NULL,'seed',NULL,'2026-07-09 16:54:57'),
-(121,'pageview','/roles','google.com','seed',NULL,'2026-07-09 14:56:35'),
-(122,'pageview','/','google.com','seed',NULL,'2026-07-09 12:12:11'),
-(123,'pageview','/contact',NULL,'seed',NULL,'2026-07-10 02:47:22'),
-(124,'pageview','/roles','google.com','seed',NULL,'2026-07-10 19:11:31'),
-(125,'pageview','/',NULL,'seed',NULL,'2026-07-10 13:56:22'),
-(126,'pageview','/','google.com','seed',NULL,'2026-07-10 23:20:13'),
-(127,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-11 04:30:27'),
-(128,'pageview','/reviews','google.com','seed',NULL,'2026-07-11 00:34:24'),
-(129,'pageview','/roles','google.com','seed',NULL,'2026-07-11 00:12:14'),
-(130,'pageview','/contact','google.com','seed',NULL,'2026-07-10 21:24:37'),
-(131,'pageview','/','google.com','seed',NULL,'2026-07-11 05:15:15'),
-(132,'pageview','/contact',NULL,'seed',NULL,'2026-07-11 00:31:35'),
-(133,'pageview','/',NULL,'seed',NULL,'2026-07-11 00:58:19'),
-(134,'pageview','/','google.com','seed',NULL,'2026-07-11 06:24:48'),
-(135,'pageview','/','google.com','seed',NULL,'2026-07-12 08:40:41'),
-(136,'pageview','/roles','google.com','seed',NULL,'2026-07-11 20:16:10'),
-(137,'pageview','/','google.com','seed',NULL,'2026-07-11 13:30:34'),
-(138,'pageview','/','google.com','seed',NULL,'2026-07-12 20:58:36'),
-(139,'pageview','/',NULL,'seed',NULL,'2026-07-12 12:21:36'),
-(140,'pageview','/','google.com','seed',NULL,'2026-07-12 20:27:02'),
-(141,'pageview','/roles','google.com','seed',NULL,'2026-07-13 17:00:20'),
-(142,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-14 06:51:34'),
-(143,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-14 00:20:46'),
-(144,'pageview','/roles',NULL,'seed',NULL,'2026-07-13 11:20:31'),
-(145,'pageview','/contact','google.com','seed',NULL,'2026-07-13 18:50:31'),
-(146,'pageview','/contact','google.com','seed',NULL,'2026-07-13 15:18:15'),
-(147,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-13 21:52:02'),
-(148,'pageview','/','google.com','seed',NULL,'2026-07-13 12:58:57'),
-(149,'pageview','/','google.com','seed',NULL,'2026-07-13 19:35:02'),
-(150,'pageview','/roles',NULL,'seed',NULL,'2026-07-13 23:19:12'),
-(151,'pageview','/',NULL,'seed',NULL,'2026-07-13 11:18:13'),
-(152,'pageview','/',NULL,'seed',NULL,'2026-07-13 20:50:51'),
-(153,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-13 17:47:07'),
-(154,'pageview','/',NULL,'seed',NULL,'2026-07-13 21:06:29'),
-(155,'pageview','/','google.com','seed',NULL,'2026-07-13 22:03:43'),
-(156,'pageview','/',NULL,'seed',NULL,'2026-07-15 01:45:44'),
-(157,'pageview','/roles',NULL,'seed',NULL,'2026-07-15 02:26:53'),
-(158,'pageview','/','google.com','seed',NULL,'2026-07-15 02:28:48'),
-(159,'pageview','/','google.com','seed',NULL,'2026-07-15 02:12:25'),
-(160,'pageview','/',NULL,'seed',NULL,'2026-07-15 03:06:09'),
-(161,'pageview','/roles',NULL,'seed',NULL,'2026-07-14 15:56:26'),
-(162,'pageview','/reviews','google.com','seed',NULL,'2026-07-14 19:50:14'),
-(163,'pageview','/contact',NULL,'seed',NULL,'2026-07-14 18:05:02'),
-(164,'pageview','/roles',NULL,'seed',NULL,'2026-07-14 19:46:32'),
-(165,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-14 20:59:24'),
-(166,'pageview','/contact','google.com','seed',NULL,'2026-07-15 05:44:10'),
-(167,'pageview','/reviews',NULL,'seed',NULL,'2026-07-14 11:45:54'),
-(168,'pageview','/','google.com','seed',NULL,'2026-07-14 18:39:42'),
-(169,'pageview','/reviews','google.com','seed',NULL,'2026-07-14 15:15:41'),
-(170,'pageview','/roles','google.com','seed',NULL,'2026-07-15 05:11:51'),
-(171,'pageview','/',NULL,'seed',NULL,'2026-07-15 01:03:10'),
-(172,'pageview','/reviews','google.com','seed',NULL,'2026-07-16 05:39:52'),
-(173,'pageview','/',NULL,'seed',NULL,'2026-07-16 05:56:34'),
-(174,'pageview','/contact',NULL,'seed',NULL,'2026-07-15 20:12:30'),
-(175,'pageview','/','google.com','seed',NULL,'2026-07-15 23:59:20'),
-(176,'pageview','/contact',NULL,'seed',NULL,'2026-07-16 04:53:52'),
-(177,'pageview','/','google.com','seed',NULL,'2026-07-15 17:36:01'),
-(178,'pageview','/roles',NULL,'seed',NULL,'2026-07-15 23:58:41'),
-(179,'pageview','/',NULL,'seed',NULL,'2026-07-15 23:08:44'),
-(180,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-16 11:45:46'),
-(181,'pageview','/contact','google.com','seed',NULL,'2026-07-16 18:30:58'),
-(182,'pageview','/contact',NULL,'seed',NULL,'2026-07-16 22:26:31'),
-(183,'pageview','/','google.com','seed',NULL,'2026-07-17 08:06:01'),
-(184,'pageview','/','google.com','seed',NULL,'2026-07-16 14:39:09'),
-(185,'pageview','/roles','google.com','seed',NULL,'2026-07-16 16:24:14'),
-(186,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-17 00:38:23'),
-(187,'pageview','/',NULL,'seed',NULL,'2026-07-17 02:55:27'),
-(188,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-16 14:34:02'),
-(189,'pageview','/',NULL,'seed',NULL,'2026-07-18 03:53:09'),
-(190,'pageview','/',NULL,'seed',NULL,'2026-07-18 06:00:06'),
-(191,'pageview','/contact','google.com','seed',NULL,'2026-07-18 02:56:24'),
-(192,'pageview','/',NULL,'seed',NULL,'2026-07-17 14:19:53'),
-(193,'pageview','/',NULL,'seed',NULL,'2026-07-17 12:02:21'),
-(194,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-17 22:11:05'),
-(195,'pageview','/roles',NULL,'seed',NULL,'2026-07-17 17:21:33'),
-(196,'pageview','/','google.com','seed',NULL,'2026-07-18 23:25:01'),
-(197,'pageview','/','google.com','seed',NULL,'2026-07-18 20:14:15'),
-(198,'pageview','/contact','google.com','seed',NULL,'2026-07-19 03:02:47'),
-(199,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-18 13:11:07'),
-(200,'pageview','/roles',NULL,'seed',NULL,'2026-07-18 17:00:23'),
-(201,'pageview','/reviews','google.com','seed',NULL,'2026-07-19 05:46:12'),
-(202,'pageview','/roles','google.com','seed',NULL,'2026-07-19 08:34:30'),
-(203,'pageview','/',NULL,'seed',NULL,'2026-07-18 21:49:49'),
-(204,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-19 06:54:13'),
-(205,'pageview','/','google.com','seed',NULL,'2026-07-18 11:52:57'),
-(206,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-20 00:19:34'),
-(207,'pageview','/contact','google.com','seed',NULL,'2026-07-19 23:09:05'),
-(208,'pageview','/roles','google.com','seed',NULL,'2026-07-20 05:31:30'),
-(209,'pageview','/',NULL,'seed',NULL,'2026-07-19 17:35:40'),
-(210,'pageview','/','google.com','seed',NULL,'2026-07-20 19:26:09'),
-(211,'pageview','/reviews',NULL,'seed',NULL,'2026-07-20 12:48:13'),
-(212,'pageview','/contact','google.com','seed',NULL,'2026-07-20 19:34:07'),
-(213,'pageview','/reviews','google.com','seed',NULL,'2026-07-22 01:18:53'),
-(214,'pageview','/reviews',NULL,'seed',NULL,'2026-07-22 01:26:17'),
-(215,'pageview','/',NULL,'seed',NULL,'2026-07-22 02:14:56'),
-(216,'pageview','/',NULL,'seed',NULL,'2026-07-22 06:30:53'),
-(217,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-22 04:29:43'),
-(218,'pageview','/','google.com','seed',NULL,'2026-07-21 18:33:29'),
-(219,'pageview','/roles','google.com','seed',NULL,'2026-07-22 08:24:18'),
-(220,'pageview','/roles','google.com','seed',NULL,'2026-07-21 12:52:12'),
-(221,'pageview','/roles',NULL,'seed',NULL,'2026-07-22 06:13:23'),
-(222,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-21 16:59:47'),
-(223,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-21 19:48:04'),
-(224,'pageview','/',NULL,'seed',NULL,'2026-07-22 03:34:18'),
-(225,'pageview','/roles','google.com','seed',NULL,'2026-07-21 23:10:05'),
-(226,'pageview','/',NULL,'seed',NULL,'2026-07-21 21:42:28'),
-(227,'pageview','/','google.com','seed',NULL,'2026-07-21 23:10:35'),
-(228,'pageview','/roles',NULL,'seed',NULL,'2026-07-22 16:15:52'),
-(229,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-23 02:32:45'),
-(230,'pageview','/contact',NULL,'seed',NULL,'2026-07-22 23:34:02'),
-(231,'pageview','/','google.com','seed',NULL,'2026-07-23 05:39:23'),
-(232,'pageview','/','google.com','seed',NULL,'2026-07-23 00:13:54'),
-(233,'pageview','/','google.com','seed',NULL,'2026-07-23 07:30:57'),
-(234,'pageview','/','google.com','seed',NULL,'2026-07-23 04:27:18'),
-(235,'pageview','/reviews','google.com','seed',NULL,'2026-07-22 21:35:11'),
-(236,'pageview','/',NULL,'seed',NULL,'2026-07-22 15:25:32'),
-(237,'pageview','/contact',NULL,'seed',NULL,'2026-07-23 04:13:46'),
-(238,'pageview','/',NULL,'seed',NULL,'2026-07-23 04:37:33'),
-(239,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-23 19:08:16'),
-(240,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-24 02:56:33'),
-(241,'pageview','/roles',NULL,'seed',NULL,'2026-07-24 08:27:51'),
-(242,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-23 15:30:09'),
-(243,'pageview','/','google.com','seed',NULL,'2026-07-23 20:42:57'),
-(244,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-23 19:34:47'),
-(245,'pageview','/reviews','google.com','seed',NULL,'2026-07-23 16:39:48'),
-(246,'pageview','/roles',NULL,'seed',NULL,'2026-07-24 03:23:57'),
-(247,'pageview','/','google.com','seed',NULL,'2026-07-24 14:56:03'),
-(248,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-24 17:01:55'),
-(249,'pageview','/','google.com','seed',NULL,'2026-07-24 19:25:07'),
-(250,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-24 12:36:34'),
-(251,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-24 17:25:55'),
-(252,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-24 17:21:41'),
-(253,'pageview','/',NULL,'seed',NULL,'2026-07-25 01:29:51'),
-(254,'pageview','/reviews','google.com','seed',NULL,'2026-07-24 15:04:05'),
-(255,'pageview','/',NULL,'seed',NULL,'2026-07-25 04:49:35'),
-(256,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-24 23:34:28'),
-(257,'pageview','/contact','google.com','seed',NULL,'2026-07-24 18:55:23'),
-(258,'pageview','/reviews',NULL,'seed',NULL,'2026-07-25 20:38:37'),
-(259,'pageview','/contact','google.com','seed',NULL,'2026-07-26 00:31:34'),
-(260,'pageview','/','google.com','seed',NULL,'2026-07-26 06:52:54'),
-(261,'pageview','/',NULL,'seed',NULL,'2026-07-26 08:28:53'),
-(262,'pageview','/','google.com','seed',NULL,'2026-07-25 17:49:58'),
-(263,'pageview','/',NULL,'seed',NULL,'2026-07-26 00:21:30'),
-(264,'pageview','/contact','google.com','seed',NULL,'2026-07-25 20:14:19'),
-(265,'pageview','/roles','google.com','seed',NULL,'2026-07-26 01:33:40'),
-(266,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-25 17:55:23'),
-(267,'pageview','/contact',NULL,'seed',NULL,'2026-07-25 15:19:27'),
-(268,'pageview','/roles',NULL,'seed',NULL,'2026-07-25 15:34:49'),
-(269,'pageview','/reviews',NULL,'seed',NULL,'2026-07-26 01:15:13'),
-(270,'pageview','/',NULL,'seed',NULL,'2026-07-26 05:44:36'),
-(271,'pageview','/','google.com','seed',NULL,'2026-07-26 09:23:52'),
-(272,'pageview','/','google.com','seed',NULL,'2026-07-25 14:49:04'),
-(273,'pageview','/',NULL,'seed',NULL,'2026-07-26 23:52:58'),
-(274,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-27 02:14:37'),
-(275,'pageview','/','google.com','seed',NULL,'2026-07-27 06:09:05'),
-(276,'pageview','/',NULL,'seed',NULL,'2026-07-27 03:49:56'),
-(277,'pageview','/roles',NULL,'seed',NULL,'2026-07-26 13:58:09'),
-(278,'pageview','/contact',NULL,'seed',NULL,'2026-07-26 15:20:11'),
-(279,'pageview','/','google.com','seed',NULL,'2026-07-26 19:40:16'),
-(280,'pageview','/',NULL,'seed',NULL,'2026-07-26 19:06:45'),
-(281,'pageview','/reviews',NULL,'seed',NULL,'2026-07-27 03:01:23'),
-(282,'pageview','/roles','google.com','curl/7.88.1',NULL,'2026-07-27 09:39:09'),
-(283,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:45:28'),
-(284,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:53:28'),
-(285,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:53:47'),
-(286,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:55:23'),
-(287,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:55:34'),
-(288,'pageview','/how-it-works','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:56:20'),
-(289,'pageview','/reviews','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:56:25'),
-(290,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:01:42'),
-(291,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:21:06'),
-(292,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:22:16'),
-(293,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:22:48'),
-(294,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:28:37'),
-(30001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:38:42'),
-(30002,'pageview','/how-it-works','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:39:32'),
-(30003,'pageview','/reviews','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:39:32'),
-(30004,'pageview','/contact','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:39:43'),
-(2030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:08:22'),
-(2030002,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:09:06'),
-(2030003,'pageview','/roles','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:18'),
-(2030004,'pageview','/how-it-works','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:31'),
-(2030005,'pageview','/reviews','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:39'),
-(2030006,'pageview','/contact','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:45'),
-(2030007,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:11:40'),
-(2030008,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:11:45'),
-(2030009,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:20:50'),
-(2030010,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:21:46'),
-(2030011,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:01'),
-(2030012,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:28'),
-(2030013,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:30'),
-(2030014,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:34'),
-(2030015,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:55'),
-(2030016,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:57'),
-(2030017,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:59'),
-(4030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:26'),
-(4030002,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:27'),
-(4030003,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:28'),
-(4030004,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:28'),
-(4030005,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36',NULL,'2026-07-28 10:55:12'),
-(4030006,'pageview','/','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:56:22'),
-(6030001,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 14:52:11'),
-(8030001,'pageview','/','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:30:35'),
-(8030002,'pageview','/roles','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:14'),
-(8030003,'pageview','/how-it-works','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:15'),
-(8030004,'pageview','/reviews','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:21'),
-(8030005,'pageview','/contact','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:31'),
-(10030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 04:56:52'),
-(10030002,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:14:01'),
-(12030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:39:03'),
-(12030002,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:40:08'),
-(12030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:41:14'),
-(12030004,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 05:44:58'),
-(12030005,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 05:45:58'),
-(12030006,'pageview','/roles',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 05:46:09'),
-(14030001,'pageview','/roles',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 06:22:52'),
-(14030002,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 06:22:53'),
-(14030003,'pageview','/reviews',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 06:32:36'),
-(16030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 06:58:26'),
-(18030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 07:28:49'),
-(18030002,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 07:33:02'),
-(20030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 08:03:08'),
-(22030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 09:40:10'),
-(22030002,'pageview','/roles',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 09:44:38'),
-(22030003,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 09:47:06'),
-(24030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 11:31:54'),
-(26030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:24:34'),
-(26030002,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:24:43'),
-(26030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:25:29'),
-(28030001,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:56:17'),
-(28030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:56:20'),
-(28030003,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:56:37'),
-(28030004,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:57:19'),
-(28030005,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:57:20'),
-(28030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:58:16'),
-(28030007,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:58:57'),
-(28030008,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:59:59'),
-(28030009,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 14:00:12'),
-(30030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 14:12:42'),
-(30030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 14:12:42'),
-(32030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 03:27:45'),
-(34030001,'pageview','/',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-07-31 04:10:23'),
-(34030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:15:02'),
-(34030003,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:16:48'),
-(34030004,'pageview','/sectors','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:17:10'),
-(34030005,'pageview','/sectors/recruitment-staffing','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:17:28'),
-(34030006,'pageview','/sectors/accounting-finance','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:18:37'),
-(34030007,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:18:52'),
-(34030008,'pageview','/sectors/recruitment-staffing','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:20:53'),
-(34030009,'pageview','/sectors/ecommerce-retail','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:21:23'),
-(34030010,'pageview','/roles/telesales','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:21:45'),
-(34030011,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:24:05'),
-(34030012,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:24:09'),
-(34030013,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:25:27'),
-(34030014,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:27:52'),
-(34030015,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:29:29'),
-(34030016,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:30:49'),
-(34030017,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:30:55'),
-(34030018,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:31:03'),
-(34030019,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:31:56'),
-(34030020,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:32:28'),
-(36030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 04:52:57'),
-(38030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-31 05:10:17'),
-(38030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 05:22:06'),
-(40030001,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:20:26'),
-(42030001,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:33:55'),
-(42030002,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:34:02'),
-(42030003,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:34:08'),
-(44030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:36'),
-(44030002,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:37'),
-(44030003,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:38'),
-(44030004,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:38'),
-(44030005,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:38'),
-(44030006,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:54:05'),
-(46030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1',NULL,'2026-07-31 07:31:43'),
-(48030001,'pageview','/sectors/recruitment-staffing',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:36:40'),
-(48030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:37:26'),
-(50030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:49:42'),
-(50030002,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 08:52:23'),
-(50030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:55:56'),
-(50030004,'pageview','/roles/marketing',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:57:07'),
-(50030005,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:57:22'),
-(50030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:59:13'),
-(50030007,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:59:16'),
-(50030008,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 09:11:20'),
-(52030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:45:30'),
-(52030002,'pageview','/roles/telesales',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:45:40'),
-(52030003,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:45:47'),
-(52030004,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:46:29'),
-(52030005,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:46:33'),
-(52030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:47:26'),
-(52030007,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:47:29'),
-(54030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:58:19'),
-(54030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:58:40'),
-(56030001,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36',NULL,'2026-07-31 14:25:28'),
-(56030002,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/30.0 Chrome/143.0.0.0 Mobile Safari/537.36',NULL,'2026-07-31 14:25:28'),
-(56030003,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)',NULL,'2026-07-31 14:25:32'),
-(58030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 02:53:25'),
-(58030002,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 02:53:26'),
-(60030001,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 04:51:22'),
-(62030001,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 05:04:18'),
-(64030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:10:58'),
-(64030002,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:11:40'),
-(64030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:11:47'),
-(64030004,'pageview','/client-portal',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:12:06'),
-(66030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:33:12'),
-(68030001,'pageview','/pricing/us','www.google.com','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 21:03:43'),
-(68030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:04:54'),
-(68030003,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 21:04:57'),
-(68030004,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36',NULL,'2026-08-01 21:05:06'),
-(68030005,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:14:50'),
-(68030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:14'),
-(68030007,'pageview','/sectors/recruitment-staffing',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:20'),
-(68030008,'pageview','/sectors/legal-professional-services',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:23'),
-(68030009,'pageview','/roles/telesales',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:26'),
-(68030010,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:28'),
-(68030011,'pageview','/pricing/au',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:30'),
-(68030012,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:32'),
-(68030013,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:35'),
-(68030014,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:37'),
-(68030015,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:48'),
-(70030001,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-02 00:08:32'),
-(72030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-02 04:45:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (1,'pageview','/','google.com','seed',NULL,'2026-06-27 11:54:19');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-28 00:08:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (3,'pageview','/reviews','google.com','seed',NULL,'2026-06-27 16:51:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4,'pageview','/reviews',NULL,'seed',NULL,'2026-06-27 12:36:56');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (5,'pageview','/contact',NULL,'seed',NULL,'2026-06-27 17:54:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (6,'pageview','/',NULL,'seed',NULL,'2026-06-27 18:37:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (7,'pageview','/contact','google.com','seed',NULL,'2026-06-27 21:32:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (8,'pageview','/roles',NULL,'seed',NULL,'2026-06-28 06:06:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (9,'pageview','/',NULL,'seed',NULL,'2026-06-27 18:36:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (10,'pageview','/reviews','google.com','seed',NULL,'2026-06-28 02:39:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (11,'pageview','/reviews','google.com','seed',NULL,'2026-06-28 19:12:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12,'pageview','/reviews','google.com','seed',NULL,'2026-06-28 23:21:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (13,'pageview','/roles',NULL,'seed',NULL,'2026-06-28 18:36:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (14,'pageview','/','google.com','seed',NULL,'2026-06-29 08:53:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (15,'pageview','/','google.com','seed',NULL,'2026-06-29 08:53:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (16,'pageview','/','google.com','seed',NULL,'2026-06-29 00:01:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (17,'pageview','/','google.com','seed',NULL,'2026-06-28 18:49:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (18,'pageview','/','google.com','seed',NULL,'2026-06-29 08:13:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (19,'pageview','/','google.com','seed',NULL,'2026-06-29 15:48:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (20,'pageview','/contact','google.com','seed',NULL,'2026-06-30 02:30:21');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (21,'pageview','/how-it-works',NULL,'seed',NULL,'2026-06-30 07:45:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (22,'pageview','/reviews',NULL,'seed',NULL,'2026-06-29 13:42:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (23,'pageview','/roles',NULL,'seed',NULL,'2026-06-30 01:16:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (24,'pageview','/reviews','google.com','seed',NULL,'2026-06-29 19:43:51');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (25,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-30 02:16:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (26,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-29 21:57:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (27,'pageview','/','google.com','seed',NULL,'2026-06-30 04:17:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28,'pageview','/',NULL,'seed',NULL,'2026-06-29 22:27:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (29,'pageview','/how-it-works','google.com','seed',NULL,'2026-06-30 14:20:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30,'pageview','/contact',NULL,'seed',NULL,'2026-06-30 20:30:59');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (31,'pageview','/reviews',NULL,'seed',NULL,'2026-07-01 06:22:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (32,'pageview','/',NULL,'seed',NULL,'2026-06-30 12:48:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (33,'pageview','/roles',NULL,'seed',NULL,'2026-07-02 01:29:50');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34,'pageview','/roles','google.com','seed',NULL,'2026-07-01 15:08:41');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (35,'pageview','/reviews','google.com','seed',NULL,'2026-07-01 20:29:39');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (36,'pageview','/reviews',NULL,'seed',NULL,'2026-07-02 03:27:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (37,'pageview','/reviews',NULL,'seed',NULL,'2026-07-01 16:57:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (38,'pageview','/','google.com','seed',NULL,'2026-07-01 16:27:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (39,'pageview','/','google.com','seed',NULL,'2026-07-02 05:33:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (40,'pageview','/',NULL,'seed',NULL,'2026-07-01 22:57:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (41,'pageview','/contact','google.com','seed',NULL,'2026-07-02 23:38:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (42,'pageview','/','google.com','seed',NULL,'2026-07-03 05:19:21');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (43,'pageview','/contact','google.com','seed',NULL,'2026-07-02 11:24:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44,'pageview','/','google.com','seed',NULL,'2026-07-03 05:17:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (45,'pageview','/',NULL,'seed',NULL,'2026-07-03 08:34:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (46,'pageview','/','google.com','seed',NULL,'2026-07-02 18:23:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (47,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-02 18:43:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (48,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-03 04:44:44');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (49,'pageview','/reviews','google.com','seed',NULL,'2026-07-04 01:34:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50,'pageview','/contact','google.com','seed',NULL,'2026-07-03 13:44:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (51,'pageview','/roles','google.com','seed',NULL,'2026-07-03 17:56:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52,'pageview','/contact','google.com','seed',NULL,'2026-07-03 23:32:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (53,'pageview','/','google.com','seed',NULL,'2026-07-04 02:36:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (54,'pageview','/reviews','google.com','seed',NULL,'2026-07-04 02:49:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (55,'pageview','/roles','google.com','seed',NULL,'2026-07-04 00:00:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (56,'pageview','/','google.com','seed',NULL,'2026-07-03 21:43:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (57,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-03 23:13:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (58,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-03 21:47:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (59,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-03 15:24:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (60,'pageview','/contact','google.com','seed',NULL,'2026-07-04 00:55:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (61,'pageview','/','google.com','seed',NULL,'2026-07-04 01:12:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (62,'pageview','/',NULL,'seed',NULL,'2026-07-03 15:48:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (63,'pageview','/contact',NULL,'seed',NULL,'2026-07-03 21:56:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (64,'pageview','/',NULL,'seed',NULL,'2026-07-03 21:31:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (65,'pageview','/','google.com','seed',NULL,'2026-07-04 21:49:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (66,'pageview','/contact','google.com','seed',NULL,'2026-07-05 02:49:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (67,'pageview','/','google.com','seed',NULL,'2026-07-04 12:05:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-04 13:44:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (69,'pageview','/','google.com','seed',NULL,'2026-07-04 12:19:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (70,'pageview','/',NULL,'seed',NULL,'2026-07-04 23:20:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (71,'pageview','/',NULL,'seed',NULL,'2026-07-04 21:01:00');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (72,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-05 00:49:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (73,'pageview','/contact','google.com','seed',NULL,'2026-07-05 08:38:24');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (74,'pageview','/','google.com','seed',NULL,'2026-07-05 02:10:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (75,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-04 15:01:25');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (76,'pageview','/',NULL,'seed',NULL,'2026-07-06 04:15:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (77,'pageview','/contact',NULL,'seed',NULL,'2026-07-06 08:25:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (78,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-06 00:27:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (79,'pageview','/reviews','google.com','seed',NULL,'2026-07-06 03:16:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (80,'pageview','/',NULL,'seed',NULL,'2026-07-07 00:17:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (81,'pageview','/','google.com','seed',NULL,'2026-07-07 00:51:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (82,'pageview','/','google.com','seed',NULL,'2026-07-07 02:18:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (83,'pageview','/',NULL,'seed',NULL,'2026-07-07 02:31:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (84,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-06 16:25:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (85,'pageview','/',NULL,'seed',NULL,'2026-07-06 21:35:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (86,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-06 12:22:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (87,'pageview','/','google.com','seed',NULL,'2026-07-08 08:48:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (88,'pageview','/','google.com','seed',NULL,'2026-07-07 17:14:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (89,'pageview','/contact','google.com','seed',NULL,'2026-07-07 19:03:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (90,'pageview','/reviews',NULL,'seed',NULL,'2026-07-08 09:20:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (91,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-08 00:03:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 08:26:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (93,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-09 00:24:39');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (94,'pageview','/','google.com','seed',NULL,'2026-07-09 00:22:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (95,'pageview','/contact',NULL,'seed',NULL,'2026-07-08 19:23:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 03:35:39');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (97,'pageview','/roles','google.com','seed',NULL,'2026-07-09 06:07:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98,'pageview','/contact','google.com','seed',NULL,'2026-07-08 16:59:24');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (99,'pageview','/',NULL,'seed',NULL,'2026-07-09 00:05:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (100,'pageview','/contact',NULL,'seed',NULL,'2026-07-08 13:00:01');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (101,'pageview','/reviews','google.com','seed',NULL,'2026-07-09 00:56:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (102,'pageview','/contact',NULL,'seed',NULL,'2026-07-09 06:22:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (103,'pageview','/',NULL,'seed',NULL,'2026-07-09 05:59:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (104,'pageview','/reviews',NULL,'seed',NULL,'2026-07-08 18:14:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (105,'pageview','/roles','google.com','seed',NULL,'2026-07-08 23:42:00');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (106,'pageview','/contact',NULL,'seed',NULL,'2026-07-08 14:11:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (107,'pageview','/',NULL,'seed',NULL,'2026-07-09 06:49:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (108,'pageview','/contact',NULL,'seed',NULL,'2026-07-10 00:29:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (109,'pageview','/',NULL,'seed',NULL,'2026-07-10 04:32:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (110,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-09 22:41:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (111,'pageview','/','google.com','seed',NULL,'2026-07-10 02:50:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (112,'pageview','/roles','google.com','seed',NULL,'2026-07-10 01:05:19');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (113,'pageview','/roles',NULL,'seed',NULL,'2026-07-10 03:23:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (114,'pageview','/','google.com','seed',NULL,'2026-07-09 13:32:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (115,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 21:39:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (116,'pageview','/reviews',NULL,'seed',NULL,'2026-07-09 13:41:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (117,'pageview','/roles','google.com','seed',NULL,'2026-07-09 14:54:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (118,'pageview','/',NULL,'seed',NULL,'2026-07-10 06:25:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (119,'pageview','/',NULL,'seed',NULL,'2026-07-09 20:01:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (120,'pageview','/roles',NULL,'seed',NULL,'2026-07-09 16:54:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (121,'pageview','/roles','google.com','seed',NULL,'2026-07-09 14:56:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (122,'pageview','/','google.com','seed',NULL,'2026-07-09 12:12:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (123,'pageview','/contact',NULL,'seed',NULL,'2026-07-10 02:47:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (124,'pageview','/roles','google.com','seed',NULL,'2026-07-10 19:11:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (125,'pageview','/',NULL,'seed',NULL,'2026-07-10 13:56:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (126,'pageview','/','google.com','seed',NULL,'2026-07-10 23:20:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (127,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-11 04:30:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (128,'pageview','/reviews','google.com','seed',NULL,'2026-07-11 00:34:24');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (129,'pageview','/roles','google.com','seed',NULL,'2026-07-11 00:12:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (130,'pageview','/contact','google.com','seed',NULL,'2026-07-10 21:24:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (131,'pageview','/','google.com','seed',NULL,'2026-07-11 05:15:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (132,'pageview','/contact',NULL,'seed',NULL,'2026-07-11 00:31:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (133,'pageview','/',NULL,'seed',NULL,'2026-07-11 00:58:19');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (134,'pageview','/','google.com','seed',NULL,'2026-07-11 06:24:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (135,'pageview','/','google.com','seed',NULL,'2026-07-12 08:40:41');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (136,'pageview','/roles','google.com','seed',NULL,'2026-07-11 20:16:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (137,'pageview','/','google.com','seed',NULL,'2026-07-11 13:30:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (138,'pageview','/','google.com','seed',NULL,'2026-07-12 20:58:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (139,'pageview','/',NULL,'seed',NULL,'2026-07-12 12:21:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (140,'pageview','/','google.com','seed',NULL,'2026-07-12 20:27:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (141,'pageview','/roles','google.com','seed',NULL,'2026-07-13 17:00:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (142,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-14 06:51:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (143,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-14 00:20:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (144,'pageview','/roles',NULL,'seed',NULL,'2026-07-13 11:20:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (145,'pageview','/contact','google.com','seed',NULL,'2026-07-13 18:50:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (146,'pageview','/contact','google.com','seed',NULL,'2026-07-13 15:18:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (147,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-13 21:52:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (148,'pageview','/','google.com','seed',NULL,'2026-07-13 12:58:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (149,'pageview','/','google.com','seed',NULL,'2026-07-13 19:35:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (150,'pageview','/roles',NULL,'seed',NULL,'2026-07-13 23:19:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (151,'pageview','/',NULL,'seed',NULL,'2026-07-13 11:18:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (152,'pageview','/',NULL,'seed',NULL,'2026-07-13 20:50:51');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (153,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-13 17:47:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (154,'pageview','/',NULL,'seed',NULL,'2026-07-13 21:06:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (155,'pageview','/','google.com','seed',NULL,'2026-07-13 22:03:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (156,'pageview','/',NULL,'seed',NULL,'2026-07-15 01:45:44');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (157,'pageview','/roles',NULL,'seed',NULL,'2026-07-15 02:26:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (158,'pageview','/','google.com','seed',NULL,'2026-07-15 02:28:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (159,'pageview','/','google.com','seed',NULL,'2026-07-15 02:12:25');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (160,'pageview','/',NULL,'seed',NULL,'2026-07-15 03:06:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (161,'pageview','/roles',NULL,'seed',NULL,'2026-07-14 15:56:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (162,'pageview','/reviews','google.com','seed',NULL,'2026-07-14 19:50:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (163,'pageview','/contact',NULL,'seed',NULL,'2026-07-14 18:05:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (164,'pageview','/roles',NULL,'seed',NULL,'2026-07-14 19:46:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (165,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-14 20:59:24');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (166,'pageview','/contact','google.com','seed',NULL,'2026-07-15 05:44:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (167,'pageview','/reviews',NULL,'seed',NULL,'2026-07-14 11:45:54');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (168,'pageview','/','google.com','seed',NULL,'2026-07-14 18:39:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (169,'pageview','/reviews','google.com','seed',NULL,'2026-07-14 15:15:41');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (170,'pageview','/roles','google.com','seed',NULL,'2026-07-15 05:11:51');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (171,'pageview','/',NULL,'seed',NULL,'2026-07-15 01:03:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (172,'pageview','/reviews','google.com','seed',NULL,'2026-07-16 05:39:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (173,'pageview','/',NULL,'seed',NULL,'2026-07-16 05:56:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (174,'pageview','/contact',NULL,'seed',NULL,'2026-07-15 20:12:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (175,'pageview','/','google.com','seed',NULL,'2026-07-15 23:59:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (176,'pageview','/contact',NULL,'seed',NULL,'2026-07-16 04:53:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (177,'pageview','/','google.com','seed',NULL,'2026-07-15 17:36:01');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (178,'pageview','/roles',NULL,'seed',NULL,'2026-07-15 23:58:41');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (179,'pageview','/',NULL,'seed',NULL,'2026-07-15 23:08:44');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (180,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-16 11:45:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (181,'pageview','/contact','google.com','seed',NULL,'2026-07-16 18:30:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (182,'pageview','/contact',NULL,'seed',NULL,'2026-07-16 22:26:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (183,'pageview','/','google.com','seed',NULL,'2026-07-17 08:06:01');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (184,'pageview','/','google.com','seed',NULL,'2026-07-16 14:39:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (185,'pageview','/roles','google.com','seed',NULL,'2026-07-16 16:24:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (186,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-17 00:38:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (187,'pageview','/',NULL,'seed',NULL,'2026-07-17 02:55:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (188,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-16 14:34:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (189,'pageview','/',NULL,'seed',NULL,'2026-07-18 03:53:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (190,'pageview','/',NULL,'seed',NULL,'2026-07-18 06:00:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (191,'pageview','/contact','google.com','seed',NULL,'2026-07-18 02:56:24');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (192,'pageview','/',NULL,'seed',NULL,'2026-07-17 14:19:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (193,'pageview','/',NULL,'seed',NULL,'2026-07-17 12:02:21');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (194,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-17 22:11:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (195,'pageview','/roles',NULL,'seed',NULL,'2026-07-17 17:21:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (196,'pageview','/','google.com','seed',NULL,'2026-07-18 23:25:01');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (197,'pageview','/','google.com','seed',NULL,'2026-07-18 20:14:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (198,'pageview','/contact','google.com','seed',NULL,'2026-07-19 03:02:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (199,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-18 13:11:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (200,'pageview','/roles',NULL,'seed',NULL,'2026-07-18 17:00:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (201,'pageview','/reviews','google.com','seed',NULL,'2026-07-19 05:46:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (202,'pageview','/roles','google.com','seed',NULL,'2026-07-19 08:34:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (203,'pageview','/',NULL,'seed',NULL,'2026-07-18 21:49:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (204,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-19 06:54:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (205,'pageview','/','google.com','seed',NULL,'2026-07-18 11:52:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (206,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-20 00:19:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (207,'pageview','/contact','google.com','seed',NULL,'2026-07-19 23:09:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (208,'pageview','/roles','google.com','seed',NULL,'2026-07-20 05:31:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (209,'pageview','/',NULL,'seed',NULL,'2026-07-19 17:35:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (210,'pageview','/','google.com','seed',NULL,'2026-07-20 19:26:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (211,'pageview','/reviews',NULL,'seed',NULL,'2026-07-20 12:48:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (212,'pageview','/contact','google.com','seed',NULL,'2026-07-20 19:34:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (213,'pageview','/reviews','google.com','seed',NULL,'2026-07-22 01:18:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (214,'pageview','/reviews',NULL,'seed',NULL,'2026-07-22 01:26:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (215,'pageview','/',NULL,'seed',NULL,'2026-07-22 02:14:56');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (216,'pageview','/',NULL,'seed',NULL,'2026-07-22 06:30:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (217,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-22 04:29:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (218,'pageview','/','google.com','seed',NULL,'2026-07-21 18:33:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (219,'pageview','/roles','google.com','seed',NULL,'2026-07-22 08:24:18');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (220,'pageview','/roles','google.com','seed',NULL,'2026-07-21 12:52:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (221,'pageview','/roles',NULL,'seed',NULL,'2026-07-22 06:13:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (222,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-21 16:59:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (223,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-21 19:48:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (224,'pageview','/',NULL,'seed',NULL,'2026-07-22 03:34:18');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (225,'pageview','/roles','google.com','seed',NULL,'2026-07-21 23:10:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (226,'pageview','/',NULL,'seed',NULL,'2026-07-21 21:42:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (227,'pageview','/','google.com','seed',NULL,'2026-07-21 23:10:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (228,'pageview','/roles',NULL,'seed',NULL,'2026-07-22 16:15:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (229,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-23 02:32:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (230,'pageview','/contact',NULL,'seed',NULL,'2026-07-22 23:34:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (231,'pageview','/','google.com','seed',NULL,'2026-07-23 05:39:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (232,'pageview','/','google.com','seed',NULL,'2026-07-23 00:13:54');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (233,'pageview','/','google.com','seed',NULL,'2026-07-23 07:30:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (234,'pageview','/','google.com','seed',NULL,'2026-07-23 04:27:18');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (235,'pageview','/reviews','google.com','seed',NULL,'2026-07-22 21:35:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (236,'pageview','/',NULL,'seed',NULL,'2026-07-22 15:25:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (237,'pageview','/contact',NULL,'seed',NULL,'2026-07-23 04:13:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (238,'pageview','/',NULL,'seed',NULL,'2026-07-23 04:37:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (239,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-23 19:08:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (240,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-24 02:56:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (241,'pageview','/roles',NULL,'seed',NULL,'2026-07-24 08:27:51');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (242,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-23 15:30:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (243,'pageview','/','google.com','seed',NULL,'2026-07-23 20:42:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (244,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-23 19:34:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (245,'pageview','/reviews','google.com','seed',NULL,'2026-07-23 16:39:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (246,'pageview','/roles',NULL,'seed',NULL,'2026-07-24 03:23:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (247,'pageview','/','google.com','seed',NULL,'2026-07-24 14:56:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (248,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-24 17:01:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (249,'pageview','/','google.com','seed',NULL,'2026-07-24 19:25:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (250,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-24 12:36:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (251,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-24 17:25:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (252,'pageview','/how-it-works','google.com','seed',NULL,'2026-07-24 17:21:41');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (253,'pageview','/',NULL,'seed',NULL,'2026-07-25 01:29:51');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (254,'pageview','/reviews','google.com','seed',NULL,'2026-07-24 15:04:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (255,'pageview','/',NULL,'seed',NULL,'2026-07-25 04:49:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (256,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-24 23:34:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (257,'pageview','/contact','google.com','seed',NULL,'2026-07-24 18:55:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (258,'pageview','/reviews',NULL,'seed',NULL,'2026-07-25 20:38:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (259,'pageview','/contact','google.com','seed',NULL,'2026-07-26 00:31:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (260,'pageview','/','google.com','seed',NULL,'2026-07-26 06:52:54');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (261,'pageview','/',NULL,'seed',NULL,'2026-07-26 08:28:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (262,'pageview','/','google.com','seed',NULL,'2026-07-25 17:49:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (263,'pageview','/',NULL,'seed',NULL,'2026-07-26 00:21:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (264,'pageview','/contact','google.com','seed',NULL,'2026-07-25 20:14:19');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (265,'pageview','/roles','google.com','seed',NULL,'2026-07-26 01:33:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (266,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-25 17:55:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (267,'pageview','/contact',NULL,'seed',NULL,'2026-07-25 15:19:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (268,'pageview','/roles',NULL,'seed',NULL,'2026-07-25 15:34:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (269,'pageview','/reviews',NULL,'seed',NULL,'2026-07-26 01:15:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (270,'pageview','/',NULL,'seed',NULL,'2026-07-26 05:44:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (271,'pageview','/','google.com','seed',NULL,'2026-07-26 09:23:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (272,'pageview','/','google.com','seed',NULL,'2026-07-25 14:49:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (273,'pageview','/',NULL,'seed',NULL,'2026-07-26 23:52:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (274,'pageview','/how-it-works',NULL,'seed',NULL,'2026-07-27 02:14:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (275,'pageview','/','google.com','seed',NULL,'2026-07-27 06:09:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (276,'pageview','/',NULL,'seed',NULL,'2026-07-27 03:49:56');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (277,'pageview','/roles',NULL,'seed',NULL,'2026-07-26 13:58:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (278,'pageview','/contact',NULL,'seed',NULL,'2026-07-26 15:20:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (279,'pageview','/','google.com','seed',NULL,'2026-07-26 19:40:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (280,'pageview','/',NULL,'seed',NULL,'2026-07-26 19:06:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (281,'pageview','/reviews',NULL,'seed',NULL,'2026-07-27 03:01:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (282,'pageview','/roles','google.com','curl/7.88.1',NULL,'2026-07-27 09:39:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (283,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:45:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (284,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:53:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (285,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:53:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (286,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:55:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (287,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:55:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (288,'pageview','/how-it-works','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:56:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (289,'pageview','/reviews','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 09:56:25');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (290,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:01:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (291,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:21:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (292,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:22:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (293,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:22:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (294,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-27 10:28:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:38:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30002,'pageview','/how-it-works','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:39:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30003,'pageview','/reviews','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:39:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30004,'pageview','/contact','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 01:39:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:08:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030002,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:09:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030003,'pageview','/roles','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:18');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030004,'pageview','/how-it-works','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030005,'pageview','/reviews','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:39');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030006,'pageview','/contact','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:10:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030007,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:11:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030008,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:11:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030009,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:20:50');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030010,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:21:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030011,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:01');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030012,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030013,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030014,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030015,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030016,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (2030017,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:22:59');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4030002,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4030003,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4030004,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:47:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4030005,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36',NULL,'2026-07-28 10:55:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (4030006,'pageview','/','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 10:56:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (6030001,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 14:52:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (8030001,'pageview','/','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:30:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (8030002,'pageview','/roles','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (8030003,'pageview','/how-it-works','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:15');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (8030004,'pageview','/reviews','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:21');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (8030005,'pageview','/contact','web.telegram.org','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-28 19:32:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (10030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 04:56:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (10030002,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:14:01');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:39:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12030002,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:40:08');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-30 05:41:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12030004,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 05:44:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12030005,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 05:45:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (12030006,'pageview','/roles',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 05:46:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (14030001,'pageview','/roles',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 06:22:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (14030002,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 06:22:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (14030003,'pageview','/reviews',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 06:32:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (16030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 06:58:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (18030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 07:28:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (18030002,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 07:33:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (20030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 08:03:08');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (22030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 09:40:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (22030002,'pageview','/roles',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 09:44:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (22030003,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 09:47:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (24030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1',NULL,'2026-07-30 11:31:54');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (26030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:24:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (26030002,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:24:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (26030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:25:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030001,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:56:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:56:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030003,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:56:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030004,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:57:19');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030005,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:57:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:58:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030007,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:58:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030008,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 13:59:59');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (28030009,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 14:00:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 14:12:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (30030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-30 14:12:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (32030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 03:27:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030001,'pageview','/',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-07-31 04:10:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:15:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030003,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:16:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030004,'pageview','/sectors','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:17:10');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030005,'pageview','/sectors/recruitment-staffing','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:17:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030006,'pageview','/sectors/accounting-finance','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:18:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030007,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:18:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030008,'pageview','/sectors/recruitment-staffing','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:20:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030009,'pageview','/sectors/ecommerce-retail','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:21:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030010,'pageview','/roles/telesales','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:21:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030011,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:24:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030012,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:24:09');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030013,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:25:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030014,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:27:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030015,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:29:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030016,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:30:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030017,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:30:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030018,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:31:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030019,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:31:56');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (34030020,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 04:32:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (36030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 04:52:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (38030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',NULL,'2026-07-31 05:10:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (38030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 05:22:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (40030001,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:20:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (42030001,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:33:55');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (42030002,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:34:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (42030003,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:34:08');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44030002,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44030003,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44030004,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44030005,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',NULL,'2026-07-31 06:47:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (44030006,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 06:54:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (46030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1',NULL,'2026-07-31 07:31:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (48030001,'pageview','/sectors/recruitment-staffing',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:36:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (48030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:37:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:49:42');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030002,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 08:52:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:55:56');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030004,'pageview','/roles/marketing',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:57:07');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030005,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:57:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:59:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030007,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 08:59:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (50030008,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-07-31 09:11:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:45:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030002,'pageview','/roles/telesales',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:45:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030003,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:45:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030004,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:46:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030005,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:46:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:47:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (52030007,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:47:29');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (54030001,'pageview','/roles',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:58:19');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (54030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0',NULL,'2026-07-31 09:58:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (56030001,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36',NULL,'2026-07-31 14:25:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (56030002,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/30.0 Chrome/143.0.0.0 Mobile Safari/537.36',NULL,'2026-07-31 14:25:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (56030003,'pageview','/',NULL,'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)',NULL,'2026-07-31 14:25:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (58030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 02:53:25');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (58030002,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 02:53:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (60030001,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 04:51:22');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (62030001,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 05:04:18');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (64030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:10:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (64030002,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:11:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (64030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:11:47');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (64030004,'pageview','/client-portal',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:12:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (66030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 20:33:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030001,'pageview','/pricing/us','www.google.com','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 21:03:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:04:54');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030003,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-01 21:04:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030004,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36',NULL,'2026-08-01 21:05:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030005,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:14:50');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030006,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:14');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030007,'pageview','/sectors/recruitment-staffing',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030008,'pageview','/sectors/legal-professional-services',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030009,'pageview','/roles/telesales',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030010,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:28');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030011,'pageview','/pricing/au',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030012,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030013,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030014,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (68030015,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-01 21:15:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (70030001,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-02 00:08:32');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (72030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-02 04:45:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (74030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-02 21:47:27');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (74030002,'pageview','/roles/telesales',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-02 21:47:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (74030003,'pageview','/sectors/ecommerce-retail',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-02 21:47:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (74030004,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-02 21:47:38');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (76030001,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-03 03:29:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (76030002,'pageview','/sectors/healthcare-medical',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-03 03:29:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (76030003,'pageview','/roles/ea',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-03 03:30:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (76030004,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-03 03:30:18');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (76030005,'pageview','/roles/bookkeeper',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-03 03:31:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (78030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-04 02:46:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (80030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-05 01:39:48');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (82030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-08-05 04:11:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (82030002,'pageview','/pricing/us',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-08-05 04:14:05');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (82030003,'pageview','/how-it-works',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-08-05 04:14:26');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (82030004,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-08-05 04:14:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (84030001,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Mobile/15E148 Safari/604.1',NULL,'2026-08-05 09:36:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (84030002,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Snapchat/14.17.1.0 (like Safari/8624.2.5.10.8, panda)',NULL,'2026-08-05 09:37:33');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (84030003,'pageview','/',NULL,'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Snapchat/14.17.1.0 (like Safari/8624.2.5.10.8, panda)',NULL,'2026-08-05 09:40:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (86030001,'pageview','/pricing/us','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-05 19:39:54');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (86030002,'pageview','/contact','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-05 19:40:13');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (86030003,'pageview','/','www.fiverr.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-05 19:40:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (88030001,'pageview','/pricing/us',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 01:18:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (90030001,'pageview','/',NULL,'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',NULL,'2026-08-07 02:14:52');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030001,'pageview','/roles/admin',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:17:02');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030002,'pageview','/roles/customer-service',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:17:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030003,'pageview','/roles/social',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:17:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030004,'pageview','/roles/sales-exec',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:17:50');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030005,'pageview','/roles/admin',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:17:53');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030006,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:17:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030007,'pageview','/roles/telesales','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:19:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030008,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-07 06:31:41');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030009,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:33:59');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030010,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:36:44');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030011,'pageview','/how-it-works',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:39:40');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030012,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:39:43');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030013,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:49:36');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030014,'pageview','/contact','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 06:50:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030015,'pageview','/contact',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-07 06:58:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030016,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:03:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030017,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:10:35');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030018,'pageview','/reviews',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:10:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030019,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:10:39');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030020,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:10:46');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030021,'pageview','/contact','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:10:56');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030022,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:12:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030023,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:12:23');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030024,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:12:30');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (92030025,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-07 07:12:31');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (94030001,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-08 02:03:57');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (94030002,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-08 02:12:49');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030001,'pageview','/roles/ppc',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-10 01:31:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030002,'pageview','/pricing/ca',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-10 01:32:00');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030003,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:34:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030004,'pageview','/roles/ppc','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:38:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030005,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:44:00');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030006,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:45:03');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030007,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:45:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030008,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:45:12');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030009,'pageview','/contact',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 01:45:20');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030010,'pageview','/pricing/uk',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-10 02:00:37');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030011,'pageview','/roles/ea',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-10 02:00:58');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030012,'pageview','/',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-10 02:01:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030013,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 02:03:24');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (96030014,'pageview','/roles/ppc','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-10 02:06:34');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 00:47:11');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98030002,'pageview','/',NULL,'Mozilla/5.0 (X11; Linux x86_64; zh-CN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.181 Safari/537.36',NULL,'2026-08-12 00:52:51');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98030003,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 00:54:45');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98030004,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 00:55:04');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98030005,'pageview','/sectors','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 00:55:08');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (98030006,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 00:55:17');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (100030001,'pageview','/','www.kimi.com','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 06:03:06');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (100030002,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 06:03:16');
+INSERT INTO `analytics_events` (`id`,`type`,`path`,`referrer`,`userAgent`,`country`,`createdAt`) VALUES (100030003,'pageview','/',NULL,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36',NULL,'2026-08-12 06:03:30');
 
 DROP TABLE IF EXISTS `enquiries`;
 CREATE TABLE `enquiries` (
@@ -482,11 +552,10 @@ CREATE TABLE `enquiries` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001;
 
-INSERT INTO `enquiries` (`id`,`name`,`company`,`email`,`phone`,`roleInterest`,`hours`,`message`,`status`,`notes`,`assignedToId`,`createdAt`,`updatedAt`) VALUES
-(1,'Tom Ashworth','Ashworth Digital','tom@ashworthdigital.co.uk','+44 7700 900123','Telesales / SDR','full','We need an outbound caller to book demos for our recruitment software, UK hours. Looking to start in the next month.','new',NULL,NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(2,'Priya Nair','Harbor Lane Realty','priya@harborlane.com.au',NULL,'Office Administrator','part','Part-time admin support for our property management team — inbox, listings, tenancy paperwork.','contacted',NULL,NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(3,'Mark Sullivan','Sullivan Tax Group','mark@sullivantax.com',NULL,'Bookkeeper / Accounts Assistant','full','Two bookkeepers needed for busy season, QuickBooks experience essential.','qualified',NULL,NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(4,'Smoke Test','Test Ltd','smoke@test.com',NULL,'Telesales / SDR','full','Test enquiry from smoke test','new',NULL,NULL,'2026-07-27 09:39:09','2026-07-27 09:39:09');
+INSERT INTO `enquiries` (`id`,`name`,`company`,`email`,`phone`,`roleInterest`,`hours`,`message`,`status`,`notes`,`assignedToId`,`createdAt`,`updatedAt`) VALUES (1,'Tom Ashworth','Ashworth Digital','tom@ashworthdigital.co.uk','+44 7700 900123','Telesales / SDR','full','We need an outbound caller to book demos for our recruitment software, UK hours. Looking to start in the next month.','new',NULL,NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `enquiries` (`id`,`name`,`company`,`email`,`phone`,`roleInterest`,`hours`,`message`,`status`,`notes`,`assignedToId`,`createdAt`,`updatedAt`) VALUES (2,'Priya Nair','Harbor Lane Realty','priya@harborlane.com.au',NULL,'Office Administrator','part','Part-time admin support for our property management team — inbox, listings, tenancy paperwork.','contacted',NULL,NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `enquiries` (`id`,`name`,`company`,`email`,`phone`,`roleInterest`,`hours`,`message`,`status`,`notes`,`assignedToId`,`createdAt`,`updatedAt`) VALUES (3,'Mark Sullivan','Sullivan Tax Group','mark@sullivantax.com',NULL,'Bookkeeper / Accounts Assistant','full','Two bookkeepers needed for busy season, QuickBooks experience essential.','qualified',NULL,NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `enquiries` (`id`,`name`,`company`,`email`,`phone`,`roleInterest`,`hours`,`message`,`status`,`notes`,`assignedToId`,`createdAt`,`updatedAt`) VALUES (4,'Smoke Test','Test Ltd','smoke@test.com',NULL,'Telesales / SDR','full','Test enquiry from smoke test','new',NULL,NULL,'2026-07-27 09:39:09','2026-07-27 09:39:09');
 
 DROP TABLE IF EXISTS `pages`;
 CREATE TABLE `pages` (
@@ -504,24 +573,7 @@ CREATE TABLE `pages` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001;
 
-INSERT INTO `pages` (`id`,`slug`,`title`,`excerpt`,`content`,`status`,`authorId`,`createdAt`,`updatedAt`) VALUES
-(1,'why-outsource-to-the-philippines','Why Outsource to the Philippines? A Straight-Talking Guide for SMEs','The real economics, the cultural fit, and the mistakes to avoid when building your first offshore team.','## The short version
-
-The Philippines combines western-standard English, a service-oriented culture and labour costs roughly 50–70% below the UK, US and Australia. It is why over 1.3 million Filipinos work in the outsourcing industry.
-
-## What makes it work
-
-- **English as an official language** — business, law and higher education all run in English.
-- **Cultural alignment** — decades of close ties with western markets mean your customers notice no difference.
-- **Time-zone flexibility** — a mature night-shift culture covers UK, US and AU business hours.
-
-## The mistakes to avoid
-
-1. Hiring freelancers with no management layer.
-2. Treating offshore staff as tasks rather than team members.
-3. Skipping structured onboarding.
-
-Ticky exists to solve all three — we employ, equip, train and manage your team so you get the output without the overhead.','published',NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `pages` (`id`,`slug`,`title`,`excerpt`,`content`,`status`,`authorId`,`createdAt`,`updatedAt`) VALUES (1,'why-outsource-to-the-philippines','Why Outsource to the Philippines? A Straight-Talking Guide for SMEs','The real economics, the cultural fit, and the mistakes to avoid when building your first offshore team.','## The short version\n\nThe Philippines combines western-standard English, a service-oriented culture and labour costs roughly 50–70% below the UK, US and Australia. It is why over 1.3 million Filipinos work in the outsourcing industry.\n\n## What makes it work\n\n- **English as an official language** — business, law and higher education all run in English.\n- **Cultural alignment** — decades of close ties with western markets mean your customers notice no difference.\n- **Time-zone flexibility** — a mature night-shift culture covers UK, US and AU business hours.\n\n## The mistakes to avoid\n\n1. Hiring freelancers with no management layer.\n2. Treating offshore staff as tasks rather than team members.\n3. Skipping structured onboarding.\n\nTicky exists to solve all three — we employ, equip, train and manage your team so you get the output without the overhead.','published',NULL,'2026-07-27 09:29:44','2026-07-27 09:29:44');
 
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE `reviews` (
@@ -548,13 +600,12 @@ CREATE TABLE `reviews` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001;
 
-INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES
-(1,'james','James Whitfield','Managing Director','Clearpath Analytics','London, UK','B2B SaaS','["Telesales / SDR","Sales Executive"]','£38,000 / year',5,'Books more meetings than the two UK hires she replaced','Our Ticky SDR books more qualified meetings than the two UK hires she replaced — at less than half the cost of one. The quality of English honestly surprised me.','["We were sceptical. We had tried a freelance VA before and it ended in missed calls and garbled emails, so the bar for Ticky was high. Our discovery call changed the tone completely — within five days we had three candidate videos, and each one spoke clearer, more confident English than some of the people we had interviewed locally.","We hired Angela as our SDR on a full-time basis, working 9am to 5:30pm UK time. Her first two weeks were spent in our HubSpot instance learning our ICP, and by week three she was on the phones. She now books 12–15 qualified demos a month — more than the two UK-based SDRs we had previously employed combined.","The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,260, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network."]','/images/review-james.jpg','published',1,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(2,'sarah','Sarah Delaney','Founder & CEO','Bloom & Co','Austin, TX','E-commerce','["Office Administrator","Marketing Executive","Customer Service × 3"]','$112,000 / year',5,'From one part-timer to a team of five in eighteen months','We started with one part-time administrator as a test. Eighteen months later we have a team of five across sales support and marketing. It has completely changed our cost base.','["As a bootstrapped founder, I was doing customer emails at midnight and calling that a strategy. I gave Ticky the smallest possible brief: a part-time administrator, 20 hours a week, to take over my inbox and order admin. Within a month I had my evenings back.","The part-time test is what sold me on the model. There was no pressure to scale, no pushy account manager — but once I saw the quality, scaling was the obvious move. Today our Ticky team handles all customer service, our email marketing, and back-office admin. Five people, one invoice, roughly $5,700 a month.","For context, hiring those five roles locally in Austin would run well over $15,000 a month before benefits. That delta is the difference between us reinvesting in product and inventory, or standing still. The team works US Central hours, joins our Slack like any employee, and our customers have no idea they are 8,000 miles away."]','/images/review-sarah.jpg','published',2,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(3,'michael','Michael Tran','Director','Meridian Advisory Group','Sydney, AU','Professional Services','["Marketing Executive","Executive Assistant"]','A$74,000 / year',5,'Running our marketing like she had been here for years','The onboarding was genuinely painless. Within two weeks our new marketing executive was running our email campaigns and social channels like she had been here for years.','["Professional services firms live and die on staying visible, but a mid-weight marketing hire in Sydney was quoting A$85k plus super. We could not justify it, so marketing simply was not getting done. Ticky presented three candidates within a week, all with genuine HubSpot and WordPress experience.","We chose Katrina, and the onboarding genuinely was painless. Ticky had her set up on managed equipment with our VPN and 2FA policies before day one. By the end of week two she owned our email calendar, LinkedIn presence and monthly newsletter. I review; she executes.","A year in, we added an executive assistant through Ticky as well. Combined, the two roles cost us about A$3,700 a month against a realistic A$9,800 locally — and the standard has never once felt like a compromise. I tell every firm owner I know: this is the easiest margin improvement you will ever make."]','/images/review-michael.jpg','published',3,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(4,'emma','Emma Callaghan','Head of Operations','Northgate Properties','Manchester, UK','Real Estate','["Office Administrator × 2","Bookkeeper"]','£46,000 / year',5,'Our back office finally runs itself','Tenancy paperwork, invoicing, bank recs — it all just happens now. Our two Ticky administrators are the most dependable people in the business.','["We manage 400+ rental units and the admin was drowning our lettings team: tenancy agreements, deposit registrations, contractor invoices, endless reconciliation. Hiring locally at £28–32k per administrator, on Manchester wages, was eating our management fees alive.","Ticky placed two administrators and a bookkeeper with us over about six weeks. The difference from our previous outsourcing experience is the management layer — their team leaders check quality before we ever see an issue, and the monthly reporting means I always know what got done.","Eight months later, our lettings negotiators spend their time on viewings and landlords, not paperwork. Error rates on our invoicing are down, and we are saving about £46k a year against local hiring. The team works 9–5:30 UK hours and are on our phones and CRM like they sit in the next room."]','/images/review-emma.jpg','published',4,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(5,'david','David Rosenbaum','Founder','Rosenbaum & Associates CPA','Chicago, IL','Accounting','["Bookkeeper × 2","Executive Assistant"]','$96,000 / year',5,'I extended our capacity without a single local hire','Tax season used to mean turning away work. This year our two Ticky bookkeepers cleared the backlog — and their Xero and QuickBooks skills were better than advertised.','["I have run a CPA firm for twenty years, so believe me when I say I do not hand my clients\' books to anyone lightly. What convinced me was the vetting: skills tests on QuickBooks and Xero, spoken English assessment, background checks — all documented before I ever interviewed.","We started with one bookkeeper during tax season as a trial. The work came back clean, coded correctly, and on deadline. We now have two bookkeepers and an executive assistant through Ticky, all working US Central hours, all inside our practice management software under our security policies.","The economics speak for themselves — about $96,000 a year saved against Chicago salaries — but the real story is capacity. We took on 30% more clients this year without a single local hire, and my senior staff finally spend their time on advisory work instead of data entry."]','/images/review-david.jpg','published',5,'2026-07-27 09:29:44','2026-07-27 09:29:44'),
-(6,'rachel','Rachel Simmons','Chief Executive','Luminary Events','Melbourne, AU','Events & Hospitality','["Social Media & Content Specialist","Office Administrator"]','A$68,000 / year',5,'Every channel active, every day, without me asking','Our Instagram, LinkedIn and TikTok are finally consistent. Bianca plans a month of content ahead and our engagement has tripled. I barely think about it anymore.','["Events is a visibility business, but between running events I was posting on social media at 11pm and calling it marketing. A content hire in Melbourne wanted A$75k+, which for a business our size was a genuine stretch.","Ticky matched us with Bianca, a social media specialist who had already worked for two Australian agencies. She works Melbourne hours, sits in our Slack, and runs our content calendar a month ahead — Canva graphics, CapCut video edits, the lot. Our engagement has tripled and inbound enquiries are noticeably up.","We added an administrator six months later for supplier coordination and run-sheets. The two roles together cost less than one local junior salary. The professionalism of the Ticky management layer — the reviews, the reporting, the replacement guarantee — is what makes this feel low-risk rather than too good to be true."]','/images/review-rachel.jpg','published',6,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES (1,'james','James Whitfield','Managing Director','Clearpath Analytics','London, UK','B2B SaaS','[\"Telesales / SDR\",\"Sales Executive\"]','£38,000 / year',5,'Books more meetings than the two UK hires she replaced','Our Ticky SDR books more qualified meetings than the two UK hires she replaced — at less than half the cost of one. The quality of English honestly surprised me.','[\"We were sceptical. We had tried a freelance VA before and it ended in missed calls and garbled emails, so the bar for Ticky was high. Our discovery call changed the tone completely — within five days we had three candidate videos, and each one spoke clearer, more confident English than some of the people we had interviewed locally.\",\"We hired Angela as our SDR on a full-time basis, working 9am to 5:30pm UK time. Her first two weeks were spent in our HubSpot instance learning our ICP, and by week three she was on the phones. She now books 12–15 qualified demos a month — more than the two UK-based SDRs we had previously employed combined.\",\"The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,385, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.\"]','/images/review-james.jpg','published',1,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES (2,'sarah','Sarah Delaney','Founder & CEO','Bloom & Co','Austin, TX','E-commerce','[\"Office Administrator\",\"Marketing Executive\",\"Customer Service × 3\"]','$112,000 / year',5,'From one part-timer to a team of five in eighteen months','We started with one part-time administrator as a test. Eighteen months later we have a team of five across sales support and marketing. It has completely changed our cost base.','[\"As a bootstrapped founder, I was doing customer emails at midnight and calling that a strategy. I gave Ticky the smallest possible brief: a part-time administrator, 20 hours a week, to take over my inbox and order admin. Within a month I had my evenings back.\",\"The part-time test is what sold me on the model. There was no pressure to scale, no pushy account manager — but once I saw the quality, scaling was the obvious move. Today our Ticky team handles all customer service, our email marketing, and back-office admin. Five people, one invoice, roughly $5,700 a month.\",\"For context, hiring those five roles locally in Austin would run well over $15,000 a month before benefits. That delta is the difference between us reinvesting in product and inventory, or standing still. The team works US Central hours, joins our Slack like any employee, and our customers have no idea they are 8,000 miles away.\"]','/images/review-sarah.jpg','published',2,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES (3,'michael','Michael Tran','Director','Meridian Advisory Group','Sydney, AU','Professional Services','[\"Marketing Executive\",\"Executive Assistant\"]','A$74,000 / year',5,'Running our marketing like she had been here for years','The onboarding was genuinely painless. Within two weeks our new marketing executive was running our email campaigns and social channels like she had been here for years.','[\"Professional services firms live and die on staying visible, but a mid-weight marketing hire in Sydney was quoting A$85k plus super. We could not justify it, so marketing simply was not getting done. Ticky presented three candidates within a week, all with genuine HubSpot and WordPress experience.\",\"We chose Katrina, and the onboarding genuinely was painless. Ticky had her set up on managed equipment with our VPN and 2FA policies before day one. By the end of week two she owned our email calendar, LinkedIn presence and monthly newsletter. I review; she executes.\",\"A year in, we added an executive assistant through Ticky as well. Combined, the two roles cost us about A$3,700 a month against a realistic A$9,800 locally — and the standard has never once felt like a compromise. I tell every firm owner I know: this is the easiest margin improvement you will ever make.\"]','/images/review-michael.jpg','published',3,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES (4,'emma','Emma Callaghan','Head of Operations','Northgate Properties','Manchester, UK','Real Estate','[\"Office Administrator × 2\",\"Bookkeeper\"]','£46,000 / year',5,'Our back office finally runs itself','Tenancy paperwork, invoicing, bank recs — it all just happens now. Our two Ticky administrators are the most dependable people in the business.','[\"We manage 400+ rental units and the admin was drowning our lettings team: tenancy agreements, deposit registrations, contractor invoices, endless reconciliation. Hiring locally at £28–32k per administrator, on Manchester wages, was eating our management fees alive.\",\"Ticky placed two administrators and a bookkeeper with us over about six weeks. The difference from our previous outsourcing experience is the management layer — their team leaders check quality before we ever see an issue, and the monthly reporting means I always know what got done.\",\"Eight months later, our lettings negotiators spend their time on viewings and landlords, not paperwork. Error rates on our invoicing are down, and we are saving about £46k a year against local hiring. The team works 9–5:30 UK hours and are on our phones and CRM like they sit in the next room.\"]','/images/review-emma.jpg','published',4,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES (5,'david','David Rosenbaum','Founder','Rosenbaum & Associates CPA','Chicago, IL','Accounting','[\"Bookkeeper × 2\",\"Executive Assistant\"]','$96,000 / year',5,'I extended our capacity without a single local hire','Tax season used to mean turning away work. This year our two Ticky bookkeepers cleared the backlog — and their Xero and QuickBooks skills were better than advertised.','[\"I have run a CPA firm for twenty years, so believe me when I say I do not hand my clients\' books to anyone lightly. What convinced me was the vetting: skills tests on QuickBooks and Xero, spoken English assessment, background checks — all documented before I ever interviewed.\",\"We started with one bookkeeper during tax season as a trial. The work came back clean, coded correctly, and on deadline. We now have two bookkeepers and an executive assistant through Ticky, all working US Central hours, all inside our practice management software under our security policies.\",\"The economics speak for themselves — about $96,000 a year saved against Chicago salaries — but the real story is capacity. We took on 30% more clients this year without a single local hire, and my senior staff finally spend their time on advisory work instead of data entry.\"]','/images/review-david.jpg','published',5,'2026-07-27 09:29:44','2026-07-27 09:29:44');
+INSERT INTO `reviews` (`id`,`slug`,`name`,`role`,`company`,`location`,`industry`,`hires`,`saving`,`rating`,`headline`,`quote`,`story`,`photo`,`status`,`sortOrder`,`createdAt`,`updatedAt`) VALUES (6,'rachel','Rachel Simmons','Chief Executive','Luminary Events','Melbourne, AU','Events & Hospitality','[\"Social Media & Content Specialist\",\"Office Administrator\"]','A$68,000 / year',5,'Every channel active, every day, without me asking','Our Instagram, LinkedIn and TikTok are finally consistent. Bianca plans a month of content ahead and our engagement has tripled. I barely think about it anymore.','[\"Events is a visibility business, but between running events I was posting on social media at 11pm and calling it marketing. A content hire in Melbourne wanted A$75k+, which for a business our size was a genuine stretch.\",\"Ticky matched us with Bianca, a social media specialist who had already worked for two Australian agencies. She works Melbourne hours, sits in our Slack, and runs our content calendar a month ahead — Canva graphics, CapCut video edits, the lot. Our engagement has tripled and inbound enquiries are noticeably up.\",\"We added an administrator six months later for supplier coordination and run-sheets. The two roles together cost less than one local junior salary. The professionalism of the Ticky management layer — the reviews, the reporting, the replacement guarantee — is what makes this feel low-risk rather than too good to be true.\"]','/images/review-rachel.jpg','published',6,'2026-07-27 09:29:44','2026-07-27 09:29:44');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -572,7 +623,6 @@ CREATE TABLE `users` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001;
 
-INSERT INTO `users` (`id`,`unionId`,`name`,`email`,`avatar`,`role`,`createdAt`,`updatedAt`,`lastSignInAt`) VALUES
-(1,'d5oaj3oc86seq6a8ri10','Moonwalker0321',NULL,'https://avatar.moonshot.cn/avatar/default/meditate_head.png','admin','2026-07-27 09:53:43','2026-07-27 09:53:43','2026-07-27 09:53:43');
+INSERT INTO `users` (`id`,`unionId`,`name`,`email`,`avatar`,`role`,`createdAt`,`updatedAt`,`lastSignInAt`) VALUES (1,'d5oaj3oc86seq6a8ri10','Moonwalker0321',NULL,'https://avatar.moonshot.cn/avatar/default/meditate_head.png','admin','2026-07-27 09:53:43','2026-07-27 09:53:43','2026-07-27 09:53:43');
 
 SET FOREIGN_KEY_CHECKS=1;

@@ -19,6 +19,7 @@ import {
   Calculator as CalcIcon,
   UserCog,
   Share2,
+  Target,
   CheckCircle2,
   Wrench,
   ArrowRight,
@@ -35,6 +36,7 @@ const iconMap: Record<string, React.ElementType> = {
   bookkeeper: CalcIcon,
   ea: UserCog,
   social: Share2,
+  ppc: Target,
 }
 
 const seoIntro: Record<Region, string> = {
@@ -66,10 +68,11 @@ export default function Pricing() {
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-slate-600">{seoIntro[region]}</p>
               <p className="mt-3 text-[15px] leading-relaxed text-slate-500">
-                Every price below is a fully loaded monthly fee — salary, benefits, HR, equipment,
-                secure office facilities and a dedicated account manager included. Part-time (20
-                hours per week) is simply 50% of the full-time fee. Most clients save 60% or more
-                against an equivalent native hire.
+                Every price below is a fully loaded <strong className="font-semibold text-slate-700">starting from</strong> monthly
+                fee — salary, benefits, HR, equipment, secure office facilities and a dedicated
+                account manager included. Final pricing is confirmed on your discovery call based
+                on seniority and requirements. Part-time (20 hours per week) starts from 50% of
+                the full-time fee. Most clients save 60% or more against an equivalent native hire.
               </p>
             </div>
             <div className="w-full max-w-[260px]">
@@ -168,12 +171,15 @@ export default function Pricing() {
                             </span>
                           </p>
                           <p className="mt-1 text-2xl font-extrabold text-slate-900">
+                            <span className="mr-1.5 align-middle text-xs font-semibold uppercase tracking-wide text-slate-500">
+                              From
+                            </span>
                             {sym}
                             {role.ticky[region].toLocaleString()}
                             <span className="text-sm font-medium text-slate-500"> / month FT</span>
                           </p>
                           <p className="text-xs text-slate-500">
-                            or {sym}
+                            or from {sym}
                             {Math.round(role.ticky[region] / 2).toLocaleString()}/mo part-time
                           </p>
                         </div>
@@ -206,10 +212,10 @@ export default function Pricing() {
           <div className="mx-auto mt-10 flex max-w-2xl items-start gap-2.5 text-sm text-slate-400">
             <Info className="mt-0.5 h-4 w-4 shrink-0" />
             <p className="text-center">
-              Native hire figures are indicative fully-loaded costs (salary, employer taxes,
-              benefits, equipment and recruitment overheads) for comparable roles in {r.label}.
-              Final Ticky pricing is confirmed on your discovery call based on seniority and
-              requirements.
+              All Ticky prices are "starting from" figures for standard seniority, confirmed in
+              writing on your discovery call. Native hire figures are indicative fully-loaded costs
+              (salary, employer taxes, benefits, equipment and recruitment overheads) for
+              comparable roles in {r.label}.
             </p>
           </div>
         </div>

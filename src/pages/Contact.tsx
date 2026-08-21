@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -12,9 +13,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CheckCircle2, Mail, Phone, CalendarCheck, Clock3, ShieldCheck, CircleAlert } from 'lucide-react'
+import { CheckCircle2, Mail, Phone, MapPin, CalendarCheck, Clock3, ShieldCheck, CircleAlert } from 'lucide-react'
 import { roles } from '@/data/content'
 import { trpc } from '@/providers/trpc'
+import { trackEnquirySubmitted } from '@/lib/tracking'
 
 const expectations = [
   {
@@ -46,7 +48,7 @@ export default function Contact() {
     e.preventDefault()
     setError(null)
     const data = new FormData(e.currentTarget)
-    submit.mutate({
+    const payload = {
       name: String(data.get('name') ?? ''),
       company: String(data.get('company') ?? ''),
       email: String(data.get('email') ?? ''),
@@ -54,6 +56,14 @@ export default function Contact() {
       roleInterest: String(data.get('roleInterest') ?? '') || undefined,
       hours: (String(data.get('hours') ?? '') || undefined) as 'full' | 'part' | 'unsure' | undefined,
       message: String(data.get('message') ?? '') || undefined,
+    }
+    submit.mutate(payload, {
+      onSuccess: () =>
+        trackEnquirySubmitted({
+          roleInterest: payload.roleInterest,
+          hours: payload.hours,
+          path: window.location.pathname,
+        }),
     })
   }
 
@@ -78,6 +88,13 @@ export default function Contact() {
               to arrange your free discovery call. No pressure, no obligation — just a clear picture
               of what you could save.
             </p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-500">
+              Ready to talk numbers first?{' '}
+              <Link to="/pricing" className="font-semibold text-blue-700 hover:underline">
+                See starting-from pricing in your currency
+              </Link>
+              .
+            </p>
 
             <div className="mt-10 space-y-6">
               {expectations.map((item) => (
@@ -93,13 +110,33 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="mt-10 space-y-3 border-t border-slate-200 pt-8 text-sm text-slate-600">
+            <div className="mt-10 border-t border-slate-200 pt-8 text-sm text-slate-600">
               <p className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-blue-700" /> hello@tickyglobal.com
               </p>
-              <p className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-blue-700" /> +44 (0)20 7946 0820
-              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <p className="flex items-center gap-2 font-bold text-slate-900">
+                    <span className="text-base">🇬🇧</span> UK Office
+                  </p>
+                  <p className="mt-2 flex items-start gap-2 leading-relaxed">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" />
+                    Chetwynd Grove, Bangor Road, Cross Lanes, Wrexham, United Kingdom
+                  </p>
+                  <p className="mt-2 flex items-center gap-2 font-semibold text-slate-900">
+                    <Phone className="h-4 w-4 shrink-0 text-blue-700" /> 0808 175 3413
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <p className="flex items-center gap-2 font-bold text-slate-900">
+                    <span className="text-base">🇺🇸</span> US Office
+                  </p>
+                  <p className="mt-2 flex items-start gap-2 leading-relaxed">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" />8 The Green,
+                    Suite A, Dover, Delaware 19901, United States
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
 

@@ -12,6 +12,7 @@ import {
   Calculator as CalcIcon,
   UserCog,
   Share2,
+  Target,
   ArrowRight,
 } from 'lucide-react'
 import { roles } from '@/data/content'
@@ -25,6 +26,7 @@ const iconMap: Record<string, React.ElementType> = {
   bookkeeper: CalcIcon,
   ea: UserCog,
   social: Share2,
+  ppc: Target,
 }
 
 export default function RolesPreview() {

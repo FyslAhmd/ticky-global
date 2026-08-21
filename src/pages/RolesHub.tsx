@@ -12,6 +12,7 @@ import {
   Calculator as CalcIcon,
   UserCog,
   Share2,
+  Target,
   ArrowRight,
   GraduationCap,
   Languages,
@@ -29,6 +30,7 @@ export const roleIcons: Record<string, React.ElementType> = {
   bookkeeper: CalcIcon,
   ea: UserCog,
   social: Share2,
+  ppc: Target,
 }
 
 const calibreHighlights = [

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CtaBand from '@/components/CtaBand'
 import { usePageTracking } from '@/lib/analytics'
 
 export default function Layout() {
@@ -20,12 +21,16 @@ export default function Layout() {
     window.scrollTo(0, 0)
   }, [pathname, hash])
 
+  // Home and Contact already end with their own conversion CTA
+  const hasOwnCta = pathname === '/' || pathname === '/contact'
+
   return (
     <div className="flex min-h-screen flex-col bg-white font-sans text-slate-900 antialiased">
       <Navbar />
       <main className="flex-1">
         <Outlet />
       </main>
+      {!hasOwnCta && <CtaBand />}
       <Footer />
     </div>
   )

@@ -32,7 +32,7 @@ export const reviews: Review[] = [
     story: [
       'We were sceptical. We had tried a freelance VA before and it ended in missed calls and garbled emails, so the bar for Ticky was high. Our discovery call changed the tone completely — within five days we had three candidate videos, and each one spoke clearer, more confident English than some of the people we had interviewed locally.',
       'We hired Angela as our SDR on a full-time basis, working 9am to 5:30pm UK time. Her first two weeks were spent in our HubSpot instance learning our ICP, and by week three she was on the phones. She now books 12–15 qualified demos a month — more than the two UK-based SDRs we had previously employed combined.',
-      'The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,260, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.',
+      'The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,525, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.',
     ],
     photo: '/images/review-james.jpg',
   },
@@ -72,7 +72,7 @@ export const reviews: Review[] = [
     story: [
       'Professional services firms live and die on staying visible, but a mid-weight marketing hire in Sydney was quoting A$85k plus super. We could not justify it, so marketing simply was not getting done. Ticky presented three candidates within a week, all with genuine HubSpot and WordPress experience.',
       'We chose Katrina, and the onboarding genuinely was painless. Ticky had her set up on managed equipment with our VPN and 2FA policies before day one. By the end of week two she owned our email calendar, LinkedIn presence and monthly newsletter. I review; she executes.',
-      'A year in, we added an executive assistant through Ticky as well. Combined, the two roles cost us about A$3,700 a month against a realistic A$9,800 locally — and the standard has never once felt like a compromise. I tell every firm owner I know: this is the easiest margin improvement you will ever make.',
+      'A year in, we added an executive assistant through Ticky as well. Combined, the two roles cost us about A$4,520 a month against a realistic A$9,800 locally — and the standard has never once felt like a compromise. I tell every firm owner I know: this is the easiest margin improvement you will ever make.',
     ],
     photo: '/images/review-michael.jpg',
   },

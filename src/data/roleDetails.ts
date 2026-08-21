@@ -85,7 +85,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   admin: {
     slug: 'admin',
     heroIntro:
-      'The office administrator is the backbone of every offshore programme: inbox, diary, data entry, documents and coordination — handled reliably, in perfect written English, from around £1,085 per month fully loaded.',
+      'The office administrator is the backbone of every offshore programme: inbox, diary, data entry, documents and coordination — handled reliably, in perfect written English, from around £1,315 per month fully loaded.',
     calibre: {
       intro:
         'Filipino administrators are career professionals, not stopgaps. Many come from executive-support and back-office roles serving multinational companies, and treat organisation as a craft.',
@@ -117,7 +117,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   marketing: {
     slug: 'marketing',
     heroIntro:
-      'Marketing is where offshoring compounds fastest: a Ticky marketing executive executes campaigns, email, SEO and analytics every single day — the consistency local teams never quite sustain — from around £1,375 per month.',
+      'Marketing is where offshoring compounds fastest: a Ticky marketing executive executes campaigns, email, SEO and analytics every single day — the consistency local teams never quite sustain — from around £1,515 per month.',
     calibre: {
       intro:
         'The Philippines has a deep pool of marketing professionals trained by serving western brands directly. They arrive fluent in the platforms your business already runs on.',
@@ -149,7 +149,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   'customer-service': {
     slug: 'customer-service',
     heroIntro:
-      'Customer service is the role the Philippines is world-famous for. A Ticky representative answers your phone, email and live chat with warmth and flawless English — from around £1,030 per month, fully loaded.',
+      'Customer service is the role the Philippines is world-famous for. A Ticky representative answers your phone, email and live chat with warmth and flawless English — from around £1,250 per month, fully loaded.',
     calibre: {
       intro:
         'The Philippines is the world’s contact-centre capital, serving the biggest western brands for decades. Ticky hires from the top of that talent pool and adds a management layer on top.',
@@ -181,7 +181,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   bookkeeper: {
     slug: 'bookkeeper',
     heroIntro:
-      'Ticky bookkeepers and accounts assistants bring qualified, software-tested capability to your reconciliations, invoicing and month-end — from around £1,200 per month fully loaded, under your review controls.',
+      'Ticky bookkeepers and accounts assistants bring qualified, software-tested capability to your reconciliations, invoicing and month-end — from around £1,320 per month fully loaded, under your review controls.',
     calibre: {
       intro:
         'The Philippines produces vast numbers of accounting graduates each year, many certified specifically on the platforms western firms run. Accuracy is screened, tested and then monitored.',
@@ -213,7 +213,7 @@ export const roleDetails: Record<string, RoleDetail> = {
   ea: {
     slug: 'ea',
     heroIntro:
-      'A Ticky executive assistant is a proactive right hand for founders and directors — complex diaries, inboxes, travel, research and gatekeeping, done to a western executive standard from around £1,430 per month.',
+      'A Ticky executive assistant is a proactive right hand for founders and directors — complex diaries, inboxes, travel, research and gatekeeping, done to a western executive standard from around £1,575 per month.',
     calibre: {
       intro:
         'Executive support is a senior profession in the Philippines, with career EAs who have supported C-suite leaders at multinational companies for years.',
@@ -238,14 +238,14 @@ export const roleDetails: Record<string, RoleDetail> = {
       quote:
         'A year in, we added an executive assistant through Ticky as well. The standard has never once felt like a compromise.',
       result:
-        'The EA joined after the marketing executive proved the model. Combined, both roles cost about A$3,700 a month against a realistic A$9,800 locally.',
+        'The EA joined after the marketing executive proved the model. Combined, both roles cost about A$4,520 a month against a realistic A$9,800 locally.',
       saving: 'Saves over A$73,000 per year',
     },
   },
   social: {
     slug: 'social',
     heroIntro:
-      'A Ticky social media and content specialist keeps your channels alive every single day — calendars planned a month ahead, graphics and video produced daily — from around £1,315 per month fully loaded.',
+      'A Ticky social media and content specialist keeps your channels alive every single day — calendars planned a month ahead, graphics and video produced daily — from around £1,445 per month fully loaded.',
     calibre: {
       intro:
         'Filipino content specialists grow up in one of the world’s most social-media-engaged countries, and the professionals we place pair that instinct with agency-grade discipline.',
@@ -272,6 +272,38 @@ export const roleDetails: Record<string, RoleDetail> = {
       result:
         'She works Melbourne hours, sits in the agency Slack and runs the content calendar a month ahead. An administrator followed six months later.',
       saving: 'Saves over A$39,000 per year',
+    },
+  },
+  ppc: {
+    slug: 'ppc',
+    heroIntro:
+      'Paid media is pure leverage: the same ad spend performs better in specialist hands. A Ticky PPC specialist manages your Google, Meta and Amazon campaigns full-time from around £1,645 per month — typically 60% less than a native hire, before you count the improvement in return on ad spend.',
+    calibre: {
+      intro:
+        'The Philippines has become a global hub for paid-media talent, with specialists who have managed seven-figure annual budgets for western agencies, e-commerce brands and Amazon sellers — and certifications to prove it.',
+      points: [
+        'Google Ads certified, with most holding Meta Blueprint and Amazon Advertising accreditations',
+        'Typically 3+ years managing live budgets for UK, US, Canadian, Australian or NZ accounts',
+        'Tested on real account audits: structure, bidding strategy, negative keywords and wasted spend',
+        'Fluent across Search, Shopping, Performance Max, Meta Advantage+ and Amazon Sponsored Ads',
+        'Reporting discipline built in — weekly performance summaries and monthly deep-dives',
+      ],
+    },
+    offering:
+      'Your PPC specialist owns the numbers: campaign builds and restructuring, keyword and audience research, bid and budget management, A/B and creative testing, conversion tracking hygiene and clear ROI reporting. They work inside your ad accounts (never ours), join your marketing stand-ups over video and flag wasted spend before it compounds. One specialist can comfortably cover Google, Meta and Amazon for most small and mid-sized businesses.',
+    idealFor: [
+      'E-commerce brands scaling Google Shopping, Meta and Amazon side by side',
+      'Agencies whose media buyers are buried in low-value optimisation work',
+      'Lead-generation businesses paying too much per lead',
+      'Amazon sellers who know PPC is leaking margin but lack the hours',
+    ],
+    caseStudy: {
+      business: 'E-commerce home goods brand, Toronto',
+      quote:
+        'Our Ticky specialist found 30% wasted spend in the first audit. Three months later our cost per acquisition is down 41% and we have finally scaled past the plateau we were stuck on.',
+      result:
+        'The specialist rebuilt the Google and Meta account structure, introduced proper conversion tracking and took over Amazon PPC. Monthly ad spend stayed flat while revenue from paid channels grew by over half.',
+      saving: 'Saves over C$49,000 per year',
     },
   },
 }

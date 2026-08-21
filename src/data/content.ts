@@ -41,7 +41,7 @@ export const roles: Role[] = [
     ],
     tools: ['HubSpot', 'Salesforce', 'Aircall', 'Outreach', 'Apollo'],
     native: { uk: 3200, us: 4500, ca: 5800, au: 6000, nz: 6900 },
-    ticky: { uk: 1260, us: 1605, ca: 2200, au: 2410, nz: 2645 },
+    ticky: { uk: 1525, us: 1940, ca: 2660, au: 2915, nz: 3200 },
     popular: true,
   },
   {
@@ -58,7 +58,7 @@ export const roles: Role[] = [
     ],
     tools: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zoom', 'Gong'],
     native: { uk: 4200, us: 5800, ca: 7500, au: 7800, nz: 8900 },
-    ticky: { uk: 1720, us: 2180, ca: 2985, au: 3215, nz: 3595 },
+    ticky: { uk: 1890, us: 2400, ca: 3285, au: 3535, nz: 3955 },
   },
   {
     id: 'admin',
@@ -74,7 +74,7 @@ export const roles: Role[] = [
     ],
     tools: ['Microsoft 365', 'Google Workspace', 'Slack', 'Asana', 'Notion'],
     native: { uk: 2800, us: 3900, ca: 5100, au: 5300, nz: 6000 },
-    ticky: { uk: 1085, us: 1375, ca: 1885, au: 2065, nz: 2270 },
+    ticky: { uk: 1315, us: 1665, ca: 2285, au: 2495, nz: 2745 },
     popular: true,
   },
   {
@@ -91,7 +91,7 @@ export const roles: Role[] = [
     ],
     tools: ['Mailchimp', 'HubSpot', 'Canva', 'WordPress', 'GA4'],
     native: { uk: 3400, us: 4700, ca: 6100, au: 6400, nz: 7200 },
-    ticky: { uk: 1375, us: 1720, ca: 2355, au: 2640, nz: 2840 },
+    ticky: { uk: 1515, us: 1890, ca: 2590, au: 2905, nz: 3125 },
     popular: true,
   },
   {
@@ -108,7 +108,7 @@ export const roles: Role[] = [
     ],
     tools: ['Zendesk', 'Intercom', 'Freshdesk', 'Shopify', 'Gorgias'],
     native: { uk: 2600, us: 3600, ca: 4700, au: 4900, nz: 5500 },
-    ticky: { uk: 1030, us: 1315, ca: 1800, au: 1950, nz: 2170 },
+    ticky: { uk: 1250, us: 1590, ca: 2180, au: 2360, nz: 2625 },
   },
   {
     id: 'bookkeeper',
@@ -124,7 +124,7 @@ export const roles: Role[] = [
     ],
     tools: ['Xero', 'QuickBooks', 'MYOB', 'Dext', 'Excel'],
     native: { uk: 3100, us: 4300, ca: 5500, au: 5800, nz: 6600 },
-    ticky: { uk: 1200, us: 1545, ca: 2115, au: 2295, nz: 2550 },
+    ticky: { uk: 1320, us: 1700, ca: 2325, au: 2525, nz: 2805 },
   },
   {
     id: 'ea',
@@ -140,7 +140,7 @@ export const roles: Role[] = [
     ],
     tools: ['Google Workspace', 'Microsoft 365', 'Calendly', 'Slack', 'Zoom'],
     native: { uk: 3500, us: 4900, ca: 6400, au: 6600, nz: 7600 },
-    ticky: { uk: 1430, us: 1835, ca: 2515, au: 2755, nz: 3030 },
+    ticky: { uk: 1575, us: 2020, ca: 2765, au: 3030, nz: 3335 },
   },
   {
     id: 'social',
@@ -156,7 +156,24 @@ export const roles: Role[] = [
     ],
     tools: ['Canva', 'Hootsuite', 'Buffer', 'CapCut', 'Meta Suite'],
     native: { uk: 3200, us: 4400, ca: 5800, au: 6000, nz: 6900 },
-    ticky: { uk: 1315, us: 1660, ca: 2275, au: 2525, nz: 2740 },
+    ticky: { uk: 1445, us: 1825, ca: 2505, au: 2780, nz: 3015 },
+  },
+  {
+    id: 'ppc',
+    title: 'Google / Meta / Amazon PPC Ads Specialist',
+    shortTitle: 'PPC Specialist',
+    description:
+      'Certified paid-media specialists who plan, build and optimise your Google, Meta and Amazon ad campaigns — squeezing more return from every pound or dollar of ad spend.',
+    responsibilities: [
+      'Google Ads & Microsoft Ads campaign builds and optimisation',
+      'Meta (Facebook & Instagram) and Amazon PPC management',
+      'Keyword, audience and competitor research',
+      'Bid, budget and A/B testing management with ROI reporting',
+    ],
+    tools: ['Google Ads', 'Meta Ads Manager', 'Amazon Ads', 'GA4', 'Looker Studio'],
+    native: { uk: 3800, us: 5300, ca: 6800, au: 7000, nz: 7900 },
+    ticky: { uk: 1645, us: 2085, ca: 2855, au: 3130, nz: 3450 },
+    popular: true,
   },
 ]
 

@@ -110,34 +110,54 @@ function MobileSection({
   to,
   items,
   onNavigate,
+  pathname,
 }: {
   title: string
   to: string
   items: { to: string; label: string; prefix?: string }[]
   onNavigate: () => void
+  pathname: string
 }) {
+  const [expanded, setExpanded] = useState(pathname.startsWith(to))
   return (
-    <div>
-      <Link
-        to={to}
-        onClick={onNavigate}
-        className="rounded-lg px-4 py-3 text-base font-semibold text-slate-900 hover:bg-slate-50"
-      >
-        {title}
-      </Link>
-      <div className="ml-4 border-l border-slate-100 pl-3">
-        {items.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            onClick={onNavigate}
-            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
-          >
-            {item.prefix && <span>{item.prefix}</span>}
-            {item.label}
-          </Link>
-        ))}
+    <div className="rounded-xl border border-slate-100">
+      <div className="flex items-center gap-1 pr-1">
+        <Link
+          to={to}
+          onClick={onNavigate}
+          className={`flex-1 rounded-lg px-4 py-3 text-base font-semibold ${
+            pathname === to ? 'text-blue-700' : 'text-slate-900 hover:bg-slate-50'
+          }`}
+        >
+          {title}
+        </Link>
+        <button
+          type="button"
+          aria-label={`${expanded ? 'Collapse' : 'Expand'} ${title}`}
+          aria-expanded={expanded}
+          onClick={() => setExpanded((v) => !v)}
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100"
+        >
+          <ChevronDown
+            className={`h-4.5 w-4.5 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+          />
+        </button>
       </div>
+      {expanded && (
+        <div className="mx-3 mb-2 border-l border-slate-100 pl-3">
+          {items.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              onClick={onNavigate}
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+            >
+              {item.prefix && <span>{item.prefix}</span>}
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -310,6 +330,7 @@ export default function Navbar() {
                 title="Sectors"
                 to="/sectors"
                 onNavigate={close}
+                pathname={location.pathname}
                 items={sectors.map((s) => ({
                   to: `/sectors/${s.slug}`,
                   label: s.name,
@@ -320,6 +341,7 @@ export default function Navbar() {
                 title="Roles"
                 to="/roles"
                 onNavigate={close}
+                pathname={location.pathname}
                 items={roles.map((r) => ({ to: `/roles/${r.id}`, label: r.title }))}
               />
 
@@ -327,6 +349,7 @@ export default function Navbar() {
                 title="Pricing"
                 to="/pricing"
                 onNavigate={close}
+                pathname={location.pathname}
                 items={regionKeys.map((key) => ({
                   to: `/pricing/${key}`,
                   label: `${regions[key].label} (${regions[key].currency})`,

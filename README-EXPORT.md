@@ -1,6 +1,7 @@
 # Ticky Global — Website Source Code
 
 Full-stack marketing website + CMS for Ticky Global.
+**Exported 13 August 2026 — includes: 10% price rise across all 5 countries with "starting from" labels, PPC Ads Specialist role, UK & US office contact details, collapsible mobile menu.**
 
 ## Stack
 - **Frontend**: React 19 + TypeScript + Vite 7 + Tailwind CSS + shadcn/ui

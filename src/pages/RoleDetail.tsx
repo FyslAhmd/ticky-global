@@ -114,7 +114,7 @@ export default function RoleDetail() {
                 <CardContent className="p-6">
                   <h3 className="font-bold text-slate-900">Typical monthly savings</h3>
                   <p className="mt-1 text-xs text-slate-500">
-                    Fully loaded native hire vs Ticky fee (full-time)
+                    Fully loaded native hire vs Ticky "starting from" fee (full-time)
                   </p>
                   <ul className="mt-4 space-y-2.5">
                     {regionKeys.map((key) => {
@@ -131,7 +131,7 @@ export default function RoleDetail() {
                             <span>{r.flag}</span> {r.label}
                           </span>
                           <span className="text-sm font-bold text-emerald-600">
-                            Save {pct}% · {r.symbol}
+                            Save {pct}% · from {r.symbol}
                             {role.ticky[key].toLocaleString()}/mo
                           </span>
                         </li>
