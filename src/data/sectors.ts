@@ -56,7 +56,7 @@ export const sectors: Sector[] = [
       { roleId: 'marketing', note: 'Job adverts, LinkedIn campaigns and talent-pool nurturing' },
     ],
     savingsNote:
-      'A native resourcer or recruitment administrator typically costs £2,800–£3,200 (US$3,900–4,500) per month fully loaded. The same role through Ticky starts from around £1,315 / US$1,665 — a saving of roughly 55–60% per seat, every month.',
+      'A native resourcer or recruitment administrator typically costs £2,800–£3,200 (US$3,900–4,500) per month fully loaded. The same role through Ticky starts from around £1,085 / US$1,380 — a saving of roughly 60% per seat, every month.',
     caseStudy: {
       business: 'A 12-consultant boutique agency in Manchester',
       challenge:
@@ -102,7 +102,7 @@ export const sectors: Sector[] = [
       { roleId: 'customer-service', note: 'First-line client queries and document collection' },
     ],
     savingsNote:
-      'A fully-loaded native bookkeeper costs roughly £3,100 (US$4,300 / C$5,500 / A$5,800) per month. A Ticky bookkeeper starts from around £1,320 / US$1,700 — typically a 55–60% saving that compounds with every seat you add.',
+      'A fully-loaded native bookkeeper costs roughly £3,100 (US$4,300 / C$5,500 / A$5,800) per month. A Ticky bookkeeper starts from around £1,200 / US$1,545 — typically a 60–62% saving that compounds with every seat you add.',
     caseStudy: {
       business: 'A four-partner practice in Denver, Colorado',
       challenge:
@@ -148,7 +148,7 @@ export const sectors: Sector[] = [
       { roleId: 'social', note: 'Property showcases, area guides and channel growth' },
     ],
     savingsNote:
-      'Two native administrators cost around £5,600 (US$7,800 / A$10,600) per month fully loaded. The same two seats through Ticky start from roughly £2,630 / US$3,330 — an annual saving that can exceed £35,000 per branch.',
+      'Two native administrators cost around £5,600 (US$7,800 / A$10,600) per month fully loaded. The same two seats through Ticky start from roughly £2,170 / US$2,760 — an annual saving that can exceed £40,000 per branch.',
     caseStudy: {
       business: 'A three-branch lettings agency in Leeds',
       challenge:
@@ -194,7 +194,7 @@ export const sectors: Sector[] = [
       { roleId: 'ppc', note: 'Google Shopping, Meta and Amazon ad management' },
     ],
     savingsNote:
-      'A native customer service representative costs around £2,600 (US$3,600 / C$4,700) per month fully loaded. Through Ticky the same seat starts from roughly £1,250 / US$1,590 — a saving of 50%+ that scales linearly as your ticket volume grows.',
+      'A native customer service representative costs around £2,600 (US$3,600 / C$4,700) per month fully loaded. Through Ticky the same seat starts from roughly £1,030 / US$1,315 — a 60%+ saving that scales linearly as your ticket volume grows.',
     caseStudy: {
       business: 'A bootstrapped DTC brand in Austin, Texas',
       challenge:
@@ -240,7 +240,7 @@ export const sectors: Sector[] = [
       { roleId: 'marketing', note: 'Newsletters, LinkedIn and campaign execution' },
     ],
     savingsNote:
-      'A native executive assistant or legal administrator costs £2,800–£3,500 (A$5,300–6,600) per month fully loaded. Ticky equivalents start from around £1,315–£1,575 / A$2,495–3,030 — typically a 50–55% saving per seat.',
+      'A native executive assistant or legal administrator costs £2,800–£3,500 (A$5,300–6,600) per month fully loaded. Ticky equivalents start from around £1,085–£1,430 / A$2,065–2,755 — typically a 60% saving per seat.',
     caseStudy: {
       business: 'A professional services firm in Sydney',
       challenge:
@@ -286,7 +286,7 @@ export const sectors: Sector[] = [
       { roleId: 'telesales', note: 'Recall campaigns and treatment follow-ups' },
     ],
     savingsNote:
-      'A native medical receptionist or patient coordinator costs around £2,600 (US$3,600 / NZ$5,500) per month fully loaded. Through Ticky the same seat starts from roughly £1,250 / US$1,590 — a saving of around 50% per seat.',
+      'A native medical receptionist or patient coordinator costs around £2,600 (US$3,600 / NZ$5,500) per month fully loaded. Through Ticky the same seat starts from roughly £1,030 / US$1,315 — a saving of around 60% per seat.',
     caseStudy: {
       business: 'A two-site dental group in Auckland',
       challenge:
@@ -332,7 +332,7 @@ export const sectors: Sector[] = [
       { roleId: 'marketing', note: 'Email nurture, SEO upkeep and analytics' },
     ],
     savingsNote:
-      'A native SDR costs roughly £3,200 (US$4,500 / C$5,800) per month fully loaded. A Ticky SDR starts from around £1,525 / US$1,940 — meaning two offshore SDRs cost little more than one local hire, with management included.',
+      'A native SDR costs roughly £3,200 (US$4,500 / C$5,800) per month fully loaded. A Ticky SDR starts from around £1,260 / US$1,605 — meaning two offshore SDRs cost less than one local hire, with management included.',
     caseStudy: {
       business: 'A B2B SaaS scale-up in London',
       challenge:
@@ -378,7 +378,7 @@ export const sectors: Sector[] = [
       { roleId: 'admin', note: 'Traffic management, deck formatting and account admin' },
     ],
     savingsNote:
-      'A native PPC or paid-media specialist costs around £3,800 (US$5,300 / A$7,000) per month fully loaded. Ticky specialists start from roughly £1,645 / US$2,085 — letting agencies add senior delivery capacity for less than half the local cost.',
+      'A native PPC or paid-media specialist costs around £3,800 (US$5,300 / A$7,000) per month fully loaded. Ticky specialists start from roughly £1,495 / US$1,895 — letting agencies add senior delivery capacity for less than half the local cost.',
     caseStudy: {
       business: 'A creative agency in Melbourne',
       challenge:

@@ -13,6 +13,7 @@ import Contact from '@/pages/Contact'
 import ClientPortal from '@/pages/ClientPortal'
 import DynamicPage from '@/pages/DynamicPage'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import Dashboard from '@/pages/admin/Dashboard'
 import Enquiries from '@/pages/admin/Enquiries'
@@ -53,6 +54,7 @@ export default function App() {
       </Route>
 
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

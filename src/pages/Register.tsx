@@ -7,26 +7,33 @@ import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { trpc } from "@/providers/trpc";
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const utils = trpc.useUtils();
   const [error, setError] = useState<string | null>(null);
 
-  const login = trpc.auth.login.useMutation({
-    onSuccess: async (user) => {
+  const register = trpc.auth.register.useMutation({
+    onSuccess: async () => {
       await utils.invalidate();
-      navigate(user.role === "admin" ? "/admin" : "/");
+      navigate("/");
     },
-    onError: (e) => setError(e.message || "Login failed — please try again."),
+    onError: (e) => setError(e.message || "Registration failed — please try again."),
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     const data = new FormData(e.currentTarget);
-    login.mutate({
+    const password = String(data.get("password") ?? "");
+    const confirm = String(data.get("confirm") ?? "");
+    if (password !== confirm) {
+      setError("Passwords do not match.");
+      return;
+    }
+    register.mutate({
+      name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
-      password: String(data.get("password") ?? ""),
+      password,
     });
   };
 
@@ -41,13 +48,27 @@ export default function Login() {
               className="mb-2 h-12 w-auto"
             />
           </Link>
-          <CardTitle className="text-xl">Sign in</CardTitle>
+          <CardTitle className="text-xl">Create your account</CardTitle>
           <p className="text-sm text-slate-400">
-            Access your Ticky Global account — admin dashboard and portal.
+            Register to access Ticky Global services and your future client portal.
           </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="name" className="text-slate-300">
+                Full name
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                required
+                autoComplete="name"
+                placeholder="Jane Smith"
+                className="border-slate-700 bg-slate-800 text-white placeholder:text-slate-500"
+              />
+            </div>
             <div className="space-y-1.5 text-left">
               <Label htmlFor="email" className="text-slate-300">
                 Email
@@ -71,8 +92,24 @@ export default function Login() {
                 name="password"
                 type="password"
                 required
-                autoComplete="current-password"
-                placeholder="••••••••"
+                minLength={8}
+                autoComplete="new-password"
+                placeholder="At least 8 characters"
+                className="border-slate-700 bg-slate-800 text-white placeholder:text-slate-500"
+              />
+            </div>
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="confirm" className="text-slate-300">
+                Confirm password
+              </Label>
+              <Input
+                id="confirm"
+                name="confirm"
+                type="password"
+                required
+                minLength={8}
+                autoComplete="new-password"
+                placeholder="Repeat your password"
                 className="border-slate-700 bg-slate-800 text-white placeholder:text-slate-500"
               />
             </div>
@@ -83,19 +120,19 @@ export default function Login() {
 
             <Button
               type="submit"
-              disabled={login.isPending}
+              disabled={register.isPending}
               className="w-full rounded-full bg-blue-600 font-semibold hover:bg-blue-500"
               size="lg"
             >
-              {login.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Sign in
+              {register.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Create account
             </Button>
           </form>
 
           <p className="mt-4 text-center text-xs text-slate-500">
-            No account yet?{" "}
-            <Link to="/register" className="font-semibold text-blue-400 hover:underline">
-              Create one
+            Already registered?{" "}
+            <Link to="/login" className="font-semibold text-blue-400 hover:underline">
+              Sign in
             </Link>
           </p>
         </CardContent>
