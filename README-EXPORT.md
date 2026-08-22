@@ -7,7 +7,7 @@ Full-stack marketing website + CMS for Ticky Global.
 - **Frontend**: React 19 + TypeScript + Vite 7 + Tailwind CSS + shadcn/ui
 - **Backend**: Hono + tRPC 11 (in `api/`)
 - **Database**: MySQL via Drizzle ORM (`db/`)
-- **Auth**: Kimi OAuth 2.0 (staff admin login)
+- **Auth**: Email + password (bcrypt-hashed, database-backed). Admin account is created by the seed script.
 
 ## Project layout
 | Path | What it is |
@@ -30,13 +30,21 @@ npx tsx db/seed.ts     # optional: seed sample reviews/enquiries/pages
 ## Environment variables (.env)
 ```
 DATABASE_URL=mysql://user:pass@host:3306/dbname
-VITE_APP_ID=<your-kimi-oauth-app-id>
-VITE_KIMI_AUTH_URL=<kimi-auth-url>
-KIMI_AUTH_URL=<kimi-auth-url>
-APP_SECRET=<random-long-secret>
-OWNER_UNION_ID=<admin-user-union-id>
+APP_SECRET=<long-random-string>          # signs session tokens
+ADMIN_EMAIL=admin@yourdomain.com         # optional — seeded admin email
+ADMIN_PASSWORD=<strong-password>         # optional — seeded admin password
+VITE_GTM_ID=GTM-XXXXXXX                  # optional — activates tracking
 PORT=3000
 ```
+
+## Authentication
+Email + password auth backed by the `users` table. Passwords are bcrypt-hashed
+(cost factor 12) — plaintext passwords are never stored. Visitors register at
+`/register` and sign in at `/login`; sessions are 30-day httpOnly cookies.
+
+**Admin account:** running `npx tsx db/seed.ts` automatically creates the
+admin account (default `admin@tickyglobal.com`, overridable via `ADMIN_EMAIL`
+/ `ADMIN_PASSWORD` env vars). The seed is idempotent — safe to re-run.
 
 ## Commands
 | Command | Purpose |
@@ -53,7 +61,7 @@ both the API and the built frontend on port 3000. Deploy to any
 Node-capable host (Railway, Render, Fly.io, VPS), set the env vars,
 and point your domain's DNS at it.
 
-**Never commit `.env` publicly** — it contains database and OAuth secrets.
+**Never commit `.env` publicly** — it contains database and session secrets.
 
 ## Full export contents (this package)
 This zip is the **complete** export — nothing excluded:

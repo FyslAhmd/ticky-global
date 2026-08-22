@@ -1,6 +1,16 @@
 import { getDb } from "../api/queries/connection";
-import { reviews, enquiries, analyticsEvents, pages } from "./schema";
-import { sql } from "drizzle-orm";
+import { reviews, enquiries, analyticsEvents, pages, users } from "./schema";
+import { sql, eq } from "drizzle-orm";
+import * as bcrypt from "bcryptjs";
+
+/**
+ * Admin account created automatically by the seed.
+ * Override before running with: ADMIN_EMAIL=... ADMIN_PASSWORD=... npx tsx db/seed.ts
+ * Password is stored as a bcrypt hash only — never in plaintext.
+ */
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL ?? "admin@tickyglobal.com").toLowerCase();
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "TickyAdmin2026!";
+const ADMIN_NAME = process.env.ADMIN_NAME ?? "Ticky Admin";
 
 const seedReviews = [
   {
@@ -19,7 +29,7 @@ const seedReviews = [
     story: [
       "We were sceptical. We had tried a freelance VA before and it ended in missed calls and garbled emails, so the bar for Ticky was high. Our discovery call changed the tone completely — within five days we had three candidate videos, and each one spoke clearer, more confident English than some of the people we had interviewed locally.",
       "We hired Angela as our SDR on a full-time basis, working 9am to 5:30pm UK time. Her first two weeks were spent in our HubSpot instance learning our ICP, and by week three she was on the phones. She now books 12–15 qualified demos a month — more than the two UK-based SDRs we had previously employed combined.",
-      "The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,525, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.",
+      "The maths is hard to argue with: we were spending roughly £6,400 a month fully loaded on two average performers. Angela costs us £1,260, outperforms both of them, and Ticky handles every HR and admin headache. We have since added a second sales executive and recommended them to two other founders in our network.",
     ],
     photo: "/images/review-james.jpg",
     status: "published" as const,
@@ -63,7 +73,7 @@ const seedReviews = [
     story: [
       "Professional services firms live and die on staying visible, but a mid-weight marketing hire in Sydney was quoting A$85k plus super. We could not justify it, so marketing simply was not getting done. Ticky presented three candidates within a week, all with genuine HubSpot and WordPress experience.",
       "We chose Katrina, and the onboarding genuinely was painless. Ticky had her set up on managed equipment with our VPN and 2FA policies before day one. By the end of week two she owned our email calendar, LinkedIn presence and monthly newsletter. I review; she executes.",
-      "A year in, we added an executive assistant through Ticky as well. Combined, the two roles cost us about A$4,520 a month against a realistic A$9,800 locally — and the standard has never once felt like a compromise. I tell every firm owner I know: this is the easiest margin improvement you will ever make.",
+      "A year in, we added an executive assistant through Ticky as well. Combined, the two roles cost us about A$4,100 a month against a realistic A$9,800 locally — and the standard has never once felt like a compromise. I tell every firm owner I know: this is the easiest margin improvement you will ever make.",
     ],
     photo: "/images/review-michael.jpg",
     status: "published" as const,
@@ -173,34 +183,48 @@ async function seed() {
   const db = getDb();
   console.log("Seeding database...");
 
-  for (const r of seedReviews) {
-    await db.insert(reviews)
-      .values({
+  // --- Admin account (idempotent) -----------------------------------------
+  const existingAdmin = await db
+    .select({ id: users.id })
+    .from(users)
+    .where(eq(users.email, ADMIN_EMAIL))
+    .limit(1);
+
+  if (existingAdmin.length === 0) {
+    const passwordHash = await bcrypt.hash(ADMIN_PASSWORD, 12);
+    await db.insert(users).values({
+      email: ADMIN_EMAIL,
+      passwordHash,
+      name: ADMIN_NAME,
+      role: "admin",
+      lastSignInAt: new Date(),
+    });
+    console.log(`Created admin account: ${ADMIN_EMAIL}`);
+  } else {
+    // keep the account admin even if its role drifted
+    await db
+      .update(users)
+      .set({ role: "admin" })
+      .where(eq(users.email, ADMIN_EMAIL));
+    console.log(`Admin account already exists: ${ADMIN_EMAIL} (role ensured: admin)`);
+  }
+
+  const [{ reviewCount }] = await db
+    .select({ reviewCount: sql<number>`count(*)` })
+    .from(reviews);
+
+  if (Number(reviewCount) === 0) {
+    await db.insert(reviews).values(
+      seedReviews.map((r) => ({
         ...r,
         hires: JSON.stringify(r.hires),
         story: JSON.stringify(r.story),
-      })
-      .onDuplicateKeyUpdate({
-        set: {
-          name: r.name,
-          role: r.role,
-          company: r.company,
-          location: r.location,
-          industry: r.industry,
-          hires: JSON.stringify(r.hires),
-          saving: r.saving,
-          rating: r.rating,
-          headline: r.headline,
-          quote: r.quote,
-          story: JSON.stringify(r.story),
-          photo: r.photo,
-          status: r.status,
-          sortOrder: r.sortOrder,
-          updatedAt: new Date(),
-        },
-      });
+      })),
+    );
+    console.log(`Inserted ${seedReviews.length} reviews`);
+  } else {
+    console.log("Reviews already seeded, skipping");
   }
-  console.log(`Upserted ${seedReviews.length} reviews`);
 
   const [{ enquiryCount }] = await db
     .select({ enquiryCount: sql<number>`count(*)` })
@@ -213,26 +237,18 @@ async function seed() {
     console.log("Enquiries already exist, skipping");
   }
 
-  const pageData = {
-    slug: "why-outsource-to-the-philippines",
-    title: "Why Outsource to the Philippines? A Straight-Talking Guide for SMEs",
-    excerpt: "The real economics, the cultural fit, and the mistakes to avoid when building your first offshore team.",
-    content: `## The short version\n\nThe Philippines combines western-standard English, a service-oriented culture and labour costs roughly 50–70% below the UK, US and Australia. It is why over 1.3 million Filipinos work in the outsourcing industry.\n\n## What makes it work\n\n- **English as an official language** — business, law and higher education all run in English.\n- **Cultural alignment** — decades of close ties with western markets mean your customers notice no difference.\n- **Time-zone flexibility** — a mature night-shift culture covers UK, US and AU business hours.\n\n## The mistakes to avoid\n\n1. Hiring freelancers with no management layer.\n2. Treating offshore staff as tasks rather than team members.\n3. Skipping structured onboarding.\n\nTicky exists to solve all three — we employ, equip, train and manage your team so you get the output without the overhead.`,
-    status: "published" as const,
-  };
-
-  await db.insert(pages)
-    .values(pageData)
-    .onDuplicateKeyUpdate({
-      set: {
-        title: pageData.title,
-        excerpt: pageData.excerpt,
-        content: pageData.content,
-        status: pageData.status,
-        updatedAt: new Date(),
-      },
+  const [{ pageCount }] = await db.select({ pageCount: sql<number>`count(*)` }).from(pages);
+  if (Number(pageCount) === 0) {
+    await db.insert(pages).values({
+      slug: "why-outsource-to-the-philippines",
+      title: "Why Outsource to the Philippines? A Straight-Talking Guide for SMEs",
+      excerpt:
+        "The real economics, the cultural fit, and the mistakes to avoid when building your first offshore team.",
+      content: `## The short version\n\nThe Philippines combines western-standard English, a service-oriented culture and labour costs roughly 50–70% below the UK, US and Australia. It is why over 1.3 million Filipinos work in the outsourcing industry.\n\n## What makes it work\n\n- **English as an official language** — business, law and higher education all run in English.\n- **Cultural alignment** — decades of close ties with western markets mean your customers notice no difference.\n- **Time-zone flexibility** — a mature night-shift culture covers UK, US and AU business hours.\n\n## The mistakes to avoid\n\n1. Hiring freelancers with no management layer.\n2. Treating offshore staff as tasks rather than team members.\n3. Skipping structured onboarding.\n\nTicky exists to solve all three — we employ, equip, train and manage your team so you get the output without the overhead.`,
+      status: "published" as const,
     });
-  console.log("Upserted 1 sample page");
+    console.log("Inserted 1 sample page");
+  }
 
   // a little analytics history so the dashboard chart isn't empty
   const [{ eventCount }] = await db
