@@ -16,6 +16,8 @@ export const users = mysqlTable("users", {
   name: varchar("name", { length: 255 }),
   avatar: text("avatar"),
   role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  /** Comma-separated permission keys (e.g. "enquiries,reviews"). Empty = none. Admins bypass. */
+  permissions: varchar("permissions", { length: 500 }).default("").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt")
     .defaultNow()
@@ -119,3 +121,142 @@ export const analyticsEvents = mysqlTable("analytics_events", {
 });
 
 export type AnalyticsEvent = typeof analyticsEvents.$inferSelect;
+
+// ---------------------------------------------------------------------------
+// CRM, clients, marketing & portal tables
+// ---------------------------------------------------------------------------
+
+/** CRM contacts — leads and contacts independent of form enquiries */
+export const crmContacts = mysqlTable("crm_contacts", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  company: varchar("company", { length: 255 }),
+  email: varchar("email", { length: 320 }),
+  phone: varchar("phone", { length: 64 }),
+  source: varchar("source", { length: 128 }),
+  stage: mysqlEnum("stage", ["lead", "prospect", "customer", "churned"])
+    .default("lead")
+    .notNull(),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
+export type CrmContact = typeof crmContacts.$inferSelect;
+
+/** Clients — companies with a Ticky team member (a "Ticker") and a portal */
+export const clients = mysqlTable("clients", {
+  id: serial("id").primaryKey(),
+  company: varchar("company", { length: 255 }).notNull(),
+  contactName: varchar("contactName", { length: 255 }),
+  country: varchar("country", { length: 8 }).default("uk").notNull(),
+  accountManager: varchar("accountManager", { length: 255 }),
+  tickerName: varchar("tickerName", { length: 255 }),
+  tickerRole: varchar("tickerRole", { length: 255 }),
+  tickerStartDate: varchar("tickerStartDate", { length: 32 }),
+  tickerPhoto: varchar("tickerPhoto", { length: 500 }),
+  contractSummary: text("contractSummary"),
+  contractFileUrl: varchar("contractFileUrl", { length: 1000 }),
+  holidayEntitlementDays: int("holidayEntitlementDays").default(20).notNull(),
+  holidayUsedDays: int("holidayUsedDays").default(0).notNull(),
+  status: mysqlEnum("status", ["active", "onboarding", "paused", "offboarded"])
+    .default("onboarding")
+    .notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
+export type Client = typeof clients.$inferSelect;
+
+/** Portal login accounts for client contacts (linked to a client) */
+export const clientUsers = mysqlTable("client_users", {
+  id: serial("id").primaryKey(),
+  clientId: bigint("clientId", { mode: "number", unsigned: true }).notNull(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  passwordHash: varchar("passwordHash", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }),
+  lastSignInAt: timestamp("lastSignInAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ClientUser = typeof clientUsers.$inferSelect;
+
+/** Philippines national holidays — shown in the client portal for awareness */
+export const nationalHolidays = mysqlTable("national_holidays", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  date: varchar("date", { length: 32 }).notNull(), // ISO date
+  type: mysqlEnum("type", ["regular", "special"]).default("regular").notNull(),
+  note: varchar("note", { length: 500 }),
+  year: int("year").notNull(),
+});
+
+export type NationalHoliday = typeof nationalHolidays.$inferSelect;
+
+/** Training plans for a client's Ticker */
+export const trainingPlans = mysqlTable("training_plans", {
+  id: serial("id").primaryKey(),
+  clientId: bigint("clientId", { mode: "number", unsigned: true }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  status: mysqlEnum("status", ["planned", "in_progress", "completed"])
+    .default("planned")
+    .notNull(),
+  dueDate: varchar("dueDate", { length: 32 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type TrainingPlan = typeof trainingPlans.$inferSelect;
+
+/** Messages between a client and their Ticky account manager */
+export const portalMessages = mysqlTable("portal_messages", {
+  id: serial("id").primaryKey(),
+  clientId: bigint("clientId", { mode: "number", unsigned: true }).notNull(),
+  senderType: mysqlEnum("senderType", ["client", "staff"]).notNull(),
+  senderName: varchar("senderName", { length: 255 }),
+  body: text("body").notNull(),
+  readByStaff: timestamp("readByStaff"),
+  readByClient: timestamp("readByClient"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PortalMessage = typeof portalMessages.$inferSelect;
+
+/** Social media profiles — managed in admin, rendered in the footer */
+export const socialLinks = mysqlTable("social_links", {
+  id: serial("id").primaryKey(),
+  platform: mysqlEnum("platform", ["facebook", "instagram", "tiktok", "youtube", "linkedin", "x"]).notNull(),
+  url: varchar("url", { length: 1000 }).notNull(),
+  label: varchar("label", { length: 255 }),
+  sortOrder: int("sortOrder").default(0).notNull(),
+});
+
+export type SocialLink = typeof socialLinks.$inferSelect;
+
+/** Blog posts — managed in admin under Marketing, rendered publicly at /blog */
+export const posts = mysqlTable("posts", {
+  id: serial("id").primaryKey(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  title: varchar("title", { length: 500 }).notNull(),
+  excerpt: varchar("excerpt", { length: 1000 }),
+  content: text("content").notNull(),
+  coverImage: varchar("coverImage", { length: 1000 }),
+  status: mysqlEnum("status", ["draft", "published", "archived"])
+    .default("draft")
+    .notNull(),
+  authorId: bigint("authorId", { mode: "number", unsigned: true }),
+  publishedAt: timestamp("publishedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
+export type Post = typeof posts.$inferSelect;

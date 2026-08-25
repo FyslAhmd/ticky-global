@@ -22,6 +22,15 @@ import ReviewEditor from '@/pages/admin/ReviewEditor'
 import AdminPages from '@/pages/admin/Pages'
 import PageEditor from '@/pages/admin/PageEditor'
 import Analytics from '@/pages/admin/Analytics'
+import AdminUsers from '@/pages/admin/Users'
+import AdminSocials from '@/pages/admin/Socials'
+import AdminBlog from '@/pages/admin/Blog'
+import BlogEditor from '@/pages/admin/BlogEditor'
+import AdminCrm from '@/pages/admin/Crm'
+import AdminClients from '@/pages/admin/Clients'
+import ClientDetail from '@/pages/admin/ClientDetail'
+import Blog from '@/pages/Blog'
+import BlogPost from '@/pages/BlogPost'
 
 export default function App() {
   return (
@@ -39,6 +48,8 @@ export default function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/client-portal" element={<ClientPortal />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/p/:slug" element={<DynamicPage />} />
       </Route>
 
@@ -46,6 +57,13 @@ export default function App() {
       <Route element={<AdminLayout />}>
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/enquiries" element={<Enquiries />} />
+        <Route path="/admin/crm" element={<AdminCrm />} />
+        <Route path="/admin/clients" element={<AdminClients />} />
+        <Route path="/admin/clients/:id" element={<ClientDetail />} />
+        <Route path="/admin/socials" element={<AdminSocials />} />
+        <Route path="/admin/blog" element={<AdminBlog />} />
+        <Route path="/admin/blog/:id" element={<BlogEditor />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/reviews" element={<AdminReviews />} />
         <Route path="/admin/reviews/:id" element={<ReviewEditor />} />
         <Route path="/admin/pages" element={<AdminPages />} />

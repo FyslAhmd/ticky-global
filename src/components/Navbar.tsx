@@ -28,6 +28,7 @@ const plainLinks = [
   { to: '/', label: 'Home' },
   { to: '/how-it-works', label: 'How It Works' },
   { to: '/reviews', label: 'Reviews' },
+  { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
 ]
 

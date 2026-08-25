@@ -1,5 +1,13 @@
 import { authRouter } from "./auth-router";
 import { publicRouter, staffRouter } from "./cms-router";
+import {
+  usersRouter,
+  crmRouter,
+  marketingRouter,
+  clientsRouter,
+  portalRouter,
+  marketingPublicRouter,
+} from "./portal-router";
 import { createRouter, publicQuery } from "./middleware";
 
 export const appRouter = createRouter({
@@ -7,6 +15,12 @@ export const appRouter = createRouter({
   auth: authRouter,
   public: publicRouter,
   staff: staffRouter,
+  users: usersRouter,
+  crm: crmRouter,
+  marketing: marketingRouter,
+  clients: clientsRouter,
+  portal: portalRouter,
+  marketingPublic: marketingPublicRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -40,3 +40,38 @@ function requireRole(role: string) {
 
 export const authedQuery = t.procedure.use(requireAuth);
 export const adminQuery = authedQuery.use(requireRole("admin"));
+
+/** Available permission keys for staff users (admins always have all). */
+export const PERMISSION_KEYS = [
+  "dashboard",
+  "enquiries",
+  "crm",
+  "clients",
+  "marketing",
+  "reviews",
+  "pages",
+  "analytics",
+  "users",
+] as const;
+export type PermissionKey = (typeof PERMISSION_KEYS)[number];
+
+export function hasPermission(user: { role: string; permissions?: string | null }, key: PermissionKey) {
+  if (user.role === "admin") return true;
+  return (user.permissions ?? "").split(",").map((p) => p.trim()).includes(key);
+}
+
+/** authed procedure restricted to users holding the given permission (or admin) */
+export function permQuery(key: PermissionKey) {
+  return authedQuery.use(
+    t.middleware(async ({ ctx, next }) => {
+      const user = ctx.user as { role: string; permissions?: string | null } | undefined;
+      if (!user || !hasPermission(user, key)) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: ErrorMessages.insufficientRole,
+        });
+      }
+      return next({ ctx });
+    }),
+  );
+}

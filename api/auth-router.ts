@@ -9,7 +9,6 @@ import { createRouter, authedQuery, publicQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import * as schema from "@db/schema";
 import { signSessionToken } from "./auth/session";
-
 const credentialsInput = z.object({
   email: z.string().email().max(320),
   password: z.string().min(8, "Password must be at least 8 characters").max(200),
@@ -37,6 +36,9 @@ function publicUser(user: schema.User) {
   const { passwordHash: _omit, ...rest } = user;
   return rest;
 }
+
+/** Client portal accounts share the session cookie; their IDs are offset to avoid collision with staff IDs. */
+import { CLIENT_ID_OFFSET } from "./auth/local";
 
 export const authRouter = createRouter({
   me: authedQuery.query((opts) => publicUser(opts.ctx.user)),
@@ -120,5 +122,38 @@ export const authRouter = createRouter({
       }),
     );
     return { success: true };
+  }),
+
+  /** Client portal sign-in — authenticates against client_users, sets the same session cookie. */
+  clientLogin: publicQuery.input(credentialsInput).mutation(async ({ ctx, input }) => {
+    const email = input.email.toLowerCase().trim();
+    const rows = await getDb()
+      .select()
+      .from(schema.clientUsers)
+      .where(eq(schema.clientUsers.email, email))
+      .limit(1);
+    const account = rows.at(0);
+
+    const hash = account?.passwordHash ??
+      "$2a$12$C6UzMDM.H6dfI/f/IKcEeO7ZBZKBHh5tQ3VvBQ5dF0z0o6c0c0c0c";
+    const valid = await bcrypt.compare(input.password, hash);
+    if (!account || !valid) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Invalid email or password.",
+      });
+    }
+
+    await getDb()
+      .update(schema.clientUsers)
+      .set({ lastSignInAt: new Date() })
+      .where(eq(schema.clientUsers.id, account.id));
+
+    const token = await signSessionToken({
+      userId: account.id + CLIENT_ID_OFFSET,
+      email: account.email,
+    });
+    setSessionCookie(ctx, token);
+    return { id: account.id, clientId: account.clientId, email: account.email, name: account.name };
   }),
 });

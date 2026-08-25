@@ -9,6 +9,21 @@
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     scroll-behavior: smooth;
   }
+  html,
+  body {
+    /* Prevent horizontal pull/rubber-banding on mobile from any overflowing child */
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+  #root {
+    overflow-x: clip;
+  }
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
 }
 
 @layer base {

@@ -1,5 +1,5 @@
 import { getDb } from "../api/queries/connection";
-import { reviews, enquiries, analyticsEvents, pages, users } from "./schema";
+import { reviews, enquiries, analyticsEvents, pages, users, nationalHolidays } from "./schema";
 import { sql, eq } from "drizzle-orm";
 import * as bcrypt from "bcryptjs";
 
@@ -271,6 +271,36 @@ async function seed() {
     }
     await db.insert(analyticsEvents).values(rows);
     console.log(`Inserted ${rows.length} sample analytics events`);
+  }
+
+  // --- Philippine national holidays (idempotent per year) -----------------
+  // Regular and special non-working holidays so clients know when their
+  // Ticker may be off. Admins can edit/add in Admin → Clients → Holidays.
+  const year = new Date().getFullYear();
+  const [{ holidayCount }] = await db
+    .select({ holidayCount: sql<number>`count(*)` })
+    .from(nationalHolidays);
+  if (Number(holidayCount) === 0) {
+    const phHolidays = [
+      { name: "New Year's Day", date: `${year}-01-01`, type: "regular" as const },
+      { name: "EDSA People Power Revolution Anniversary", date: `${year}-02-25`, type: "special" as const },
+      { name: "Maundy Thursday", date: `${year}-04-02`, type: "regular" as const, note: "Holy Week — dates vary each year" },
+      { name: "Good Friday", date: `${year}-04-03`, type: "regular" as const, note: "Holy Week — dates vary each year" },
+      { name: "Black Saturday", date: `${year}-04-04`, type: "special" as const },
+      { name: "Araw ng Kagitingan (Day of Valor)", date: `${year}-04-09`, type: "regular" as const },
+      { name: "Labor Day", date: `${year}-05-01`, type: "regular" as const },
+      { name: "Independence Day", date: `${year}-06-12`, type: "regular" as const },
+      { name: "Ninoy Aquino Day", date: `${year}-08-21`, type: "special" as const },
+      { name: "National Heroes Day", date: `${year}-08-31`, type: "regular" as const, note: "Last Monday of August" },
+      { name: "All Saints' Day", date: `${year}-11-01`, type: "special" as const },
+      { name: "Bonifacio Day", date: `${year}-11-30`, type: "regular" as const },
+      { name: "Feast of the Immaculate Conception", date: `${year}-12-08`, type: "special" as const },
+      { name: "Christmas Day", date: `${year}-12-25`, type: "regular" as const },
+      { name: "Rizal Day", date: `${year}-12-30`, type: "regular" as const },
+      { name: "New Year's Eve", date: `${year}-12-31`, type: "special" as const },
+    ];
+    await db.insert(nationalHolidays).values(phHolidays.map((h) => ({ ...h, year })));
+    console.log(`Inserted ${phHolidays.length} Philippine holidays for ${year}`);
   }
 
   console.log("Done.");
