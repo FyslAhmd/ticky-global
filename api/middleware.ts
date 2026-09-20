@@ -51,6 +51,7 @@ export const PERMISSION_KEYS = [
   "reviews",
   "pages",
   "analytics",
+  "integrations",
   "users",
 ] as const;
 export type PermissionKey = (typeof PERMISSION_KEYS)[number];

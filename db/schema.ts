@@ -260,3 +260,15 @@ export const posts = mysqlTable("posts", {
 });
 
 export type Post = typeof posts.$inferSelect;
+
+/** Generic key/value site settings (tracking config, integrations, etc.) */
+export const siteSettings = mysqlTable("site_settings", {
+  key: varchar("key", { length: 100 }).primaryKey(),
+  value: text("value"),
+  updatedAt: timestamp("updatedAt")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
+export type SiteSetting = typeof siteSettings.$inferSelect;

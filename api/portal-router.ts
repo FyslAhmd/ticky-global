@@ -45,6 +45,10 @@ import {
   createPost,
   updatePost,
   deletePost,
+  getTrackingConfig,
+  saveTrackingConfig,
+  DEFAULT_TRACKING_CONFIG,
+  type TrackingConfig,
 } from "./queries/portal";
 
 // ---------------------------------------------------------------------------
@@ -375,4 +379,68 @@ export const marketingPublicRouter = createRouter({
   socials: publicQuery.query(() => listSocialLinks()),
   posts: publicQuery.query(() => listPublishedPosts()),
   post: publicQuery.input(z.object({ slug: z.string() })).query(({ input }) => getPostBySlug(input.slug)),
+  /**
+   * Public tracking config — GA4/GTM/Google Ads IDs are public by nature
+   * (visible in any page's source once scripts load). Returns the disabled
+   * default until the PPC manager activates tracking in the admin panel.
+   */
+  trackingConfig: publicQuery.query(async () => {
+    const config = await getTrackingConfig();
+    return config.enabled ? config : { ...DEFAULT_TRACKING_CONFIG };
+  }),
 });
+
+// ---------------------------------------------------------------------------
+// Integrations control panel (GA4 / GTM / Google Ads) — PPC manager
+// ---------------------------------------------------------------------------
+
+const idPattern = (re: RegExp) =>
+  z.string().trim().regex(re, "Invalid ID format").or(z.literal("")).default("");
+
+const trackingConfigInput = z.object({
+  enabled: z.boolean(),
+  gtmId: idPattern(/^GTM-[A-Z0-9]{4,12}$/i),
+  ga4Id: idPattern(/^G-[A-Z0-9]{4,12}$/i),
+  googleAdsId: idPattern(/^AW-\d{6,14}$/i),
+  conversionLabels: z.object({
+    enquiry_submitted: z.string().trim().max(100).default(""),
+    calculator_used: z.string().trim().max(100).default(""),
+    cta_click: z.string().trim().max(100).default(""),
+  }),
+});
+
+export const integrationsRouter = createRouter({
+  /** Full config for the admin panel (requires the integrations permission). */
+  get: permQuery("integrations").query(() => getTrackingConfig()),
+
+  update: permQuery("integrations")
+    .input(trackingConfigInput)
+    .mutation(async ({ input }) => {
+      // normalise IDs to upper-case
+      const config: TrackingConfig = {
+        enabled: input.enabled,
+        gtmId: input.gtmId.toUpperCase(),
+        ga4Id: input.ga4Id.toUpperCase(),
+        googleAdsId: input.googleAdsId.toUpperCase(),
+        conversionLabels: input.conversionLabels,
+      };
+      if (config.enabled && !config.gtmId && !config.ga4Id && !config.googleAdsId) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Enter at least one ID (GA4, GTM or Google Ads) before enabling tracking.",
+        });
+      }
+      await saveTrackingConfig(config);
+      return config;
+    }),
+
+  /** Recent on-site events so the PPC manager can confirm data is flowing. */
+  recentEvents: permQuery("integrations").query(async () => {
+    const db = getDb();
+    return db.query.analyticsEvents.findMany({
+      orderBy: (t, { desc }) => [desc(t.createdAt)],
+      limit: 15,
+    });
+  }),
+});
+

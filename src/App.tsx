@@ -31,6 +31,7 @@ import AdminClients from '@/pages/admin/Clients'
 import ClientDetail from '@/pages/admin/ClientDetail'
 import Blog from '@/pages/Blog'
 import BlogPost from '@/pages/BlogPost'
+import AdminIntegrations from '@/pages/admin/Integrations'
 
 export default function App() {
   return (
@@ -63,6 +64,7 @@ export default function App() {
         <Route path="/admin/socials" element={<AdminSocials />} />
         <Route path="/admin/blog" element={<AdminBlog />} />
         <Route path="/admin/blog/:id" element={<BlogEditor />} />
+        <Route path="/admin/integrations" element={<AdminIntegrations />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/reviews" element={<AdminReviews />} />
         <Route path="/admin/reviews/:id" element={<ReviewEditor />} />

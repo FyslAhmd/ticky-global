@@ -83,7 +83,10 @@ export default function CtaBand({
                   </Link>
                 </Button>
                 <p className="text-center text-xs text-blue-200">
-                  or call the UK office: 0808 175 3413
+                  or call the UK office:{' '}
+                  <a href="tel:+448081753413" className="font-semibold text-white underline decoration-blue-300 underline-offset-2 hover:text-blue-100">
+                    0808 175 3413
+                  </a>
                 </p>
               </div>
             </CardContent>

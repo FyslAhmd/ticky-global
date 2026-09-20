@@ -7,6 +7,7 @@ import {
   clientsRouter,
   portalRouter,
   marketingPublicRouter,
+  integrationsRouter,
 } from "./portal-router";
 import { createRouter, publicQuery } from "./middleware";
 
@@ -21,6 +22,7 @@ export const appRouter = createRouter({
   clients: clientsRouter,
   portal: portalRouter,
   marketingPublic: marketingPublicRouter,
+  integrations: integrationsRouter,
 });
 
 export type AppRouter = typeof appRouter;

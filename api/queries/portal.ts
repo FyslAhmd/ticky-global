@@ -220,3 +220,57 @@ export const updatePost = (id: number, data: Partial<InsertPost>) =>
 
 export const deletePost = (id: number) =>
   getDb().delete(schema.posts).where(eq(schema.posts.id, id));
+
+// ---------------------------------------------------------------------------
+// Tracking / integrations settings (single JSON row in site_settings)
+// ---------------------------------------------------------------------------
+
+export type TrackingConfig = {
+  enabled: boolean;
+  gtmId: string;
+  ga4Id: string;
+  googleAdsId: string;
+  conversionLabels: {
+    enquiry_submitted: string;
+    calculator_used: string;
+    cta_click: string;
+  };
+};
+
+export const DEFAULT_TRACKING_CONFIG: TrackingConfig = {
+  enabled: false,
+  gtmId: "",
+  ga4Id: "",
+  googleAdsId: "",
+  conversionLabels: { enquiry_submitted: "", calculator_used: "", cta_click: "" },
+};
+
+const TRACKING_KEY = "tracking";
+
+export async function getTrackingConfig(): Promise<TrackingConfig> {
+  const row = await getDb().query.siteSettings.findFirst({
+    where: eq(schema.siteSettings.key, TRACKING_KEY),
+  });
+  if (!row?.value) return { ...DEFAULT_TRACKING_CONFIG };
+  try {
+    const parsed = JSON.parse(row.value) as Partial<TrackingConfig>;
+    return {
+      ...DEFAULT_TRACKING_CONFIG,
+      ...parsed,
+      conversionLabels: {
+        ...DEFAULT_TRACKING_CONFIG.conversionLabels,
+        ...(parsed.conversionLabels ?? {}),
+      },
+    };
+  } catch {
+    return { ...DEFAULT_TRACKING_CONFIG };
+  }
+}
+
+export async function saveTrackingConfig(config: TrackingConfig) {
+  const value = JSON.stringify(config);
+  await getDb()
+    .insert(schema.siteSettings)
+    .values({ key: TRACKING_KEY, value })
+    .onDuplicateKeyUpdate({ set: { value } });
+}

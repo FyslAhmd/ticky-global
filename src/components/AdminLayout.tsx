@@ -27,6 +27,7 @@ import {
   UserCog,
   Share2,
   Newspaper,
+  Plug,
 } from 'lucide-react'
 
 export const adminNav = [
@@ -36,6 +37,7 @@ export const adminNav = [
   { to: '/admin/clients', label: 'Clients', icon: UserCog, group: 'Sales' },
   { to: '/admin/socials', label: 'Socials', icon: Share2, group: 'Marketing' },
   { to: '/admin/blog', label: 'Blog', icon: Newspaper, group: 'Marketing' },
+  { to: '/admin/integrations', label: 'Integrations', icon: Plug, group: 'Marketing' },
   { to: '/admin/reviews', label: 'Reviews', icon: Star, group: 'Content' },
   { to: '/admin/pages', label: 'Pages', icon: FileText, group: 'Content' },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3, group: 'Overview' },

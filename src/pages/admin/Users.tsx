@@ -33,6 +33,7 @@ const PERMISSION_LABELS: Record<string, string> = {
   reviews: 'Reviews',
   pages: 'Pages',
   analytics: 'Analytics',
+  integrations: 'Integrations (GA4 / Ads)',
   users: 'Users & Access',
 }
 

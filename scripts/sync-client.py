@@ -230,28 +230,35 @@ def apply_safe_data(git_root: Path, client_root: Path):
 
 def main():
     parser = argparse.ArgumentParser(description="Ticky Global Client AI Sync Tool")
-    parser.add_argument("--audit", type=str, help="Path to client export folder to audit")
-    parser.add_argument("--diff", type=str, help="File relative path to diff against client folder")
-    parser.add_argument("--apply-data", type=str, help="Path to client export folder to copy safe content from")
+    parser.add_argument("--audit", nargs="+", help="Path to client export folder to audit")
+    parser.add_argument("--diff", nargs="+", help="File relative path and client folder to diff")
+    parser.add_argument("--apply-data", nargs="+", help="Path to client export folder to copy safe content from")
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
     git_root = get_git_root()
 
     if args.audit:
-        client_root = Path(args.audit).resolve()
+        full_tokens = args.audit + unknown
+        path_str = " ".join(full_tokens).strip("\"'")
+        client_root = Path(path_str).resolve()
         if not client_root.exists():
-            print(f"Error: Path {client_root} does not exist.")
+            print(f"Error: Path '{client_root}' does not exist.")
             sys.exit(1)
         audit_report(git_root, client_root)
     elif args.apply_data:
-        client_root = Path(args.apply_data).resolve()
+        full_tokens = args.apply_data + unknown
+        path_str = " ".join(full_tokens).strip("\"'")
+        client_root = Path(path_str).resolve()
         if not client_root.exists():
-            print(f"Error: Path {client_root} does not exist.")
+            print(f"Error: Path '{client_root}' does not exist.")
             sys.exit(1)
         apply_safe_data(git_root, client_root)
-    elif args.diff and len(sys.argv) >= 4:
-        file_path = args.diff
-        client_root = Path(sys.argv[3]).resolve()
+    elif args.diff:
+        full_tokens = args.diff + unknown
+        # The first token is the file path, the rest is the client root
+        file_path = full_tokens[0]
+        path_str = " ".join(full_tokens[1:]).strip("\"'")
+        client_root = Path(path_str).resolve()
         show_file_diff(git_root, client_root, file_path)
     else:
         parser.print_help()

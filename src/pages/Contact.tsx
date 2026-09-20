@@ -112,7 +112,10 @@ export default function Contact() {
 
             <div className="mt-10 border-t border-slate-200 pt-8 text-sm text-slate-600">
               <p className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-blue-700" /> hello@tickyglobal.com
+                <Mail className="h-4 w-4 shrink-0 text-blue-700" />
+                <a href="mailto:hello@tickyglobal.com" className="font-medium text-blue-700 hover:underline">
+                  hello@tickyglobal.com
+                </a>
               </p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-slate-200 bg-white p-5">
@@ -124,7 +127,8 @@ export default function Contact() {
                     Chetwynd Grove, Bangor Road, Cross Lanes, Wrexham, United Kingdom
                   </p>
                   <p className="mt-2 flex items-center gap-2 font-semibold text-slate-900">
-                    <Phone className="h-4 w-4 shrink-0 text-blue-700" /> 0808 175 3413
+                    <Phone className="h-4 w-4 shrink-0 text-blue-700" />
+                    <a href="tel:+448081753413" className="text-blue-700 hover:underline">0808 175 3413</a>
                   </p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5">

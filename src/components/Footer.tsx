@@ -66,10 +66,16 @@ export default function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Get in touch</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-blue-400" /> hello@tickyglobal.com
+                <Mail className="h-4 w-4 shrink-0 text-blue-400" />
+                <a href="mailto:hello@tickyglobal.com" className="transition hover:text-white">
+                  hello@tickyglobal.com
+                </a>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-blue-400" /> UK: 0808 175 3413
+                <Phone className="h-4 w-4 shrink-0 text-blue-400" />
+                <a href="tel:+448081753413" className="transition hover:text-white">
+                  UK: 0808 175 3413
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
