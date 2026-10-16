@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { AdminHeader, AdminLoading } from '@/components/AdminLayout'
+import { ImagePicker } from '@/components/ImagePicker'
 import { trpc } from '@/providers/trpc'
 import { ArrowLeft, Trash2, Save, Plus, X } from 'lucide-react'
 
@@ -214,20 +215,14 @@ export default function ReviewEditor() {
                 </Select>
               </div>
             </div>
-            <div className="space-y-2">
-              <Label>Photo URL</Label>
-              <Input
-                value={form.photo}
-                onChange={(e) => set('photo', e.target.value)}
-                placeholder="/images/review-jane.jpg or https://..."
-              />
-              {form.photo && (
-                <img src={form.photo} alt="preview" className="h-24 w-24 rounded-xl object-cover object-top" />
-              )}
-              <p className="text-xs text-slate-400">
-                Leave blank to show initials. For uploads, place the image in the site's public/images folder or use any public URL.
-              </p>
-            </div>
+            <ImagePicker
+              id="photo"
+              label="Reviewer photo"
+              value={form.photo}
+              onChange={(url) => set('photo', url)}
+              hint="Upload a headshot or pick one from the library. Leave blank to show initials."
+              previewClass="h-24 w-24 rounded-xl object-cover object-top"
+            />
           </CardContent>
         </Card>
 

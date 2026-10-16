@@ -49,7 +49,14 @@ import {
   saveTrackingConfig,
   DEFAULT_TRACKING_CONFIG,
   type TrackingConfig,
+  listMedia,
+  createMedia,
+  getMedia,
+  deleteMedia,
 } from "./queries/portal";
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // ---------------------------------------------------------------------------
 // Staff user management (admin only) — varying levels of access
@@ -442,5 +449,98 @@ export const integrationsRouter = createRouter({
       limit: 15,
     });
   }),
+});
+
+// ---------------------------------------------------------------------------
+// Media library — upload images once, reuse across reviews, blog, pages, etc.
+// Files are stored in public/uploads/ and served as /uploads/<file>.
+// ---------------------------------------------------------------------------
+
+const UPLOAD_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../public/uploads");
+const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // 5MB
+const ALLOWED_MIME: Record<string, string> = {
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+  "image/gif": ".gif",
+  "image/svg+xml": ".svg",
+  "image/avif": ".avif",
+};
+
+function uploadsDir() {
+  // production build runs from dist/, so resolve relative to project root
+  const candidates = [
+    UPLOAD_DIR,
+    path.resolve(process.cwd(), "public/uploads"),
+    path.resolve(process.cwd(), "dist/public/uploads"),
+  ];
+  for (const dir of candidates) {
+    if (fs.existsSync(dir)) return dir;
+  }
+  fs.mkdirSync(candidates[0], { recursive: true });
+  return candidates[0];
+}
+
+export const mediaRouter = createRouter({
+  list: authedQuery.query(() => listMedia()),
+
+  upload: authedQuery
+    .input(
+      z.object({
+        fileName: z.string().min(1).max(255),
+        mimeType: z.string().min(3).max(100),
+        dataBase64: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const ext = ALLOWED_MIME[input.mimeType];
+      if (!ext) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Only image files are allowed (JPG, PNG, WebP, GIF, SVG, AVIF)." });
+      }
+      const buffer = Buffer.from(input.dataBase64, "base64");
+      if (buffer.length === 0 || buffer.length > MAX_UPLOAD_BYTES) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Images must be under 5MB." });
+      }
+      const safeBase = input.fileName
+        .replace(/\.[^.]+$/, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60) || "image";
+      const fileName = `${Date.now()}-${safeBase}${ext}`;
+      fs.writeFileSync(path.join(uploadsDir(), fileName), buffer);
+
+      // mirror into dist/public/uploads if the production build exists
+      const distUploads = path.resolve(process.cwd(), "dist/public/uploads");
+      try {
+        if (fs.existsSync(path.resolve(process.cwd(), "dist/public"))) {
+          fs.mkdirSync(distUploads, { recursive: true });
+          fs.copyFileSync(path.join(uploadsDir(), fileName), path.join(distUploads, fileName));
+        }
+      } catch { /* dev mode */ }
+
+      const url = `/uploads/${fileName}`;
+      await createMedia({
+        fileName: input.fileName.slice(0, 255),
+        url,
+        mimeType: input.mimeType,
+        size: buffer.length,
+        uploadedBy: ctx.user?.id,
+      });
+      return { url, fileName };
+    }),
+
+  delete: authedQuery
+    .input(z.object({ id: z.number().int() }))
+    .mutation(async ({ input }) => {
+      const media = await getMedia(input.id);
+      if (!media) throw new TRPCError({ code: "NOT_FOUND" });
+      await deleteMedia(input.id);
+      // best-effort file removal
+      for (const dir of [uploadsDir(), path.resolve(process.cwd(), "dist/public/uploads")]) {
+        try { fs.unlinkSync(path.join(dir, path.basename(media.url))); } catch { /* already gone */ }
+      }
+      return { ok: true };
+    }),
 });
 

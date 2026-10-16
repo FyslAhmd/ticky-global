@@ -8,6 +8,7 @@ import {
   portalRouter,
   marketingPublicRouter,
   integrationsRouter,
+  mediaRouter,
 } from "./portal-router";
 import { createRouter, publicQuery } from "./middleware";
 
@@ -23,6 +24,7 @@ export const appRouter = createRouter({
   portal: portalRouter,
   marketingPublic: marketingPublicRouter,
   integrations: integrationsRouter,
+  media: mediaRouter,
 });
 
 export type AppRouter = typeof appRouter;

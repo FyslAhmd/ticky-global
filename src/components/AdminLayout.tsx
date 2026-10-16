@@ -28,6 +28,7 @@ import {
   Share2,
   Newspaper,
   Plug,
+  Images,
 } from 'lucide-react'
 
 export const adminNav = [
@@ -40,6 +41,7 @@ export const adminNav = [
   { to: '/admin/integrations', label: 'Integrations', icon: Plug, group: 'Marketing' },
   { to: '/admin/reviews', label: 'Reviews', icon: Star, group: 'Content' },
   { to: '/admin/pages', label: 'Pages', icon: FileText, group: 'Content' },
+  { to: '/admin/media', label: 'Media library', icon: Images, group: 'Content' },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3, group: 'Overview' },
   { to: '/admin/users', label: 'Users & Access', icon: UsersRound, group: 'Settings', adminOnly: true },
 ]

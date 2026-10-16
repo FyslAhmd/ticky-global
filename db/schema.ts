@@ -272,3 +272,16 @@ export const siteSettings = mysqlTable("site_settings", {
 });
 
 export type SiteSetting = typeof siteSettings.$inferSelect;
+
+/** Uploaded media files (image library) — files live in public/uploads/ */
+export const mediaFiles = mysqlTable("media_files", {
+  id: serial("id").primaryKey(),
+  fileName: varchar("fileName", { length: 255 }).notNull(),
+  url: varchar("url", { length: 500 }).notNull(),
+  mimeType: varchar("mimeType", { length: 100 }).notNull(),
+  size: int("size").notNull(),
+  uploadedBy: bigint("uploadedBy", { mode: "number", unsigned: true }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type MediaFile = typeof mediaFiles.$inferSelect;

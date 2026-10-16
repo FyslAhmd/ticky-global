@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { AdminHeader, AdminLoading } from '@/components/AdminLayout'
+import { ImagePicker } from '@/components/ImagePicker'
 import { trpc } from '@/providers/trpc'
 import { ArrowLeft, Trash2, Save, Eye } from 'lucide-react'
 import { renderMarkdown } from '@/lib/markdown'
@@ -142,15 +143,14 @@ export default function BlogEditor() {
                 onChange={(e) => set('excerpt', e.target.value)}
               />
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="coverImage">Cover image URL (optional)</Label>
-              <Input
-                id="coverImage"
-                value={form.coverImage}
-                onChange={(e) => set('coverImage', e.target.value)}
-                placeholder="/images/blog-cover.jpg or https://…"
-              />
-            </div>
+            <ImagePicker
+              id="coverImage"
+              label="Cover image (optional)"
+              value={form.coverImage}
+              onChange={(url) => set('coverImage', url)}
+              hint="Upload a cover image or pick one from the library."
+              previewClass="h-24 w-40 rounded-xl object-cover"
+            />
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <Label htmlFor="content">Content (markdown)</Label>

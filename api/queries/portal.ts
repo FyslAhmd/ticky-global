@@ -274,3 +274,26 @@ export async function saveTrackingConfig(config: TrackingConfig) {
     .values({ key: TRACKING_KEY, value })
     .onDuplicateKeyUpdate({ set: { value } });
 }
+
+// ---------------------------------------------------------------------------
+// Media library (uploaded images/files)
+// ---------------------------------------------------------------------------
+
+export const listMedia = () =>
+  getDb().query.mediaFiles.findMany({
+    orderBy: (t, { desc }) => [desc(t.createdAt)],
+  });
+
+export const createMedia = (data: {
+  fileName: string;
+  url: string;
+  mimeType: string;
+  size: number;
+  uploadedBy?: number;
+}) => getDb().insert(schema.mediaFiles).values(data);
+
+export const getMedia = (id: number) =>
+  getDb().query.mediaFiles.findFirst({ where: eq(schema.mediaFiles.id, id) });
+
+export const deleteMedia = (id: number) =>
+  getDb().delete(schema.mediaFiles).where(eq(schema.mediaFiles.id, id));

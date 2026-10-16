@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { AdminHeader, AdminLoading } from '@/components/AdminLayout'
+import { ImagePicker } from '@/components/ImagePicker'
 import { trpc } from '@/providers/trpc'
 import { ArrowLeft, Plus, Trash2, Send, KeyRound, CalendarDays, GraduationCap, FileText, UserRound } from 'lucide-react'
 
@@ -47,7 +48,12 @@ export default function AdminClientDetail() {
   const [holidayDialog, setHolidayDialog] = useState(false)
   const [trainingDialog, setTrainingDialog] = useState(false)
   const [msgBody, setMsgBody] = useState('')
+  const [tickerPhoto, setTickerPhoto] = useState('')
   const msgEndRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (client.data) setTickerPhoto(client.data.tickerPhoto ?? '')
+  }, [client.data?.id])
 
   useEffect(() => {
     msgEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -93,6 +99,7 @@ export default function AdminClientDetail() {
         tickerName: String(data.get('tickerName') ?? '') || undefined,
         tickerRole: String(data.get('tickerRole') ?? '') || undefined,
         tickerStartDate: String(data.get('tickerStartDate') ?? '') || undefined,
+        tickerPhoto: tickerPhoto || undefined,
         contractSummary: String(data.get('contractSummary') ?? '') || undefined,
         contractFileUrl: String(data.get('contractFileUrl') ?? '') || undefined,
         holidayEntitlementDays: Number(data.get('holidayEntitlementDays') ?? 20),
@@ -194,6 +201,16 @@ export default function AdminClientDetail() {
                 <div className="space-y-1.5">
                   <Label htmlFor="tickerStartDate">Start date</Label>
                   <Input id="tickerStartDate" name="tickerStartDate" type="date" defaultValue={c.tickerStartDate ?? ''} />
+                </div>
+                <div className="md:col-span-2">
+                  <ImagePicker
+                    id="tickerPhoto"
+                    label="Ticker photo (shown in the client portal)"
+                    value={tickerPhoto}
+                    onChange={setTickerPhoto}
+                    hint="Upload a headshot or pick one from the library. Leave blank to show their initial."
+                    previewClass="h-24 w-24 rounded-full object-cover"
+                  />
                 </div>
 
                 <div className="md:col-span-2 mt-2 flex items-center gap-2 border-t border-slate-100 pt-5 text-sm font-bold text-slate-900">
