@@ -33,6 +33,9 @@ import Blog from '@/pages/Blog'
 import BlogPost from '@/pages/BlogPost'
 import AdminIntegrations from '@/pages/admin/Integrations'
 import AdminMedia from '@/pages/admin/Media'
+import AdminBookings from '@/pages/admin/Bookings'
+import AdminEmail from '@/pages/admin/Email'
+import Book from '@/pages/Book'
 
 export default function App() {
   return (
@@ -49,6 +52,7 @@ export default function App() {
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/book" element={<Book />} />
         <Route path="/client-portal" element={<ClientPortal />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
@@ -59,6 +63,7 @@ export default function App() {
       <Route element={<AdminLayout />}>
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/enquiries" element={<Enquiries />} />
+        <Route path="/admin/bookings" element={<AdminBookings />} />
         <Route path="/admin/crm" element={<AdminCrm />} />
         <Route path="/admin/clients" element={<AdminClients />} />
         <Route path="/admin/clients/:id" element={<ClientDetail />} />
@@ -68,6 +73,7 @@ export default function App() {
         <Route path="/admin/integrations" element={<AdminIntegrations />} />
         <Route path="/admin/media" element={<AdminMedia />} />
         <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/email" element={<AdminEmail />} />
         <Route path="/admin/reviews" element={<AdminReviews />} />
         <Route path="/admin/reviews/:id" element={<ReviewEditor />} />
         <Route path="/admin/pages" element={<AdminPages />} />

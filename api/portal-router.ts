@@ -53,7 +53,20 @@ import {
   createMedia,
   getMedia,
   deleteMedia,
+  getBookingSettings,
+  saveBookingSettings,
+  listBookings,
+  listBookingsForDate,
+  createBooking,
+  updateBookingStatus,
+  deleteBooking,
+  bulkUpdateBookingStatus,
+  bulkDeleteBookings,
+  getEmailSettings,
+  saveEmailSettings,
 } from "./queries/portal";
+import { sendBookingEmails } from "./lib/email";
+import nodemailer from "nodemailer";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -544,3 +557,211 @@ export const mediaRouter = createRouter({
     }),
 });
 
+// ---------------------------------------------------------------------------
+// Discovery call booking — public slots + booking, admin management
+// ---------------------------------------------------------------------------
+
+function hmToMinutes(hm: string) {
+  const [h, m] = hm.split(":").map(Number);
+  return h * 60 + m;
+}
+
+export const bookingRouter = createRouter({
+  /** Public: booking settings (sanitised) + booked slots for a date. */
+  config: publicQuery.query(async () => {
+    const s = await getBookingSettings();
+    return {
+      enabled: s.enabled,
+      calendlyUrl: s.calendlyUrl,
+      timezone: s.timezone,
+      slotMinutes: s.slotMinutes,
+      startTime: s.startTime,
+      endTime: s.endTime,
+      days: s.days,
+    };
+  }),
+
+  /** Public: available slots for a given date (YYYY-MM-DD). */
+  slots: publicQuery
+    .input(z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }))
+    .query(async ({ input }) => {
+      const s = await getBookingSettings();
+      if (!s.enabled) return { available: [] as string[] };
+
+      // day-of-week in the business timezone
+      const dayName = new Date(`${input.date}T12:00:00Z`).toLocaleDateString("en-US", {
+        weekday: "short",
+        timeZone: s.timezone,
+      });
+      const dayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(dayName);
+      if (!s.days.includes(dayIndex)) return { available: [] as string[] };
+
+      const start = hmToMinutes(s.startTime);
+      const end = hmToMinutes(s.endTime);
+      const all: string[] = [];
+      for (let t = start; t + s.slotMinutes <= end; t += s.slotMinutes) {
+        all.push(`${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`);
+      }
+
+      const taken = new Set((await listBookingsForDate(input.date)).map((b) => b.time));
+
+      // filter out past slots (compare in business timezone)
+      const nowStr = new Date().toLocaleString("en-CA", {
+        timeZone: s.timezone,
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", hour12: false,
+      });
+      const [nowDate, nowTime] = nowStr.replace(",", "").split(" ");
+
+      const available = all.filter((slot) => {
+        if (taken.has(slot)) return false;
+        if (input.date < nowDate) return false;
+        if (input.date === nowDate && slot <= nowTime) return false;
+        return true;
+      });
+      return { available };
+    }),
+
+  /** Public: create a booking (also lands in Enquiries). */
+  book: publicQuery
+    .input(
+      z.object({
+        name: z.string().min(1).max(255),
+        email: z.string().email().max(320),
+        company: z.string().max(255).optional(),
+        phone: z.string().max(64).optional(),
+        roleInterest: z.string().max(128).optional(),
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+        time: z.string().regex(/^\d{2}:\d{2}$/),
+        notes: z.string().max(2000).optional(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const s = await getBookingSettings();
+      if (!s.enabled) throw new TRPCError({ code: "BAD_REQUEST", message: "Booking is currently disabled." });
+
+      // re-validate availability to prevent double-booking races
+      const taken = new Set((await listBookingsForDate(input.date)).map((b) => b.time));
+      if (taken.has(input.time)) {
+        throw new TRPCError({ code: "CONFLICT", message: "Sorry — that slot was just taken. Please pick another time." });
+      }
+
+      await createBooking(input);
+      // also record as an enquiry so it appears in the existing pipeline
+      await getDb().insert(schema.enquiries).values({
+        name: input.name,
+        company: input.company || "—",
+        email: input.email,
+        phone: input.phone,
+        roleInterest: input.roleInterest || "Discovery call",
+        hours: "unsure",
+        message: `📅 DISCOVERY CALL BOOKED — ${input.date} at ${input.time} (${s.timezone})${input.notes ? `\n\n${input.notes}` : ""}`,
+        status: "new",
+      });
+      // notify the manager + confirm to the client (async, never blocks the booking)
+      sendBookingEmails(input);
+      return { ok: true };
+    }),
+
+  /** Admin: list all bookings. */
+  list: permQuery("enquiries").query(() => listBookings()),
+
+  setStatus: permQuery("enquiries")
+    .input(z.object({ id: z.number().int(), status: z.enum(["booked", "cancelled", "completed"]) }))
+    .mutation(({ input }) => updateBookingStatus(input.id, input.status)),
+
+  delete: permQuery("enquiries")
+    .input(z.object({ id: z.number().int() }))
+    .mutation(({ input }) => deleteBooking(input.id)),
+
+  bulkStatus: permQuery("enquiries")
+    .input(z.object({ ids: z.array(z.number().int()).min(1).max(500), status: z.enum(["booked", "cancelled", "completed"]) }))
+    .mutation(async ({ input }) => {
+      await bulkUpdateBookingStatus(input.ids, input.status);
+      return { ok: true, count: input.ids.length };
+    }),
+
+  bulkDelete: permQuery("enquiries")
+    .input(z.object({ ids: z.array(z.number().int()).min(1).max(500) }))
+    .mutation(async ({ input }) => {
+      await bulkDeleteBookings(input.ids);
+      return { ok: true, count: input.ids.length };
+    }),
+
+  /** Admin: booking settings. */
+  getSettings: permQuery("enquiries").query(() => getBookingSettings()),
+
+  saveSettings: permQuery("enquiries")
+    .input(
+      z.object({
+        enabled: z.boolean(),
+        calendlyUrl: z.string().trim().max(500).refine((v) => v === "" || /^https:\/\/(www\.)?calendly\.com\//.test(v), "Must be a calendly.com URL"),
+        timezone: z.string().min(1).max(64),
+        slotMinutes: z.number().int().min(10).max(120),
+        startTime: z.string().regex(/^\d{2}:\d{2}$/),
+        endTime: z.string().regex(/^\d{2}:\d{2}$/),
+        days: z.array(z.number().int().min(0).max(6)),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      if (input.enabled && !input.calendlyUrl && input.days.length === 0) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Select at least one available day." });
+      }
+      await saveBookingSettings(input);
+      return { ok: true };
+    }),
+
+  /** Admin: email (SMTP) settings. */
+  getEmailSettings: permQuery("enquiries").query(async () => {
+    const s = await getEmailSettings();
+    // mask the password — send back whether one is set, not the value
+    return { ...s, password: s.password ? "••••••••" : "" };
+  }),
+
+  saveEmailSettings: permQuery("enquiries")
+    .input(
+      z.object({
+        enabled: z.boolean(),
+        host: z.string().trim().max(255),
+        port: z.number().int().min(1).max(65535),
+        secure: z.boolean(),
+        user: z.string().trim().max(320),
+        password: z.string().max(255),
+        fromEmail: z.string().email().max(320),
+        fromName: z.string().trim().min(1).max(100),
+        managerEmail: z.string().email().max(320),
+        notifyManagerOnBooking: z.boolean(),
+        confirmToClient: z.boolean(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const current = await getEmailSettings();
+      // keep the stored password when the masked placeholder is sent back
+      const password = input.password === "••••••••" ? current.password : input.password;
+      if (input.enabled && !input.host) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Enter your SMTP host before enabling email." });
+      }
+      await saveEmailSettings({ ...input, password });
+      return { ok: true };
+    }),
+
+  /** Admin: verify SMTP connection and send a test email to the manager address. */
+  testEmail: permQuery("enquiries").mutation(async () => {
+    const s = await getEmailSettings();
+    if (!s.host) throw new TRPCError({ code: "BAD_REQUEST", message: "Save your SMTP settings first." });
+    const t = nodemailer.createTransport({
+      host: s.host,
+      port: s.port,
+      secure: s.secure,
+      auth: s.user ? { user: s.user, pass: s.password } : undefined,
+    });
+    await t.verify();
+    await t.sendMail({
+      from: `"${s.fromName}" <${s.fromEmail}>`,
+      to: s.managerEmail,
+      subject: "Ticky Global — email notifications are working",
+      html: `<p>This is a test email from your website's admin panel.</p><p>Booking notifications and client confirmations will be sent from <strong>${s.fromEmail}</strong>.</p>`,
+    });
+    return { ok: true };
+  }),
+});

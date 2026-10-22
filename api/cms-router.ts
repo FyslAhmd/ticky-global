@@ -6,6 +6,8 @@ import {
   listEnquiries,
   updateEnquiry,
   deleteEnquiry,
+  bulkUpdateEnquiryStatus,
+  bulkDeleteEnquiries,
   listPublishedReviews,
   listAllReviews,
   createReview,
@@ -131,6 +133,18 @@ export const staffRouter = createRouter({
     delete: adminQuery
       .input(z.object({ id: z.number().int() }))
       .mutation(({ input }) => deleteEnquiry(input.id)),
+    bulkStatus: authedQuery
+      .input(z.object({ ids: z.array(z.number().int()).min(1).max(500), status: statusEnum }))
+      .mutation(async ({ input }) => {
+        await bulkUpdateEnquiryStatus(input.ids, input.status);
+        return { ok: true, count: input.ids.length };
+      }),
+    bulkDelete: adminQuery
+      .input(z.object({ ids: z.array(z.number().int()).min(1).max(500) }))
+      .mutation(async ({ input }) => {
+        await bulkDeleteEnquiries(input.ids);
+        return { ok: true, count: input.ids.length };
+      }),
   }),
 
   reviews: createRouter({

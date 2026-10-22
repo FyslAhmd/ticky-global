@@ -29,11 +29,14 @@ import {
   Newspaper,
   Plug,
   Images,
+  CalendarCheck,
+  Mail,
 } from 'lucide-react'
 
 export const adminNav = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true, group: 'Overview' },
   { to: '/admin/enquiries', label: 'Enquiries', icon: Inbox, group: 'Sales' },
+  { to: '/admin/bookings', label: 'Bookings', icon: CalendarCheck, group: 'Sales' },
   { to: '/admin/crm', label: 'CRM & Contacts', icon: UsersRound, group: 'Sales' },
   { to: '/admin/clients', label: 'Clients', icon: UserCog, group: 'Sales' },
   { to: '/admin/socials', label: 'Socials', icon: Share2, group: 'Marketing' },
@@ -43,6 +46,7 @@ export const adminNav = [
   { to: '/admin/pages', label: 'Pages', icon: FileText, group: 'Content' },
   { to: '/admin/media', label: 'Media library', icon: Images, group: 'Content' },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3, group: 'Overview' },
+  { to: '/admin/email', label: 'Email', icon: Mail, group: 'Settings' },
   { to: '/admin/users', label: 'Users & Access', icon: UsersRound, group: 'Settings', adminOnly: true },
 ]
 

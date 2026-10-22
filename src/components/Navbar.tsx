@@ -299,7 +299,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-2.5 lg:flex">
           <PortalDropdown />
           <Button asChild className="rounded-full bg-blue-700 px-5 font-semibold hover:bg-blue-800">
-            <Link to="/contact">
+            <Link to="/book">
               Book a Discovery Call
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
@@ -394,7 +394,7 @@ export default function Navbar() {
               </Link>
 
               <Button asChild className="mt-4 rounded-full bg-blue-700 font-semibold hover:bg-blue-800">
-                <Link to="/contact" onClick={close}>
+                <Link to="/book" onClick={close}>
                   Book a Discovery Call
                 </Link>
               </Button>

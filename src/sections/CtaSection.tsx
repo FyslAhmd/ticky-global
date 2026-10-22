@@ -38,7 +38,7 @@ export default function CtaSection() {
                 className="rounded-full bg-white px-8 text-base font-semibold text-blue-800 hover:bg-blue-50"
               >
                 <Link
-                  to="/contact"
+                  to="/book"
                   onClick={() =>
                     trackCtaClick({
                       label: 'Book Your Free Discovery Call',

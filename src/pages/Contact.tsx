@@ -95,6 +95,15 @@ export default function Contact() {
               </Link>
               .
             </p>
+            <div className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
+              <CalendarCheck className="h-8 w-8 shrink-0 text-blue-700" />
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Rather pick a time right now?</p>
+                <Link to="/book" className="text-sm font-medium text-blue-700 hover:underline">
+                  Book your discovery call slot instantly →
+                </Link>
+              </div>
+            </div>
 
             <div className="mt-10 space-y-6">
               {expectations.map((item) => (

@@ -285,3 +285,20 @@ export const mediaFiles = mysqlTable("media_files", {
 });
 
 export type MediaFile = typeof mediaFiles.$inferSelect;
+
+/** Discovery call bookings */
+export const bookings = mysqlTable("bookings", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  company: varchar("company", { length: 255 }),
+  phone: varchar("phone", { length: 64 }),
+  roleInterest: varchar("roleInterest", { length: 128 }),
+  date: varchar("date", { length: 10 }).notNull(), // YYYY-MM-DD in business timezone
+  time: varchar("time", { length: 5 }).notNull(),  // HH:MM in business timezone
+  notes: text("notes"),
+  status: mysqlEnum("status", ["booked", "cancelled", "completed"]).default("booked").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Booking = typeof bookings.$inferSelect;

@@ -1,6 +1,6 @@
 import { getDb } from "./connection";
 import { enquiries, reviews, pages, analyticsEvents } from "@db/schema";
-import { eq, desc, asc, and, gte, sql, type SQL } from "drizzle-orm";
+import { eq, desc, asc, and, gte, sql, inArray, type SQL } from "drizzle-orm";
 
 // ---------------------------------------------------------------------------
 // Enquiries
@@ -43,6 +43,19 @@ export async function updateEnquiry(
 
 export async function deleteEnquiry(id: number) {
   await getDb().delete(enquiries).where(eq(enquiries.id, id));
+}
+
+export async function bulkUpdateEnquiryStatus(
+  ids: number[],
+  status: "new" | "contacted" | "qualified" | "won" | "lost",
+) {
+  if (ids.length === 0) return;
+  await getDb().update(enquiries).set({ status }).where(inArray(enquiries.id, ids));
+}
+
+export async function bulkDeleteEnquiries(ids: number[]) {
+  if (ids.length === 0) return;
+  await getDb().delete(enquiries).where(inArray(enquiries.id, ids));
 }
 
 // ---------------------------------------------------------------------------

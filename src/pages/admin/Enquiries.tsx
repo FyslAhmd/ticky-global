@@ -19,8 +19,10 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { AdminHeader, AdminLoading } from '@/components/AdminLayout'
+import { useBatchSelection, BatchActionBar, SelectAllCheckbox, RowCheckbox } from '@/components/BatchActions'
 import { trpc } from '@/providers/trpc'
 import { Mail, Phone, Building2, Clock3, Trash2 } from 'lucide-react'
+import { toast } from 'sonner'
 import { useAuth } from '@/hooks/useAuth'
 
 const statuses = ['new', 'contacted', 'qualified', 'won', 'lost'] as const
@@ -54,6 +56,23 @@ export default function Enquiries() {
 
   const update = trpc.staff.enquiries.update.useMutation({
     onSuccess: () => utils.staff.enquiries.list.invalidate(),
+  })
+  const batch = useBatchSelection()
+  const bulkStatus = trpc.staff.enquiries.bulkStatus.useMutation({
+    onSuccess: (r) => {
+      utils.staff.enquiries.list.invalidate()
+      batch.clear()
+      toast.success(`${r.count} enquir${r.count > 1 ? 'ies' : 'y'} updated`)
+    },
+    onError: (e) => toast.error(e.message),
+  })
+  const bulkDelete = trpc.staff.enquiries.bulkDelete.useMutation({
+    onSuccess: (r) => {
+      utils.staff.enquiries.list.invalidate()
+      batch.clear()
+      toast.success(`${r.count} enquir${r.count > 1 ? 'ies' : 'y'} deleted`)
+    },
+    onError: (e) => toast.error(e.message),
   })
   const remove = trpc.staff.enquiries.delete.useMutation({
     onSuccess: () => {
@@ -103,6 +122,9 @@ export default function Enquiries() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-slate-100 text-left text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="w-10 px-4 py-4">
+                    <SelectAllCheckbox selection={batch} ids={(list.data ?? []).map((e) => e.id)} />
+                  </th>
                   <th className="px-6 py-4">Contact</th>
                   <th className="px-6 py-4">Role interest</th>
                   <th className="px-6 py-4">Hours</th>
@@ -115,8 +137,11 @@ export default function Enquiries() {
                   <tr
                     key={e.id}
                     onClick={() => open(e.id)}
-                    className="cursor-pointer transition-colors hover:bg-blue-50/40"
+                    className={`cursor-pointer transition-colors hover:bg-blue-50/40 ${batch.selected.has(e.id) ? 'bg-blue-50/60' : ''}`}
                   >
+                    <td className="px-4 py-4">
+                      <RowCheckbox selection={batch} id={e.id} />
+                    </td>
                     <td className="px-6 py-4">
                       <p className="font-semibold text-slate-900">{e.name}</p>
                       <p className="text-xs text-slate-500">{e.company}</p>
@@ -139,7 +164,7 @@ export default function Enquiries() {
                 ))}
                 {(list.data ?? []).length === 0 && (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-slate-400">
+                    <td colSpan={6} className="px-6 py-12 text-center text-slate-400">
                       No enquiries found.
                     </td>
                   </tr>
@@ -149,6 +174,14 @@ export default function Enquiries() {
           </CardContent>
         </Card>
       )}
+
+      <BatchActionBar
+        selection={batch}
+        busy={bulkStatus.isPending || bulkDelete.isPending}
+        statusOptions={statuses.map((s) => ({ value: s, label: s }))}
+        onSetStatus={(status) => bulkStatus.mutate({ ids: [...batch.selected], status: status as Status })}
+        onDelete={() => bulkDelete.mutate({ ids: [...batch.selected] })}
+      />
 
       {/* Detail dialog */}
       <Dialog open={!!selected} onOpenChange={(o) => !o && close()}>

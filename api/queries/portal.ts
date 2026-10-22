@@ -1,4 +1,4 @@
-import { asc, desc, eq } from "drizzle-orm";
+import { asc, desc, eq, inArray } from "drizzle-orm";
 import * as bcrypt from "bcryptjs";
 import * as schema from "@db/schema";
 import { getDb } from "./connection";
@@ -297,3 +297,140 @@ export const getMedia = (id: number) =>
 
 export const deleteMedia = (id: number) =>
   getDb().delete(schema.mediaFiles).where(eq(schema.mediaFiles.id, id));
+
+// ---------------------------------------------------------------------------
+// Discovery call bookings
+// ---------------------------------------------------------------------------
+
+export type BookingSettings = {
+  enabled: boolean;
+  calendlyUrl: string; // if set, /book embeds Calendly instead of the built-in calendar
+  timezone: string;    // IANA, e.g. "Europe/London"
+  slotMinutes: number;
+  startTime: string;   // "HH:MM"
+  endTime: string;     // "HH:MM"
+  days: number[];      // 0=Sun … 6=Sat
+};
+
+export const DEFAULT_BOOKING_SETTINGS: BookingSettings = {
+  enabled: true,
+  calendlyUrl: "",
+  timezone: "Europe/London",
+  slotMinutes: 30,
+  startTime: "09:00",
+  endTime: "17:30",
+  days: [1, 2, 3, 4, 5],
+};
+
+const BOOKING_KEY = "booking";
+
+export async function getBookingSettings(): Promise<BookingSettings> {
+  const row = await getDb().query.siteSettings.findFirst({
+    where: eq(schema.siteSettings.key, BOOKING_KEY),
+  });
+  if (!row?.value) return { ...DEFAULT_BOOKING_SETTINGS };
+  try {
+    return { ...DEFAULT_BOOKING_SETTINGS, ...(JSON.parse(row.value) as Partial<BookingSettings>) };
+  } catch {
+    return { ...DEFAULT_BOOKING_SETTINGS };
+  }
+}
+
+export async function saveBookingSettings(settings: BookingSettings) {
+  const value = JSON.stringify(settings);
+  await getDb()
+    .insert(schema.siteSettings)
+    .values({ key: BOOKING_KEY, value })
+    .onDuplicateKeyUpdate({ set: { value } });
+}
+
+export const listBookings = () =>
+  getDb().query.bookings.findMany({
+    orderBy: (t, { asc }) => [asc(t.date), asc(t.time)],
+  });
+
+export const listBookingsForDate = (date: string) =>
+  getDb().query.bookings.findMany({
+    where: (t, { and }) => and(eq(t.date, date), eq(t.status, "booked")),
+  });
+
+export const createBooking = (data: {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  roleInterest?: string;
+  date: string;
+  time: string;
+  notes?: string;
+}) => getDb().insert(schema.bookings).values(data);
+
+export const updateBookingStatus = (id: number, status: "booked" | "cancelled" | "completed") =>
+  getDb().update(schema.bookings).set({ status }).where(eq(schema.bookings.id, id));
+
+export const deleteBooking = (id: number) =>
+  getDb().delete(schema.bookings).where(eq(schema.bookings.id, id));
+
+export async function bulkUpdateBookingStatus(ids: number[], status: "booked" | "cancelled" | "completed") {
+  if (ids.length === 0) return;
+  await getDb().update(schema.bookings).set({ status }).where(inArray(schema.bookings.id, ids));
+}
+
+export async function bulkDeleteBookings(ids: number[]) {
+  if (ids.length === 0) return;
+  await getDb().delete(schema.bookings).where(inArray(schema.bookings.id, ids));
+}
+
+// ---------------------------------------------------------------------------
+// Email (SMTP) settings
+// ---------------------------------------------------------------------------
+
+export type EmailSettings = {
+  enabled: boolean;
+  host: string;
+  port: number;
+  secure: boolean; // true = SSL (465), false = STARTTLS (587)
+  user: string;
+  password: string;
+  fromEmail: string;
+  fromName: string;
+  managerEmail: string; // receives booking notifications
+  notifyManagerOnBooking: boolean;
+  confirmToClient: boolean;
+};
+
+export const DEFAULT_EMAIL_SETTINGS: EmailSettings = {
+  enabled: false,
+  host: "",
+  port: 587,
+  secure: false,
+  user: "",
+  password: "",
+  fromEmail: "hello@tickyglobal.com",
+  fromName: "Ticky Global",
+  managerEmail: "hello@tickyglobal.com",
+  notifyManagerOnBooking: true,
+  confirmToClient: true,
+};
+
+const EMAIL_KEY = "email";
+
+export async function getEmailSettings(): Promise<EmailSettings> {
+  const row = await getDb().query.siteSettings.findFirst({
+    where: eq(schema.siteSettings.key, EMAIL_KEY),
+  });
+  if (!row?.value) return { ...DEFAULT_EMAIL_SETTINGS };
+  try {
+    return { ...DEFAULT_EMAIL_SETTINGS, ...(JSON.parse(row.value) as Partial<EmailSettings>) };
+  } catch {
+    return { ...DEFAULT_EMAIL_SETTINGS };
+  }
+}
+
+export async function saveEmailSettings(settings: EmailSettings) {
+  const value = JSON.stringify(settings);
+  await getDb()
+    .insert(schema.siteSettings)
+    .values({ key: EMAIL_KEY, value })
+    .onDuplicateKeyUpdate({ set: { value } });
+}

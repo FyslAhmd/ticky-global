@@ -59,7 +59,7 @@ export default function CtaBand({
                   className="w-full rounded-full bg-white text-base font-bold text-blue-800 hover:bg-blue-50"
                 >
                   <Link
-                    to="/contact"
+                    to="/book"
                     onClick={() =>
                       trackCtaClick({ label: primaryLabel, path: window.location.pathname })
                     }
