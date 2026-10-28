@@ -36,6 +36,7 @@ import AdminMedia from '@/pages/admin/Media'
 import AdminBookings from '@/pages/admin/Bookings'
 import AdminEmail from '@/pages/admin/Email'
 import Book from '@/pages/Book'
+import Booked from '@/pages/Booked'
 
 export default function App() {
   return (
@@ -53,6 +54,7 @@ export default function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/book" element={<Book />} />
+        <Route path="/booked" element={<Booked />} />
         <Route path="/client-portal" element={<ClientPortal />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router'
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -16,11 +17,11 @@ import { trpc } from '@/providers/trpc'
 import { roles } from '@/data/content'
 import { trackCtaClick } from '@/lib/tracking'
 import {
-  CalendarDays, ChevronLeft, ChevronRight, Clock3, CheckCircle2, Loader2,
-  ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarCheck,
+  ChevronLeft, ChevronRight, Clock3, Loader2,
+  ArrowLeft, ArrowRight, CalendarCheck,
 } from 'lucide-react'
 
-type Step = 'date' | 'time' | 'details' | 'done'
+type Step = 'date' | 'time' | 'details'
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 const DOW = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
@@ -35,6 +36,7 @@ function prettyDate(iso: string) {
 }
 
 export default function Book() {
+  const navigate = useNavigate()
   const config = trpc.booking.config.useQuery()
   const [step, setStep] = useState<Step>('date')
   const [monthOffset, setMonthOffset] = useState(0)
@@ -47,7 +49,9 @@ export default function Book() {
     { enabled: Boolean(date) },
   )
   const book = trpc.booking.book.useMutation({
-    onSuccess: () => setStep('done'),
+    // Redirect to the dedicated /booked confirmation URL so GA4 / Google Ads
+    // can count a page_view of /booked as the booking conversion.
+    onSuccess: () => navigate(`/booked?date=${date}&time=${encodeURIComponent(time ?? '')}`),
     onError: (e) => setError(e.message),
   })
 
@@ -144,8 +148,7 @@ export default function Book() {
           </p>
         </motion.div>
 
-        {step !== 'done' ? (
-          <Card className="mx-auto mt-10 max-w-3xl rounded-3xl border-slate-200 shadow-sm">
+        <Card className="mx-auto mt-10 max-w-3xl rounded-3xl border-slate-200 shadow-sm">
             <CardContent className="p-5 sm:p-8">
               {/* progress */}
               <div className="mb-6 flex items-center gap-2 text-xs font-medium">
@@ -299,26 +302,6 @@ export default function Book() {
               )}
             </CardContent>
           </Card>
-        ) : (
-          /* STEP 4: confirmation */
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
-            <Card className="mx-auto mt-10 max-w-xl rounded-3xl border-emerald-200 bg-emerald-50/50 shadow-sm">
-              <CardContent className="p-8 text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
-                  <CheckCircle2 className="h-7 w-7 text-emerald-600" />
-                </div>
-                <h2 className="mt-4 text-2xl font-bold text-slate-900">You're booked in!</h2>
-                <p className="mt-2 text-lg font-medium text-blue-800">{prettyDate(date!)} at {time}</p>
-                <p className="text-sm text-slate-500">({cfg.timezone.replace('_', ' ')} time)</p>
-                <div className="mx-auto mt-6 max-w-sm space-y-2.5 rounded-2xl bg-white p-5 text-left text-sm text-slate-600">
-                  <p className="flex items-start gap-2"><Video className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" /> We'll send a video call link to your email shortly before the call.</p>
-                  <p className="flex items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" /> Need to change it? Just reply to the confirmation or call 0808 175 3413.</p>
-                  <p className="flex items-start gap-2"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-blue-700" /> No obligation — it's a friendly chat about whether we're a fit.</p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        )}
 
         {step === 'date' && (
           <div className="mx-auto mt-6 flex max-w-3xl items-center justify-center gap-2 text-center text-xs text-slate-400">
