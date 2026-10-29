@@ -116,6 +116,15 @@ export default function Enquiries() {
 
       {list.isLoading ? (
         <AdminLoading />
+      ) : list.isError ? (
+        <Card className="rounded-2xl border-red-200 bg-red-50/50">
+          <CardContent className="py-8 text-center text-sm text-red-600">
+            <p className="font-semibold">Failed to load enquiries: {list.error.message}</p>
+            <Button variant="outline" size="sm" className="mt-3" onClick={() => list.refetch()}>
+              Retry
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
         <Card className="rounded-2xl border-slate-200">
           <CardContent className="p-0">
