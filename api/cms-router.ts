@@ -21,6 +21,7 @@ import {
   deletePage,
   trackEvent,
   getAnalyticsSummary,
+  getRecentActivity,
 } from "./queries/cms";
 import { getDb } from "./queries/connection";
 
@@ -111,8 +112,16 @@ export const staffRouter = createRouter({
   me: authedQuery.query(({ ctx }) => ctx.user),
 
   analyticsSummary: authedQuery
-    .input(z.object({ days: z.number().int().min(1).max(365).default(30) }))
-    .query(({ input }) => getAnalyticsSummary(input.days)),
+    .input(
+      z.object({
+        days: z.number().int().min(1).max(365).optional(),
+        from: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+        to: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+      }),
+    )
+    .query(({ input }) => getAnalyticsSummary(input)),
+
+  recentActivity: authedQuery.query(() => getRecentActivity(20)),
 
   enquiries: createRouter({
     list: authedQuery

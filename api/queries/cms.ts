@@ -1,6 +1,6 @@
 import { getDb } from "./connection";
 import { enquiries, reviews, pages, analyticsEvents } from "@db/schema";
-import { eq, desc, asc, and, gte, sql, inArray, type SQL } from "drizzle-orm";
+import { eq, desc, asc, and, gte, lte, sql, inArray, type SQL } from "drizzle-orm";
 
 // ---------------------------------------------------------------------------
 // Enquiries
@@ -204,12 +204,28 @@ export async function trackEvent(data: {
   await getDb().insert(analyticsEvents).values(data);
 }
 
-export async function getAnalyticsSummary(days: number) {
-  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+export type AnalyticsRange = { days?: number; from?: string; to?: string };
+
+/** Resolve a summary range to an inclusive [since, until] window. */
+function resolveRange(range: number | AnalyticsRange): { since: Date; until: Date } {
+  if (typeof range === "number") {
+    const until = new Date();
+    return { since: new Date(Date.now() - range * 24 * 60 * 60 * 1000), until };
+  }
+  const until = range.to ? new Date(`${range.to}T23:59:59.999Z`) : new Date();
+  const since = range.from
+    ? new Date(`${range.from}T00:00:00.000Z`)
+    : new Date(until.getTime() - (range.days ?? 30) * 24 * 60 * 60 * 1000);
+  return { since, until };
+}
+
+export async function getAnalyticsSummary(range: number | AnalyticsRange) {
+  const { since, until } = resolveRange(range);
   const db = getDb();
   const where: SQL = and(
     eq(analyticsEvents.type, "pageview"),
     gte(analyticsEvents.createdAt, since),
+    lte(analyticsEvents.createdAt, until),
   )!;
 
   const [{ total }] = await db
@@ -219,7 +235,7 @@ export async function getAnalyticsSummary(days: number) {
 
   const byDay = await db
     .select({
-      day: sql<string>`date_format(${analyticsEvents.createdAt}, '%Y-%m-%d')`,
+      day: sql<string>`max(date_format(${analyticsEvents.createdAt}, '%Y-%m-%d'))`,
       views: sql<number>`count(*)`,
     })
     .from(analyticsEvents)
@@ -252,11 +268,28 @@ export async function getAnalyticsSummary(days: number) {
   const [{ newEnquiries }] = await db
     .select({ newEnquiries: sql<number>`count(*)` })
     .from(enquiries)
-    .where(gte(enquiries.createdAt, since));
+    .where(and(gte(enquiries.createdAt, since), lte(enquiries.createdAt, until)));
+
+  // Hourly breakdown — only meaningful for "Today" (single-day range ending now)
+  const isToday = since.toDateString() === new Date().toDateString();
+  let byHour: { hour: number; views: number }[] = [];
+  if (isToday) {
+    const rows = await db
+      .select({
+        hour: sql<number>`max(hour(${analyticsEvents.createdAt}))`,
+        views: sql<number>`count(*)`,
+      })
+      .from(analyticsEvents)
+      .where(where)
+      .groupBy(sql`hour(${analyticsEvents.createdAt})`)
+      .orderBy(sql`hour(${analyticsEvents.createdAt})`);
+    byHour = rows.map((r) => ({ hour: Number(r.hour), views: Number(r.views) }));
+  }
 
   return {
     totalViews: Number(total ?? 0),
     newEnquiries: Number(newEnquiries ?? 0),
+    byHour,
     byDay: byDay.map((r) => ({ day: r.day, views: Number(r.views) })),
     topPages: topPages.map((r) => ({ path: r.path, views: Number(r.views) })),
     topReferrers: topReferrers.map((r) => ({
@@ -264,4 +297,27 @@ export async function getAnalyticsSummary(days: number) {
       views: Number(r.views),
     })),
   };
+}
+
+/** Latest individual analytics events — powers the "live" activity feed. */
+export async function getRecentActivity(limit = 20) {
+  const db = getDb();
+  const rows = await db
+    .select({
+      id: analyticsEvents.id,
+      type: analyticsEvents.type,
+      path: analyticsEvents.path,
+      referrer: analyticsEvents.referrer,
+      createdAt: analyticsEvents.createdAt,
+    })
+    .from(analyticsEvents)
+    .orderBy(desc(analyticsEvents.id))
+    .limit(Math.min(limit, 100));
+  return rows.map((r) => ({
+    id: Number(r.id),
+    type: r.type,
+    path: r.path,
+    referrer: r.referrer ?? null,
+    at: r.createdAt.toISOString(),
+  }));
 }

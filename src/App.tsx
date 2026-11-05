@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router'
 import Layout from '@/components/Layout'
 import AdminLayout from '@/components/AdminLayout'
 import Home from '@/pages/Home'
+import HomeNew from '@/pages/HomeAlt'
 import Pricing from '@/pages/Pricing'
 import Sectors from '@/pages/Sectors'
 import SectorDetail from '@/pages/SectorDetail'
@@ -43,7 +44,9 @@ export default function App() {
     <Routes>
       {/* Public marketing site */}
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomeNew />} />
+        {/* Previous homepage design, kept as a hidden archive for easy rollback */}
+        <Route path="/home-classic" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/pricing/:region" element={<Pricing />} />
         <Route path="/sectors" element={<Sectors />} />
