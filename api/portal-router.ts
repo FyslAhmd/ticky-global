@@ -66,6 +66,7 @@ import {
   saveEmailSettings,
 } from "./queries/portal";
 import { sendBookingEmails } from "./lib/email";
+import { syncBookingToCalendar } from "./lib/calendar";
 import nodemailer from "nodemailer";
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -633,6 +634,18 @@ export const bookingRouter = createRouter({
         roleInterest: z.string().max(128).optional(),
         date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
         time: z.string().regex(/^\d{2}:\d{2}$/),
+        clientTimezone: z
+          .string()
+          .min(1)
+          .max(64)
+          .refine((tz) => {
+            try {
+              new Intl.DateTimeFormat("en", { timeZone: tz });
+              return true;
+            } catch {
+              return false;
+            }
+          }, "Please choose a valid time zone."),
         notes: z.string().max(2000).optional(),
       }),
     )
@@ -646,7 +659,11 @@ export const bookingRouter = createRouter({
         throw new TRPCError({ code: "CONFLICT", message: "Sorry — that slot was just taken. Please pick another time." });
       }
 
-      await createBooking(input);
+      // sync to the manager's Google Calendar first so we can store the
+      // event id — skipped automatically while demo credentials are in place
+      const calendar = await syncBookingToCalendar(input);
+
+      await createBooking({ ...input, calendarEventId: calendar.eventId });
       // also record as an enquiry so it appears in the existing pipeline
       await getDb().insert(schema.enquiries).values({
         name: input.name,
@@ -655,11 +672,17 @@ export const bookingRouter = createRouter({
         phone: input.phone,
         roleInterest: input.roleInterest || "Discovery call",
         hours: "unsure",
-        message: `📅 DISCOVERY CALL BOOKED — ${input.date} at ${input.time} (${s.timezone})${input.notes ? `\n\n${input.notes}` : ""}`,
+        message: `📅 DISCOVERY CALL BOOKED — ${input.date} at ${input.time} (${s.timezone}) — client time zone: ${input.clientTimezone}${input.notes ? `\n\n${input.notes}` : ""}`,
         status: "new",
       });
       // notify the manager + confirm to the client (async, never blocks the booking)
-      sendBookingEmails(input);
+      sendBookingEmails({
+        ...input,
+        calendarStatus: calendar.status,
+        calendarEventId: calendar.eventId,
+        calendarEventLink: calendar.eventLink,
+        calendarError: calendar.error,
+      });
       return { ok: true };
     }),
 

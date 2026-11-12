@@ -296,6 +296,8 @@ export const bookings = mysqlTable("bookings", {
   roleInterest: varchar("roleInterest", { length: 128 }),
   date: varchar("date", { length: 10 }).notNull(), // YYYY-MM-DD in business timezone
   time: varchar("time", { length: 5 }).notNull(),  // HH:MM in business timezone
+  clientTimezone: varchar("clientTimezone", { length: 64 }), // booker's own IANA time zone
+  calendarEventId: varchar("calendarEventId", { length: 128 }), // Google Calendar event id, when synced
   notes: text("notes"),
   status: mysqlEnum("status", ["booked", "cancelled", "completed"]).default("booked").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

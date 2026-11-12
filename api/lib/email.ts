@@ -42,7 +42,13 @@ export type BookingDetails = {
   roleInterest?: string;
   date: string;
   time: string;
+  clientTimezone?: string;
   notes?: string;
+  /** populated by the calendar sync step before emails go out */
+  calendarStatus?: "created" | "skipped" | "failed";
+  calendarEventId?: string;
+  calendarEventLink?: string;
+  calendarError?: string;
 };
 
 function prettyDate(iso: string) {
@@ -52,6 +58,17 @@ function prettyDate(iso: string) {
   });
 }
 
+/** One-line calendar-sync status note shown at the top of the manager email. */
+function calendarNote(b: BookingDetails, s: { managerEmail: string }) {
+  if (b.calendarStatus === "created" && b.calendarEventLink) {
+    return `<p style="margin:0 0 16px;padding:10px 14px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;color:#065f46;font-size:13px">✅ Added to your calendar automatically. <a href="${b.calendarEventLink}" style="color:#047857;font-weight:bold">Open the event →</a></p>`;
+  }
+  if (b.calendarStatus === "skipped") {
+    return `<p style="margin:0 0 16px;padding:10px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;color:#92400e;font-size:13px">⚠️ Automatic calendar sync isn't set up yet — <strong>add this to your calendar manually:</strong> ${prettyDate(b.date)} at ${b.time} (UK time). Once Google Calendar is connected in the site configuration this happens automatically.</p>`;
+  }
+  return `<p style="margin:0 0 16px;padding:10px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;color:#991b1b;font-size:13px">⚠️ Calendar sync failed${b.calendarError ? ` (${b.calendarError})` : ""} — add this booking to your calendar manually. The booking itself is saved.</p>`;
+}
+
 /** Notification to the manager when a new discovery call is booked. */
 export async function sendManagerBookingNotification(b: BookingDetails) {
   const s = await getEmailSettings();
@@ -59,8 +76,10 @@ export async function sendManagerBookingNotification(b: BookingDetails) {
 
   const html = branded(`
     <h2 style="margin:0 0 16px;color:#0f172a;font-size:18px">📅 New discovery call booked</h2>
+    ${calendarNote(b, s)}
     <table style="border-collapse:collapse">${[
-      row("When", `${prettyDate(b.date)} at ${b.time}`),
+      row("When", `${prettyDate(b.date)} at ${b.time} (UK time)`),
+      b.clientTimezone ? row("Their time zone", b.clientTimezone) : "",
       row("Name", b.name),
       row("Email", `<a href="mailto:${b.email}" style="color:#1d4ed8">${b.email}</a>`),
       b.company ? row("Company", b.company) : "",
@@ -91,6 +110,7 @@ export async function sendClientBookingConfirmation(b: BookingDetails) {
     <div style="background:#eff6ff;border-radius:12px;padding:16px 20px;margin:0 0 16px">
       <p style="margin:0;font-size:16px;font-weight:bold;color:#1e40af">${prettyDate(b.date)}</p>
       <p style="margin:4px 0 0;font-size:16px;font-weight:bold;color:#1e40af">${b.time} (UK time)</p>
+      ${b.clientTimezone ? `<p style="margin:4px 0 0;font-size:12px;color:#475569">Your time zone: ${b.clientTimezone}</p>` : ""}
     </div>
     <p style="margin:0 0 12px"><strong>What happens next:</strong></p>
     <ul style="margin:0;padding-left:20px">

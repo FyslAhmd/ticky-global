@@ -15,7 +15,7 @@ import {
 import { AdminHeader, AdminLoading } from '@/components/AdminLayout'
 import { useBatchSelection, BatchActionBar, SelectAllCheckbox, RowCheckbox } from '@/components/BatchActions'
 import { trpc } from '@/providers/trpc'
-import { CalendarCheck, Trash2, Loader2, Settings2, CalendarDays, Mail, Building2, Phone } from 'lucide-react'
+import { CalendarCheck, Trash2, Loader2, Settings2, CalendarDays, Globe2, Mail, Building2, Phone } from 'lucide-react'
 import { toast } from 'sonner'
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -213,8 +213,18 @@ export default function AdminBookings() {
                   <div>
                     <p className="font-semibold text-slate-900">{b.name}</p>
                     <p className="flex items-center gap-1 text-xs text-slate-500">
-                      <CalendarDays className="h-3 w-3" /> {b.date} at {b.time}
+                      <CalendarDays className="h-3 w-3" /> {b.date} at {b.time} (UK)
                     </p>
+                    {b.clientTimezone && (
+                      <p className="flex items-center gap-1 text-xs text-slate-400">
+                        <Globe2 className="h-3 w-3" /> Client zone: {b.clientTimezone}
+                      </p>
+                    )}
+                    {b.calendarEventId && (
+                      <p className="flex items-center gap-1 text-xs font-medium text-emerald-600">
+                        <CalendarCheck className="h-3 w-3" /> Synced to Google Calendar
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="min-w-0 flex-1 text-xs text-slate-500">
@@ -254,7 +264,7 @@ export default function AdminBookings() {
               <div key={b.id} className={`flex items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-2.5 text-sm ${batch.selected.has(b.id) ? 'ring-2 ring-blue-300' : ''}`}>
                 <span className="flex items-center gap-3 text-slate-700">
                   <RowCheckbox selection={batch} id={b.id} />
-                  {b.name} — {b.date} at {b.time}
+                  {b.name} — {b.date} at {b.time}{b.clientTimezone ? ` (${b.clientTimezone})` : ''}
                 </span>
                 <Badge className={statusStyles[b.status]}>{b.status}</Badge>
               </div>

@@ -9,7 +9,9 @@ import { Textarea } from '@/components/ui/textarea'
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -18,7 +20,7 @@ import { roles } from '@/data/content'
 import { trackCtaClick } from '@/lib/tracking'
 import {
   ChevronLeft, ChevronRight, Clock3, Loader2,
-  ArrowLeft, ArrowRight, CalendarCheck,
+  ArrowLeft, ArrowRight, CalendarCheck, Globe2,
 } from 'lucide-react'
 
 type Step = 'date' | 'time' | 'details'
@@ -35,6 +37,60 @@ function prettyDate(iso: string) {
   return new Date(y, m - 1, d).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+/* ------------------------------------------------------------------ */
+/* World time zones (full IANA tz database list, grouped by region)    */
+/* ------------------------------------------------------------------ */
+function gmtOffset(tz: string): number {
+  try {
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: tz, timeZoneName: 'shortOffset' }).formatToParts(new Date())
+    const raw = parts.find((p) => p.type === 'timeZoneName')?.value ?? 'GMT'
+    if (raw === 'GMT') return 0
+    const m = raw.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/)
+    if (!m) return 0
+    const sign = m[1] === '-' ? -1 : 1
+    return sign * (Number(m[2]) + Number(m[3] ?? 0) / 60)
+  } catch {
+    return 0
+  }
+}
+
+function fmtOffset(hours: number): string {
+  if (hours === 0) return 'GMT'
+  const sign = hours < 0 ? '-' : '+'
+  const abs = Math.abs(hours)
+  const h = Math.floor(abs)
+  const mins = Math.round((abs - h) * 60)
+  return `GMT${sign}${h}${mins ? `:${String(mins).padStart(2, '0')}` : ''}`
+}
+
+/* All world time zones grouped by GMT offset, west (GMT-12) to east (GMT+14),
+   so visitors can jump straight to their offset instead of scanning continents. */
+const TIMEZONE_GROUPS: { region: string; zones: { value: string; label: string }[] }[] = (() => {
+  const zones: string[] =
+    typeof Intl.supportedValuesOf === 'function'
+      ? Intl.supportedValuesOf('timeZone')
+      : ['Europe/London']
+  const groups = new Map<number, { value: string; label: string }[]>()
+  for (const tz of zones) {
+    const off = gmtOffset(tz)
+    const city = tz.split('/').pop()!.replace(/_/g, ' ')
+    const label = `${city} (${fmtOffset(off)})`
+    if (!groups.has(off)) groups.set(off, [])
+    groups.get(off)!.push({ value: tz, label })
+  }
+  return [...groups.entries()]
+    .sort(([a], [b]) => a - b) // minus -> zero -> plus
+    .map(([off, zs]) => ({ region: fmtOffset(off), zones: zs.sort((a, b) => a.label.localeCompare(b.label)) }))
+})()
+
+const detectTimezone = () => {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+  } catch {
+    return ''
+  }
+}
+
 export default function Book() {
   const navigate = useNavigate()
   const config = trpc.booking.config.useQuery()
@@ -42,6 +98,7 @@ export default function Book() {
   const [monthOffset, setMonthOffset] = useState(0)
   const [date, setDate] = useState<string | null>(null)
   const [time, setTime] = useState<string | null>(null)
+  const [timezone, setTimezone] = useState<string>(detectTimezone)
   const [error, setError] = useState<string | null>(null)
 
   const slots = trpc.booking.slots.useQuery(
@@ -51,7 +108,7 @@ export default function Book() {
   const book = trpc.booking.book.useMutation({
     // Redirect to the dedicated /booked confirmation URL so GA4 / Google Ads
     // can count a page_view of /booked as the booking conversion.
-    onSuccess: () => navigate(`/booked?date=${date}&time=${encodeURIComponent(time ?? '')}`),
+    onSuccess: () => navigate(`/booked?date=${date}&time=${encodeURIComponent(time ?? '')}&tz=${encodeURIComponent(timezone)}`),
     onError: (e) => setError(e.message),
   })
 
@@ -219,18 +276,67 @@ export default function Book() {
                   ) : (slots.data?.available ?? []).length === 0 ? (
                     <p className="py-8 text-center text-sm text-slate-500">No slots left on this day — please pick another date.</p>
                   ) : (
-                    <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-                      {(slots.data?.available ?? []).map((t) => (
-                        <button
-                          key={t}
-                          type="button"
-                          onClick={() => { setTime(t); setStep('details') }}
-                          className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 py-2.5 text-sm font-medium text-slate-700 transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-800"
-                        >
-                          <Clock3 className="h-3.5 w-3.5 text-blue-600" /> {t}
-                        </button>
-                      ))}
-                    </div>
+                    <>
+                      <p className="mb-2 text-sm font-semibold text-slate-800">Pick a time <span className="font-normal text-slate-400">(shown in UK time)</span></p>
+                      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                        {(slots.data?.available ?? []).map((t) => (
+                          <button
+                            key={t}
+                            type="button"
+                            onClick={() => setTime(t)}
+                            className={`flex items-center justify-center gap-1.5 rounded-xl border py-2.5 text-sm font-medium transition ${
+                              time === t
+                                ? 'border-blue-600 bg-blue-700 text-white shadow-sm'
+                                : 'border-slate-200 text-slate-700 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-800'
+                            }`}
+                          >
+                            <Clock3 className={`h-3.5 w-3.5 ${time === t ? 'text-white' : 'text-blue-600'}`} /> {t}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Time zone — mandatory */}
+                      <div className="mt-6 space-y-1.5">
+                        <Label htmlFor="timezone" className="text-sm font-semibold text-slate-800">
+                          Your time zone <span className="text-red-500">*</span>
+                        </Label>
+                        <Select value={timezone} onValueChange={setTimezone} required>
+                          <SelectTrigger id="timezone" className={timezone ? '' : 'text-slate-400'}>
+                            <div className="flex items-center gap-2">
+                              <Globe2 className="h-4 w-4 shrink-0 text-blue-600" />
+                              <SelectValue placeholder="Select your time zone" />
+                            </div>
+                          </SelectTrigger>
+                          <SelectContent className="max-h-72">
+                            {TIMEZONE_GROUPS.map((g) => (
+                              <SelectGroup key={g.region}>
+                                <SelectLabel>{g.region}</SelectLabel>
+                                {g.zones.map((z) => (
+                                  <SelectItem key={z.value} value={z.value}>{z.label}</SelectItem>
+                                ))}
+                              </SelectGroup>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <p className="text-xs text-slate-400">
+                          We've pre-selected your device's time zone — change it if it's not right. We'll use this when confirming your call.
+                        </p>
+                      </div>
+
+                      <Button
+                        type="button"
+                        disabled={!time || !timezone}
+                        onClick={() => setStep('details')}
+                        className="mt-6 w-full rounded-full bg-blue-700 py-6 text-base hover:bg-blue-800 disabled:opacity-50"
+                      >
+                        Continue <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                      {(!time || !timezone) && (
+                        <p className="mt-2 text-center text-xs text-slate-400">
+                          {!time && !timezone ? 'Choose a time and your time zone to continue.' : !time ? 'Choose a time to continue.' : 'Choose your time zone to continue.'}
+                        </p>
+                      )}
+                    </>
                   )}
                 </div>
               )}
@@ -251,13 +357,14 @@ export default function Book() {
                       roleInterest: String(data.get('roleInterest') ?? '') || undefined,
                       date,
                       time,
+                      clientTimezone: timezone,
                       notes: String(data.get('notes') ?? '') || undefined,
                     })
                   }}
                   className="space-y-4"
                 >
                   <button type="button" onClick={() => setStep('time')} className="flex items-center gap-1 text-sm font-medium text-blue-700 hover:underline">
-                    <ArrowLeft className="h-4 w-4" /> {prettyDate(date)} at {time}
+                    <ArrowLeft className="h-4 w-4" /> {prettyDate(date)} at {time} (UK) — your zone: {timezone.split('/').pop()?.replace(/_/g, ' ')}
                   </button>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-1.5">

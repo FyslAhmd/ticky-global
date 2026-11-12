@@ -22,6 +22,7 @@ export default function Booked() {
   const [params] = useSearchParams()
   const date = params.get('date')
   const time = params.get('time')
+  const tz = params.get('tz')
 
   useEffect(() => {
     document.title = 'Booking confirmed — Ticky Global'
@@ -30,6 +31,7 @@ export default function Booked() {
       page_path: '/booked',
       booking_date: date ?? '',
       booking_time: time ?? '',
+      booking_timezone: tz ?? '',
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -47,7 +49,7 @@ export default function Booked() {
               {date && time ? (
                 <>
                   <p className="mt-2 text-lg font-medium text-blue-800">{prettyDate(date)} at {time}</p>
-                  <p className="text-sm text-slate-500">(UK time)</p>
+                  <p className="text-sm text-slate-500">(UK time){tz ? ` — your time zone: ${tz}` : ''}</p>
                 </>
               ) : (
                 <p className="mt-2 text-slate-600">Your discovery call is confirmed.</p>

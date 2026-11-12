@@ -362,11 +362,25 @@ export const createBooking = (data: {
   roleInterest?: string;
   date: string;
   time: string;
+  clientTimezone?: string;
+  calendarEventId?: string;
   notes?: string;
 }) => getDb().insert(schema.bookings).values(data);
 
-export const updateBookingStatus = (id: number, status: "booked" | "cancelled" | "completed") =>
-  getDb().update(schema.bookings).set({ status }).where(eq(schema.bookings.id, id));
+export const updateBookingStatus = async (id: number, status: "booked" | "cancelled" | "completed") => {
+  // remove the calendar event when a synced booking is cancelled
+  if (status === "cancelled") {
+    const booking = await getDb().query.bookings.findFirst({ where: (t, { eq }) => eq(t.id, id) });
+    if (booking?.calendarEventId) {
+      const { removeBookingFromCalendar } = await import("../lib/calendar");
+      await removeBookingFromCalendar(booking.calendarEventId);
+    }
+  }
+  return getDb()
+    .update(schema.bookings)
+    .set(status === "cancelled" ? { status, calendarEventId: null } : { status })
+    .where(eq(schema.bookings.id, id));
+};
 
 export const deleteBooking = (id: number) =>
   getDb().delete(schema.bookings).where(eq(schema.bookings.id, id));
