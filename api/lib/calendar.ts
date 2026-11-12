@@ -91,6 +91,28 @@ function eventTimes(date: string, time: string, slotMinutes: number, tz: string)
   };
 }
 
+function convertToZone(dateISO: string, timeHM: string, fromTz: string, toTz: string): string | null {
+  try {
+    const guessUtc = new Date(`${dateISO}T${timeHM}:00Z`);
+    const dtf = new Intl.DateTimeFormat("en-GB", {
+      timeZone: fromTz, year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    });
+    let ts = guessUtc.getTime();
+    for (let i = 0; i < 2; i++) {
+      const parts = dtf.formatToParts(new Date(ts));
+      const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+      const asIfUtc = Date.UTC(Number(get("year")), Number(get("month")) - 1, Number(get("day")), Number(get("hour")), Number(get("minute")));
+      ts += guessUtc.getTime() - asIfUtc;
+    }
+    return new Intl.DateTimeFormat("en-GB", {
+      timeZone: toTz, weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit",
+    }).format(new Date(ts));
+  } catch {
+    return null;
+  }
+}
+
 function eventDescription(b: BookingLike) {
   const lines = [
     `Discovery call booked via tickyglobal.com/book`,
@@ -100,6 +122,10 @@ function eventDescription(b: BookingLike) {
     b.phone ? `Phone: ${b.phone}` : "",
     b.roleInterest ? `Interested in: ${b.roleInterest}` : "",
     b.clientTimezone ? `Client time zone: ${b.clientTimezone}` : "",
+    (() => {
+      const local = b.clientTimezone && b.clientTimezone !== "Europe/London" ? convertToZone(b.date, b.time, "Europe/London", b.clientTimezone) : null;
+      return local ? `Client's local time: ${local}` : "";
+    })(),
     ``,
     b.notes ? `Their notes:\n${b.notes}` : "",
   ];

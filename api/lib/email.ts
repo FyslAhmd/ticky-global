@@ -51,6 +51,29 @@ export type BookingDetails = {
   calendarError?: string;
 };
 
+/** Convert a business-timezone slot into the client's own zone (Node Intl). */
+function convertToZone(dateISO: string, timeHM: string, fromTz: string, toTz: string): string | null {
+  try {
+    const guessUtc = new Date(`${dateISO}T${timeHM}:00Z`);
+    const dtf = new Intl.DateTimeFormat("en-GB", {
+      timeZone: fromTz, year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    });
+    let ts = guessUtc.getTime();
+    for (let i = 0; i < 2; i++) {
+      const parts = dtf.formatToParts(new Date(ts));
+      const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+      const asIfUtc = Date.UTC(Number(get("year")), Number(get("month")) - 1, Number(get("day")), Number(get("hour")), Number(get("minute")));
+      ts += guessUtc.getTime() - asIfUtc;
+    }
+    return new Intl.DateTimeFormat("en-GB", {
+      timeZone: toTz, weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit",
+    }).format(new Date(ts));
+  } catch {
+    return null;
+  }
+}
+
 function prettyDate(iso: string) {
   const [y, m, d] = iso.split("-").map(Number);
   return new Date(y, m - 1, d).toLocaleDateString("en-GB", {
@@ -80,6 +103,10 @@ export async function sendManagerBookingNotification(b: BookingDetails) {
     <table style="border-collapse:collapse">${[
       row("When", `${prettyDate(b.date)} at ${b.time} (UK time)`),
       b.clientTimezone ? row("Their time zone", b.clientTimezone) : "",
+      (() => {
+        const local = b.clientTimezone && b.clientTimezone !== "Europe/London" ? convertToZone(b.date, b.time, "Europe/London", b.clientTimezone) : null;
+        return local ? row("Their local time", `<strong>${local}</strong> (${b.clientTimezone})`) : "";
+      })(),
       row("Name", b.name),
       row("Email", `<a href="mailto:${b.email}" style="color:#1d4ed8">${b.email}</a>`),
       b.company ? row("Company", b.company) : "",
@@ -110,7 +137,12 @@ export async function sendClientBookingConfirmation(b: BookingDetails) {
     <div style="background:#eff6ff;border-radius:12px;padding:16px 20px;margin:0 0 16px">
       <p style="margin:0;font-size:16px;font-weight:bold;color:#1e40af">${prettyDate(b.date)}</p>
       <p style="margin:4px 0 0;font-size:16px;font-weight:bold;color:#1e40af">${b.time} (UK time)</p>
-      ${b.clientTimezone ? `<p style="margin:4px 0 0;font-size:12px;color:#475569">Your time zone: ${b.clientTimezone}</p>` : ""}
+      ${(() => {
+        const local = b.clientTimezone && b.clientTimezone !== "Europe/London" ? convertToZone(b.date, b.time, "Europe/London", b.clientTimezone) : null;
+        return local
+          ? `<p style="margin:6px 0 0;font-size:14px;color:#1e40af"><strong>In your time zone:</strong> ${local} (${b.clientTimezone})</p>`
+          : b.clientTimezone ? `<p style="margin:4px 0 0;font-size:12px;color:#475569">Your time zone: ${b.clientTimezone}</p>` : "";
+      })()}
     </div>
     <p style="margin:0 0 12px"><strong>What happens next:</strong></p>
     <ul style="margin:0;padding-left:20px">

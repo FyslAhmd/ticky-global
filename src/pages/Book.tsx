@@ -18,6 +18,7 @@ import {
 import { trpc } from '@/providers/trpc'
 import { roles } from '@/data/content'
 import { trackCtaClick } from '@/lib/tracking'
+import { convertToZone } from '@/lib/tz'
 import {
   ChevronLeft, ChevronRight, Clock3, Loader2,
   ArrowLeft, ArrowRight, CalendarCheck, Globe2,
@@ -113,6 +114,11 @@ export default function Book() {
   })
 
   const cfg = config.data
+  const localTime = useMemo(() => {
+    if (!date || !time || !timezone || !cfg) return null
+    if (timezone === cfg.timezone) return null
+    return convertToZone(date, time, cfg.timezone, timezone)
+  }, [date, time, timezone, cfg])
 
   // Calendly mode — embed the widget
   useEffect(() => {
@@ -321,6 +327,11 @@ export default function Book() {
                         <p className="text-xs text-slate-400">
                           We've pre-selected your device's time zone — change it if it's not right. We'll use this when confirming your call.
                         </p>
+                        {time && timezone && localTime && (
+                          <p className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-medium text-blue-800">
+                            {time} UK time = <span className="font-bold">{localTime}</span> for you
+                          </p>
+                        )}
                       </div>
 
                       <Button
@@ -364,7 +375,7 @@ export default function Book() {
                   className="space-y-4"
                 >
                   <button type="button" onClick={() => setStep('time')} className="flex items-center gap-1 text-sm font-medium text-blue-700 hover:underline">
-                    <ArrowLeft className="h-4 w-4" /> {prettyDate(date)} at {time} (UK) — your zone: {timezone.split('/').pop()?.replace(/_/g, ' ')}
+                    <ArrowLeft className="h-4 w-4" /> {prettyDate(date)} at {time} (UK){localTime ? ` — that's ${localTime} for you` : ` — your zone: ${timezone.split('/').pop()?.replace(/_/g, ' ')}`}
                   </button>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-1.5">

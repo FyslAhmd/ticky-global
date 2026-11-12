@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, Video, CalendarDays, ShieldCheck, Home, ArrowRight } from 'lucide-react'
 import { pushEvent } from '@/lib/tracking'
+import { convertToZone } from '@/lib/tz'
 
 function prettyDate(iso: string) {
   const [y, m, d] = iso.split('-').map(Number)
@@ -23,6 +24,7 @@ export default function Booked() {
   const date = params.get('date')
   const time = params.get('time')
   const tz = params.get('tz')
+  const local = date && time && tz && tz !== 'Europe/London' ? convertToZone(date, time, 'Europe/London', tz) : null
 
   useEffect(() => {
     document.title = 'Booking confirmed — Ticky Global'
@@ -48,8 +50,12 @@ export default function Booked() {
               <h1 className="mt-4 text-2xl font-bold text-slate-900">You're booked in!</h1>
               {date && time ? (
                 <>
-                  <p className="mt-2 text-lg font-medium text-blue-800">{prettyDate(date)} at {time}</p>
-                  <p className="text-sm text-slate-500">(UK time){tz ? ` — your time zone: ${tz}` : ''}</p>
+                  <p className="mt-2 text-lg font-medium text-blue-800">{prettyDate(date)} at {time} <span className="text-sm font-normal text-slate-500">(UK time)</span></p>
+                  {local && (
+                    <p className="mt-1.5 rounded-xl bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-800">
+                      In your time zone ({tz?.split('/').pop()?.replace(/_/g, ' ')}): {local}
+                    </p>
+                  )}
                 </>
               ) : (
                 <p className="mt-2 text-slate-600">Your discovery call is confirmed.</p>
